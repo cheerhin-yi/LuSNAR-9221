@@ -1,6 +1,6 @@
 # LuSNAR-9221 项目状态
 
-> 最后更新：2026-11-08 16:32（Asia/Shanghai）  
+> 最后更新：2026-11-08 18:21（Asia/Shanghai）  
 > 仓库：https://github.com/cheerhin-yi/LuSNAR-9221.git  
 > 维护约定：本文件由 **4090 Bot** 与 **@LuSNAR（cheerhin）** 共同维护；4090 负责本机冒烟/组合消融章节，cheerhin 章节由 LuSNAR 填写与更新。
 
@@ -63,23 +63,46 @@ configs/  data/  logs/  pretrained/  results/  tools/  work_dirs/  _tmp/
 - **M_SHAD** 训练期最好（+0.012，mountain +0.036）
 - M_ABL / M_SEGFIX **不进组合**；M_INVFORM 与 ABL 同配置，两次差约 0.017 可作噪声标定
 
-## 5. 4090 — 两两组合消融（进行中）
+## 5. 4090 — 两两组合消融（ALL DONE）
 
-日志目录：`results/smoke_combo/`。每卡 1 进程；**不跑第三批**（第三批在 cheerhin）。
+- **完成时间**：2026-11-08 17:59（Asia/Shanghai）；launcher 日志写出 `ALL DONE`
+- **日志**：`results/smoke_combo/`（launcher + 各实验 `.log`）
+- **结果**：10 个 `summary.json` 齐全于 `work_dirs/smoke_*/summary.json`（`M_ROW_SHAD`、`M_ROW_SHAD_TTA`、`M_BLV_SHAD`、`M_BLV_SHAD_TTA`、`M_SHAD_TTA`、`M_BLV_TTA`、`M_ROW_TTA`、`V_B1C_noise`、`M_ROW_BLV`、`M_ROW_BLV_TTA`）
+- **对照**：4090 本机 Scene5 `V_B1C` mIoU **0.8014**（**不可**与 cheerhin 本机 V_B1C 0.8126 直接比）
+- **全文表 / 交互项**：见 `results/smoke_method_eval.md`（Pairwise combo ablation 节）
+- **本机不跑第三批**（batch-3 在 cheerhin）；**从未触碰 Moon_2/4/9**
 
-队列（FULL pairwise v2）：
-- GPU0：`M_ROW_SHAD` → `M_ROW_SHAD_TTA` → `M_BLV_SHAD` → `M_BLV_SHAD_TTA`
-- GPU1：`M_SHAD_TTA` → `M_BLV_TTA` → `M_ROW_TTA` → `V_B1C_noise` → `M_ROW_BLV` → `M_ROW_BLV_TTA`
+### 5.1 最优与训练侧结论
 
-已完成（截至 4090 首推时）：
-- TTA 两两：`M_SHAD_TTA`、`M_BLV_TTA`、`M_ROW_TTA`
-- 训练：`M_ROW_SHAD` + `M_ROW_SHAD_TTA`；`V_B1C_noise`
-- 进行中：`M_BLV_SHAD`（GPU0）、`M_ROW_BLV`（GPU1）
-- 待跑：`M_BLV_SHAD_TTA`、`M_ROW_BLV_TTA`
+| 项 | 结果 |
+|---|---|
+| 全队列最优 | **M_ROW_BLV_TTA** mIoU **0.8522**，Δ=**+0.0509** |
+| 训练侧只保留 | **ROW+BLV**（mIoU 0.8219，Δ=+0.0205，I=+0.0120 **协同**） |
+| 负交互 | ROW×SHAD I=−0.0107；BLV×SHAD I=−0.0292（组合低于对照）→ **不要把 SHAD 与 ROW/BLV 同训** |
+| TTA | 帮助 ROW+BLV（+0.0303）、BLV（+0.0319）；伤害 ROW、ROW+SHAD（≈0）、尤其 BLV+SHAD（−0.0333，岩石/山体崩） |
+| 噪声标定 | `V_B1C_noise` Δ=+0.0052，落在 \|Δ\|<0.02 带内；单模块 ROW/BLV 的 +0.003～+0.006 **不可靠** |
 
-筛选规则（用户）：优先坑+山两侧都改善的三组合；否则选整体 mIoU（再看 rock）提升最大者。暂不加第四模块。
+### 5.2 三模块筛选（用户规则已应用）
 
-候选三组合：`ROW+SHAD+TTA`（优先）、`BLV+SHAD+TTA`、`ROW+BLV+TTA`。
+优先 crater **与** mountain 同时提升；否则看整体 mIoU / rock。
+
+- **入选**：仅 **ROW+BLV**（坑+山双升）；推理侧可挂 **TTA** → `M_ROW_BLV_TTA`
+- **不加第三训练模块**；**不开第四模块**
+- SHAD 与 ROW、BLV 均为负交互，不再并入
+
+### 5.3 摘要表（Δ vs 4090 V_B1C 0.8014）
+
+| exp | mIoU | Δ | rock | crater | mountain | note |
+|---|---:|---:|---:|---:|---:|---|
+| V_B1C | 0.8014 | — | 0.7228 | 0.7407 | 0.6530 | 对照 |
+| M_ROW_BLV | 0.8219 | +0.0205 | 0.7479 | 0.7828 | 0.6958 | 训练侧最佳 |
+| M_ROW_BLV_TTA | 0.8522 | +0.0509 | 0.7520 | 0.7897 | 0.7423 | **全队列最优** |
+| M_BLV_TTA | 0.8359 | +0.0346 | 0.7556 | 0.7211 | 0.7294 | TTA 有助 BLV |
+| M_BLV_SHAD | 0.7866 | −0.0148 | 0.7113 | 0.7230 | 0.6101 | 强负交互 |
+| M_BLV_SHAD_TTA | 0.7533 | −0.0481 | 0.5716 | 0.7505 | 0.4814 | 严重负交互 |
+| V_B1C_noise | 0.8066 | +0.0052 | 0.7721 | 0.7184 | 0.6805 | 噪声带内 |
+
+完整交互项表与全部 10+ 对照行见 `results/smoke_method_eval.md`。
 
 ## 6. cheerhin（由 @LuSNAR 维护）
 
