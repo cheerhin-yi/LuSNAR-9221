@@ -1,6 +1,6 @@
 # LuSNAR-9221 项目状态
 
-> 最后更新：2026-11-08 18:21（Asia/Shanghai）  
+> 最后更新：2026-11-09 04:08（Asia/Shanghai）  
 > 仓库：https://github.com/cheerhin-yi/LuSNAR-9221.git  
 > 维护约定：本文件由 **4090 Bot** 与 **@LuSNAR（cheerhin）** 共同维护；4090 负责本机冒烟/组合消融章节，cheerhin 章节由 LuSNAR 填写与更新。
 
@@ -121,7 +121,9 @@ configs/  data/  logs/  pretrained/  results/  tools/  work_dirs/  _tmp/
 | M_DYSAMPLE | 12065 | OK |
 | M_CTRAST | 12015 | OK（contrastive loss 生效） |
 
-### 6.2 Batch-3 full smoke（pid 21276，进行中）
+### 6.2 Batch-3 full smoke（已完成，2026-11-09 03:46 Asia/Shanghai）
+
+原始 launcher pid 21276；`M_CTRAST` / `M_SAPA` 由 resume pid 2132 补跑完成（日志 `D:\\LuSNAR_Seg\\logs\\batch3_resume.out.log`；`work_dirs/smoke_M_CTRAST/summary.json` 与 `work_dirs/smoke_M_SAPA/summary.json` 已写出）。六项 `summary.json` 均齐全。
 
 命令：
 
@@ -132,18 +134,34 @@ configs/  data/  logs/  pretrained/  results/  tools/  work_dirs/  _tmp/
   --iters 2000 --batch 16 --val-every 500 --seed 42 --lr 6e-5
 ```
 
+对照本机 V_B1C `best_mIoU_scene5` **0.812645**（表中四位小数 **0.8126**）。噪声带：`|Δ| < 0.02`。
+
 | exp | status | best mIoU | rock | crater | mountain | BoundF1 | Δ vs 本机 V_B1C | note |
 |---|---|---:|---:|---:|---:|---:|---:|---|
-| V_B1C | **done** | **0.8126** | 0.7467 | 0.7464 | 0.6844 | 0.7285 | — | 本机对照；wall ~1.58h；peak_mem ~12.0GB |
-| M_DYSAMPLE | running | — | — | — | — | — | — | ~iter 750（16:32 快照）；约 15:59 起训 |
-| M_MSINFER | queued | — | — | — | — | — | — | eval-only，依赖 V_B1C best；四种整图/滑窗模式 |
-| M_HARD | queued | — | — | — | — | — | — | lite hardness |
-| M_CTRAST | queued | — | — | — | — | — | — | lite boundary-pair InfoNCE |
-| M_SAPA | queued | — | — | — | — | — | — | lite stage1 SAPA |
+| V_B1C | **done** | **0.8126** | 0.7467 | 0.7464 | 0.6844 | 0.7285 | — | 本机对照；wall 5684s；peak_mem 12014 MB |
+| M_DYSAMPLE | **done** | 0.8079 | 0.7502 | 0.7504 | 0.6568 | 0.7245 | −0.0047 | 噪声带内略低；peak_mem 12162 MB |
+| M_MSINFER | **done** | — | — | — | — | — | n/a | eval-only，整图/滑窗，不可与中心裁剪比；见下表 |
+| M_HARD | **done** | 0.7860 | 0.7243 | 0.7341 | 0.6190 | 0.7025 | −0.0266 | 超出噪声带的下降；不进组合 |
+| M_CTRAST | **done** | 0.7941 | 0.7461 | 0.7400 | 0.6502 | 0.7215 | −0.0185 | 噪声带内略低；lite boundary-pair InfoNCE；wall 6491s |
+| M_SAPA | **done** | 0.7967 | 0.7266 | 0.7160 | 0.6496 | 0.6973 | −0.0159 | 噪声带内略低；SAPA-B-lite；wall 9132s |
 
-> 跨机不可比：4090 的 V_B1C=0.8014，cheerhin 本机对照=0.8126；第三批 Δ 一律相对 **0.8126**。
+M_MSINFER（权重 `smoke_V_B1C/best.pth`；四种独立整图模式；summary 的 `best_mIoU_scene5` 取 whole_1.0 = 0.7707）：
 
-预计整轮剩余约 6–9 小时（Asia/Shanghai 今晚到凌晨）。完成后将回填本表并写结论。
+| mode | mIoU | rock | crater | mountain | BoundF1 | note |
+|---|---:|---:|---:|---:|---:|---|
+| whole_1.0 | 0.7707 | 0.6035 | 0.6656 | 0.6127 | 0.6630 | 整图 scale 1.0 |
+| slide_1.0 | 0.7820 | 0.6255 | 0.6977 | 0.6120 | 0.6784 | 四种模式最高 |
+| slide_1.25 | 0.7564 | 0.6149 | 0.5729 | 0.6275 | 0.6714 | crop 512 / stride 256 |
+| slide_1.5 | 0.7008 | 0.5371 | 0.4312 | 0.5760 | 0.6242 | crop 512 / stride 256 |
+
+> 跨机不可比：4090 的 V_B1C=0.8014，cheerhin 本机对照=0.812645；第三批 Δ 一律相对 **0.812645**。
+
+结论：
+- 训练期五项里，**没有任何方法相对本机 V_B1C 超出噪声带的正向增益**，因此 **无 stack candidate**
+- M_DYSAMPLE（−0.0047）、M_CTRAST（−0.0185）、M_SAPA（−0.0159）均落在 `|Δ|<0.02` 噪声带内、略低于对照
+- **M_HARD −0.0266** 是唯一超出噪声带的变化，方向为下降，不进组合
+- M_MSINFER 不可与中心裁剪对照直接比较
+- 从未触碰 Moon_2/4/9
 
 ## 7. 仓库同步说明
 
