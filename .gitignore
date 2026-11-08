@@ -1,0 +1,52 @@
+# Temp / admin docs (aligned with cheerhin)
+_tmp/
+*.docx
+*.doc
+*.xlsx
+*.pptx
+*.pdf
+
+# Datasets — never sync
+data/
+**/Moon_*
+**/raw/
+
+# Weights / checkpoints
+*.pth
+*.pt
+*.ckpt
+pretrained/
+work_dirs/**/best.pth
+work_dirs/**/iter_*.pth
+work_dirs/**/*.pth
+
+# Keep small run metadata if present under work_dirs (explicit allow)
+!work_dirs/**/summary.json
+!work_dirs/**/train_log.jsonl
+
+# Caches / env
+__pycache__/
+.pytest_cache/
+*.pyc
+*.pyo
+.conda/
+*.egg-info/
+.mypy_cache/
+.ruff_cache/
+
+# Logs noise (keep results/*.md)
+*.err.log
+logs/
+*.log
+!results/**/*.md
+
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# Misc local
+1.txt
+micro adjust/
