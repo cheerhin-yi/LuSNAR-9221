@@ -1,6 +1,6 @@
 # LuSNAR-9221 项目状态
 
-> 最后更新：2026-11-08 16:27（Asia/Shanghai）  
+> 最后更新：2026-11-08 16:32（Asia/Shanghai）  
 > 仓库：https://github.com/cheerhin-yi/LuSNAR-9221.git  
 > 维护约定：本文件由 **4090 Bot** 与 **@LuSNAR（cheerhin）** 共同维护；4090 负责本机冒烟/组合消融章节，cheerhin 章节由 LuSNAR 填写与更新。
 
@@ -22,8 +22,8 @@ configs/  data/  logs/  pretrained/  results/  tools/  work_dirs/  _tmp/
 
 | 主机 | 机器 | 角色 | 工程根目录 |
 |------|------|------|------------|
-| DESKTOP-ORQLB8F（4090×2） | machineId `370a07e6-…` | 方法冒烟矩阵 + 两两组合消融 | `D:\LuSNAR_Seg` |
-| cheerhin（5060 Ti） | machineId `2256a039-…` | 第三批方法冒烟（LuSNAR 管理） | `D:\LuSNAR_Seg` |
+| DESKTOP-ORQLB8F（4090×2） | machineId `370a07e6-…` | 方法冒烟矩阵 + 两两组合消融 | `D:\\LuSNAR_Seg` |
+| cheerhin（5060 Ti） | machineId `2256a039-…` | 第三批方法冒烟（LuSNAR 管理） | `D:\\LuSNAR_Seg` |
 
 - 数据集 `data/` **不同步**到 GitHub
 - 权重 `*.pth` / `pretrained/` **不上传**；`_tmp/`、`*.docx`、`*.pdf` 等行政文件不上传
@@ -31,14 +31,15 @@ configs/  data/  logs/  pretrained/  results/  tools/  work_dirs/  _tmp/
 
 ## 3. 冒烟协议（统一口径）
 
-- 对照：**V_B1C@2k**
+- 对照：**V_B1C@2k**（**必须本机重跑**；跨机数字不可直接比）
 - Scene5 `val_sub` 350 张；训练子集 1600；seed **42**
 - crop 512，lr `6e-5`，**2000** iters，**batch 16**，每 500 iter 验证
 - `num_workers=0`（与对照增强 RNG 一致；故 GPU 利用率故意偏低）
 - 噪声带：`|Δ| < 0.02` 视为噪声
 - 门槛备忘：
-  - M_ROW：sky→mountain &lt; 12% 且 mountain ≥ +0.03，其它类下降 ≤ 0.01
-  - M_BLV：crater→regolith &lt; 7%，或 crater ≥ +0.02
+  - M_ROW：sky→mountain < 12% 且 mountain ≥ +0.03，其它类下降 ≤ 0.01
+  - M_BLV：crater→regolith < 7%，或 crater ≥ +0.02
+- 评测附加：Boundary F1 / Boundary IoU（容差 3px）；M_MSINFER 为整图评测，**不可**与中心裁剪验证直接比
 
 ## 4. 4090 — 方法冒烟矩阵（已完成）
 
@@ -70,7 +71,7 @@ configs/  data/  logs/  pretrained/  results/  tools/  work_dirs/  _tmp/
 - GPU0：`M_ROW_SHAD` → `M_ROW_SHAD_TTA` → `M_BLV_SHAD` → `M_BLV_SHAD_TTA`
 - GPU1：`M_SHAD_TTA` → `M_BLV_TTA` → `M_ROW_TTA` → `V_B1C_noise` → `M_ROW_BLV` → `M_ROW_BLV_TTA`
 
-已完成（截至本文件撰写时）：
+已完成（截至 4090 首推时）：
 - TTA 两两：`M_SHAD_TTA`、`M_BLV_TTA`、`M_ROW_TTA`
 - 训练：`M_ROW_SHAD` + `M_ROW_SHAD_TTA`；`V_B1C_noise`
 - 进行中：`M_BLV_SHAD`（GPU0）、`M_ROW_BLV`（GPU1）
@@ -82,14 +83,44 @@ configs/  data/  logs/  pretrained/  results/  tools/  work_dirs/  _tmp/
 
 ## 6. cheerhin（由 @LuSNAR 维护）
 
-> 以下数字来自 LuSNAR 同步口径；后续更新请 LuSNAR 直接改本节。
+- **Host / GPU**：cheerhin · RTX 5060 Ti 16GB · `machineId 2256a039-ab6a-4308-8c10-5d88e0be1ab4`
+- **工程**：`D:\\LuSNAR_Seg` · env `F:\\Conda\\envs\\lusnar` · torch 2.7.1+cu128 · MMSeg 1.2.2 · SegFormer-B2
+- **数据路径**（不同步）：`--data-root D:\\LuSNAR_Seg\\data\\raw --train-subdir LuSNAR_train`
+- **角色**：第三批方法冒烟（`M_DYSAMPLE` / `M_MSINFER` / `M_HARD` / `M_CTRAST` / `M_SAPA`），**本机重跑 V_B1C 对照**；不做长训
+- **脚本**：`tools/portable/`（`_lusnar_common.py`、`lusnar_smoke_compare.py`、`README_METHOD_SMOKE.md`）
+- **行政文件**：已移入 `_tmp/`（`数据访问登记表_已填写.docx/.pdf`、`挑战赛规则协议_已填写.docx/.pdf`），gitignore 排除 `_tmp/` 与 `*.docx/*.pdf`
 
-- 角色：第三批方法冒烟（DySample / MSInfer / Hard / Contrast / SAPA 等），**不做长训**
-- **V_B1C@2k**（cheerhin Scene5）：best mIoU **0.8126**（rock 0.747 / crater 0.746 / mountain 0.684；Boundary F1 mean 0.729）
-- 当前：`M_DYSAMPLE` ~iter 600；batch-3 其余仍在跑
-- 行政文件已移入 `_tmp/`（含访问登记等 docx/pdf），不入库
+### 6.1 Dry-run（2026-11-08，batch 16，无需 accum）
 
-（LuSNAR：请在此补充 batch-3 各实验完成后的表格与结论。）
+| exp | peak_mem_mb | note |
+|---|---:|---|
+| V_B1C | 12014 | OK |
+| M_DYSAMPLE | 12065 | OK |
+| M_CTRAST | 12015 | OK（contrastive loss 生效） |
+
+### 6.2 Batch-3 full smoke（pid 21276，进行中）
+
+命令：
+
+```powershell
+& 'F:\\Conda\\envs\\lusnar\\python.exe' 'D:\\LuSNAR_Seg\\tools\\portable\\lusnar_smoke_compare.py' `
+  --project-root D:\\LuSNAR_Seg --data-root D:\\LuSNAR_Seg\\data\\raw --train-subdir LuSNAR_train `
+  --exps V_B1C,M_DYSAMPLE,M_MSINFER,M_HARD,M_CTRAST,M_SAPA `
+  --iters 2000 --batch 16 --val-every 500 --seed 42 --lr 6e-5
+```
+
+| exp | status | best mIoU | rock | crater | mountain | BoundF1 | Δ vs 本机 V_B1C | note |
+|---|---|---:|---:|---:|---:|---:|---:|---|
+| V_B1C | **done** | **0.8126** | 0.7467 | 0.7464 | 0.6844 | 0.7285 | — | 本机对照；wall ~1.58h；peak_mem ~12.0GB |
+| M_DYSAMPLE | running | — | — | — | — | — | — | ~iter 750（16:32 快照）；约 15:59 起训 |
+| M_MSINFER | queued | — | — | — | — | — | — | eval-only，依赖 V_B1C best；四种整图/滑窗模式 |
+| M_HARD | queued | — | — | — | — | — | — | lite hardness |
+| M_CTRAST | queued | — | — | — | — | — | — | lite boundary-pair InfoNCE |
+| M_SAPA | queued | — | — | — | — | — | — | lite stage1 SAPA |
+
+> 跨机不可比：4090 的 V_B1C=0.8014，cheerhin 本机对照=0.8126；第三批 Δ 一律相对 **0.8126**。
+
+预计整轮剩余约 6–9 小时（Asia/Shanghai 今晚到凌晨）。完成后将回填本表并写结论。
 
 ## 7. 仓库同步说明
 
