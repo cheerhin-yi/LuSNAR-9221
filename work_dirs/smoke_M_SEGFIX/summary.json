@@ -1,0 +1,89 @@
+{
+  "exp": "M_SEGFIX",
+  "run_name": "smoke_M_SEGFIX",
+  "iters": 0,
+  "target_iters": 0,
+  "best_mIoU_scene5": 0.8020624384811736,
+  "per_class_IoU_best": {
+    "月壤": 0.972638548866142,
+    "岩石": 0.7236816882221706,
+    "撞击坑": 0.7415297822755181,
+    "山体": 0.6563877738162534,
+    "天空": 0.9160743992257838
+  },
+  "iou_rock": 0.7236816882221706,
+  "iou_crater": 0.7415297822755181,
+  "confusion_rates": {
+    "sky_to_mountain": 0.05831818932760614,
+    "crater_to_regolith": 0.04940998290927271,
+    "mountain_to_rock": 0.11007473780851283,
+    "rock_to_mountain": 0.009724447445620494
+  },
+  "segfix_before_after": {
+    "before_mIoU": 0.8014414454478629,
+    "before_per_class": {
+      "月壤": 0.9724820533615304,
+      "岩石": 0.7228826993294892,
+      "撞击坑": 0.7406616994867015,
+      "山体": 0.6532080775387048,
+      "天空": 0.9179726975228889
+    },
+    "before_confusion_rates": {
+      "sky_to_mountain": 0.058696567417915936,
+      "crater_to_regolith": 0.0492112535222169,
+      "mountain_to_rock": 0.11132254351244977,
+      "rock_to_mountain": 0.009676669289156588
+    },
+    "after_mIoU": 0.8020624384811736,
+    "after_per_class": {
+      "月壤": 0.972638548866142,
+      "岩石": 0.7236816882221706,
+      "撞击坑": 0.7415297822755181,
+      "山体": 0.6563877738162534,
+      "天空": 0.9160743992257838
+    },
+    "after_confusion_rates": {
+      "sky_to_mountain": 0.05831818932760614,
+      "crater_to_regolith": 0.04940998290927271,
+      "mountain_to_rock": 0.11007473780851283,
+      "rock_to_mountain": 0.009724447445620494
+    },
+    "delta_mIoU": 0.0006209930333107572,
+    "ckpt": "D:\\LuSNAR_Seg\\work_dirs\\smoke_V_B1C\\best.pth",
+    "n_images": 350,
+    "k": 5
+  },
+  "peak_mem_mb": 333.3,
+  "wall_sec": 86.4,
+  "flags": {
+    "rcs": false,
+    "mosaic": false,
+    "cc_paste": false,
+    "acw": false,
+    "crater_boost": false,
+    "eps": false,
+    "multi_scale": false,
+    "photometric": false,
+    "ema": false,
+    "row_attn": false,
+    "blv": false,
+    "shadow_aug": false,
+    "abl": false,
+    "invform_fallback": false,
+    "fade": false,
+    "tta": false,
+    "segfix": true,
+    "t_b1_tta": false,
+    "hrda": false,
+    "eval_only": true
+  },
+  "subset": {
+    "train": 1600,
+    "val": 350,
+    "seed": 42
+  },
+  "dry_run": false,
+  "error": null,
+  "method_note": "SegFix-lite postprocess on V_B1C (or --ckpt); no retrain",
+  "note": "本地 Scene5 子集验证，非官方测试成绩；未使用 Moon_2/4/9 标签"
+}
