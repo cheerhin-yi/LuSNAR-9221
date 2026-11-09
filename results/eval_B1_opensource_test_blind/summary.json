@@ -1,0 +1,130 @@
+{
+  "disclaimer": "非官方事后盲评；开源 Moon_2/4/9 GT；不参与调参/选模/配方。ONE-SHOT POST-HOC ONLY.",
+  "weight": "D:\\LuSNAR_Seg\\work_dirs\\train_B1\\best.pth",
+  "weight_note": "iter 17000, Scene5 local mIoU 0.8630 (not this test score)",
+  "pred_source": "D:\\LuSNAR_Seg\\results\\submit_B1_best",
+  "pred_reused": true,
+  "re_inferred": false,
+  "gt_root": "D:\\LuSNAR_Seg\\data\\Moon_{2,4,9}\\image0\\label",
+  "gt_remap": "RGB via COLOR_TO_ID (open-source palette rock/crater swapped vs official)",
+  "official_class_order": {
+    "0": "regolith",
+    "1": "rock",
+    "2": "crater",
+    "3": "mountain",
+    "4": "sky"
+  },
+  "gpu_used": "none (CPU score of existing preds); GPU1 reserved if re-infer were needed",
+  "n_images_total": 5004,
+  "missing_gt": [],
+  "n_missing": 0,
+  "unmapped_gt_pixels": 0,
+  "wall_time_sec": 669.74,
+  "overall_micro_from_confusion": {
+    "mIoU": 0.8516380137085628,
+    "per_class_IoU": {
+      "regolith": 0.984897276494731,
+      "rock": 0.8147209342924037,
+      "crater": 0.6453748303398178,
+      "mountain": 0.8198841948070547,
+      "sky": 0.9933128326088072
+    },
+    "per_class_IoU_zh": {
+      "月壤": 0.984897276494731,
+      "岩石": 0.8147209342924037,
+      "撞击坑": 0.6453748303398178,
+      "山体": 0.8198841948070547,
+      "天空": 0.9933128326088072
+    },
+    "gt_pixel_support": {
+      "regolith": 3589208122,
+      "rock": 157197614,
+      "crater": 65474918,
+      "mountain": 141505961,
+      "sky": 1293687689
+    }
+  },
+  "macro_mean_of_scene_mIoU": 0.8809840759159959,
+  "image_count_weighted_mean_of_scene_mIoU": 0.8692756557344747,
+  "official_scene_weights": null,
+  "per_scene": {
+    "Moon_2": {
+      "n_images": 1597,
+      "expect_n": 1597,
+      "mIoU": 0.9345176133566939,
+      "per_class_IoU": {
+        "regolith": 0.9933495955256654,
+        "rock": 0.8764447967126905,
+        "crater": 0.8650905917223478,
+        "mountain": 0.9419126033590557,
+        "sky": 0.9957904794637099
+      },
+      "per_class_IoU_zh": {
+        "月壤": 0.9933495955256654,
+        "岩石": 0.8764447967126905,
+        "撞击坑": 0.8650905917223478,
+        "山体": 0.9419126033590557,
+        "天空": 0.9957904794637099
+      },
+      "gt_pixel_support": {
+        "regolith": 1153203401,
+        "rock": 30692028,
+        "crater": 17330406,
+        "mountain": 52041900,
+        "sky": 421308137
+      }
+    },
+    "Moon_4": {
+      "n_images": 1320,
+      "expect_n": 1320,
+      "mIoU": 0.9231711701042498,
+      "per_class_IoU": {
+        "regolith": 0.9918128166454224,
+        "rock": 0.8903659725770683,
+        "crater": 0.8226092133622623,
+        "mountain": 0.9125280637411747,
+        "sky": 0.9985397841953214
+      },
+      "per_class_IoU_zh": {
+        "月壤": 0.9918128166454224,
+        "岩石": 0.8903659725770683,
+        "撞击坑": 0.8226092133622623,
+        "山体": 0.9125280637411747,
+        "天空": 0.9985397841953214
+      },
+      "gt_pixel_support": {
+        "regolith": 948578636,
+        "rock": 29376699,
+        "crater": 18902881,
+        "mountain": 11369205,
+        "sky": 375892899
+      }
+    },
+    "Moon_9": {
+      "n_images": 2087,
+      "expect_n": 2087,
+      "mIoU": 0.7852634442870443,
+      "per_class_IoU": {
+        "regolith": 0.9740013850952565,
+        "rock": 0.7759913080552687,
+        "crater": 0.45479761811542935,
+        "mountain": 0.7342360861995835,
+        "sky": 0.9872908239696837
+      },
+      "per_class_IoU_zh": {
+        "月壤": 0.9740013850952565,
+        "岩石": 0.7759913080552687,
+        "撞击坑": 0.45479761811542935,
+        "山体": 0.7342360861995835,
+        "天空": 0.9872908239696837
+      },
+      "gt_pixel_support": {
+        "regolith": 1487426085,
+        "rock": 97128887,
+        "crater": 29241631,
+        "mountain": 78094856,
+        "sky": 496486653
+      }
+    }
+  }
+}

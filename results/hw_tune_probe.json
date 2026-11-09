@@ -1,0 +1,74 @@
+{
+  "host": "DESKTOP-ORQLB8F",
+  "os": "Windows-10-10.0.26100-SP0",
+  "python": "3.10.22",
+  "torch": "2.7.1+cu128",
+  "cuda": "12.8",
+  "gpu_count": 2,
+  "cpu_physical": 24,
+  "cpu_logical": 48,
+  "ram_total_gb": 63.84,
+  "ram_available_gb": 45.47,
+  "gpus": [
+    {
+      "index": 0,
+      "name": "NVIDIA GeForce RTX 4090",
+      "mem_total_mb": 49140.0,
+      "mem_free_mb": 47763.0,
+      "mem_used_mb": 860.0,
+      "util": 1.0,
+      "temp_c": 29.0,
+      "power_w": 10.61,
+      "power_limit_w": 450.0
+    },
+    {
+      "index": 1,
+      "name": "NVIDIA GeForce RTX 4090",
+      "mem_total_mb": 49140.0,
+      "mem_free_mb": 46348.0,
+      "mem_used_mb": 2275.0,
+      "util": 0.0,
+      "temp_c": 29.0,
+      "power_w": 12.02,
+      "power_limit_w": 450.0
+    }
+  ],
+  "probe": [
+    {
+      "batch": 32,
+      "ok": true,
+      "peak_alloc_mb": 23267.7
+    },
+    {
+      "batch": 28,
+      "ok": true,
+      "peak_alloc_mb": 20754.3
+    },
+    {
+      "batch": 24,
+      "ok": true,
+      "peak_alloc_mb": 17851.0
+    },
+    {
+      "batch": 20,
+      "ok": true,
+      "peak_alloc_mb": 14935.5
+    }
+  ],
+  "recommend": {
+    "recipe": "B1",
+    "nproc_per_node": 2,
+    "batch_per_gpu": 24,
+    "global_batch": 48,
+    "crop": 512,
+    "workers_per_proc": 12,
+    "amp": "bf16",
+    "iters": 20000,
+    "val_every": 1000,
+    "MASTER_ADDR": "127.0.0.1",
+    "USE_LIBUV": "0",
+    "OMP_NUM_THREADS": 2,
+    "backend_note": "gloo on win32",
+    "max_batch_probe_ok": 32
+  }
+}

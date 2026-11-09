@@ -1,0 +1,37 @@
+{
+  "locked_before_any_open_score": true,
+  "test_scenes": [
+    2,
+    4,
+    9
+  ],
+  "label_alignment": "open-source RGB remapped by COLOR_TO_ID; rock/crater swapped vs official index order",
+  "inference": "ROW + TTA scales 0.75/1.0/1.25, sliding window 512 stride 256",
+  "no_tuning_on_test": true,
+  "run_a": {
+    "checkpoint": "D:\\LuSNAR_Seg\\work_dirs\\train_ROW_BLV_20k\\best.pth",
+    "why": "best.pth already selected on Scene5 during the current train, before this test"
+  },
+  "run_b": {
+    "checkpoint": "D:\\LuSNAR_Seg\\work_dirs\\train_ROW_BLV_20k_plus5\\last.pth",
+    "train_scenes": [
+      1,
+      3,
+      5,
+      6,
+      7,
+      8
+    ],
+    "why": "Moon_5 joins training. No val set remains, so the tested weights are the predetermined final iter, not a test-picked checkpoint.",
+    "hyperparams_from_scene5": {
+      "recipe": "M_ROW_BLV",
+      "iters": 20000,
+      "batch_per_gpu": 48,
+      "lr": 6e-05,
+      "crop": 512,
+      "amp": "bf16",
+      "workers": 4,
+      "val": false
+    }
+  }
+}
