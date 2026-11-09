@@ -1,0 +1,8 @@
+{
+  "python": "3.10.22 | packaged by Anaconda, Inc. | (main, Oct  1 2026, 20:15:38) [MSC v.1942 64 bit (AMD64)]",
+  "executable": "F:\\Conda\\envs\\lusnar\\python.exe",
+  "torch": "2.7.1+cu128",
+  "transformers": "4.49.0",
+  "cuda": "12.8",
+  "gpu": "NVIDIA GeForce RTX 4090"
+}
