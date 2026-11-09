@@ -199,13 +199,17 @@ def scan_scene_pairs(scene_root: Path, scene_id: int):
     return pairs
 
 
-def build_split_lists(scene_root: Path, out_dir: Path):
-    """Write train_scenes.txt (1/3/6/7/8) and val_scene5.txt under out_dir."""
+def build_split_lists(scene_root: Path, out_dir: Path, train_scenes=None, val_scene=VAL_SCENE):
+    """Write train and val pair lists under out_dir.
+
+    val_scene=None writes an empty val list. Defaults stay 1/3/6/7/8 train, scene 5 val.
+    """
     out_dir.mkdir(parents=True, exist_ok=True)
+    use_train = TRAIN_SCENES if train_scenes is None else tuple(train_scenes)
     train_pairs = []
-    for sid in TRAIN_SCENES:
+    for sid in use_train:
         train_pairs.extend(scan_scene_pairs(scene_root, sid))
-    val_pairs = scan_scene_pairs(scene_root, VAL_SCENE)
+    val_pairs = [] if val_scene is None else scan_scene_pairs(scene_root, val_scene)
     train_file = out_dir / "train_scenes.txt"
     val_file = out_dir / "val_scene5.txt"
     train_file.write_text(
@@ -457,11 +461,19 @@ class CCBank:
                 pi = pi[:, ::-1].copy()
                 pm = pm[:, ::-1].copy()
             ph, pw = pm.shape
-            reg = np.argwhere(out_m == 0)
-            if len(reg) < 100:
-                continue
+            # Random regolith pixels. argwhere() materializes every hit and
+            # ran the machine out of RAM with two ranks of workers.
+            placed = False
             for _try in range(8):
-                yx = reg[rng.randrange(len(reg))]
+                yx = None
+                for _pick in range(24):
+                    y = rng.randrange(h)
+                    x = rng.randrange(w)
+                    if out_m[y, x] == 0:
+                        yx = (y, x)
+                        break
+                if yx is None:
+                    break
                 y0 = int(yx[0] - ph // 2)
                 x0 = int(yx[1] - pw // 2)
                 if y0 < 0 or x0 < 0 or y0 + ph > h or x0 + pw > w:
@@ -470,11 +482,14 @@ class CCBank:
                 dest = (region == 0) | (region == IGNORE)
                 src = pm != IGNORE
                 use = dest & src
-                if use.sum() < 32:
+                if int(use.sum()) < 32:
                     continue
                 out_i[y0 : y0 + ph, x0 : x0 + pw][use] = pi[use]
                 out_m[y0 : y0 + ph, x0 : x0 + pw][use] = cid
+                placed = True
                 break
+            if not placed:
+                continue
         return out_i, out_m
 
 
@@ -503,6 +518,7 @@ def recipe_flags(recipe: str) -> dict:
       M_ROW_SHAD: V_B1C + RowHeightAttn + shadow_augment (combo train)
       M_BLV_SHAD: V_B1C + BLV + shadow_augment (combo train)
       M_ROW_BLV: V_B1C + RowHeightAttn + BLV (combo train)
+      M_ROW_BLV_SHAD: V_B1C + RowHeightAttn + BLV + shadow_augment (3-module combo train)
       M_ABL: V_B1C + ABL-lite boundary loss (train only)
       M_INVFORM: stub → falls back to ABL-lite with warning (no InverseForm net)
       M_FADE: V_B1C + FADE-lite content-aware refine on low-res logits
@@ -514,6 +530,7 @@ def recipe_flags(recipe: str) -> dict:
     r = recipe.upper()
     train_method = (
         "M_ROW", "M_BLV", "M_SHAD", "M_ROW_SHAD", "M_BLV_SHAD", "M_ROW_BLV",
+        "M_ROW_BLV_SHAD",
         "M_ABL", "M_INVFORM", "M_FADE",
     )
     a1_fam = r in ("A1", "B1", "C1", "V_B1C", "V_B1E", *train_method, "M_TTA", "M_SEGFIX", "T_B1_TTA")
@@ -532,9 +549,9 @@ def recipe_flags(recipe: str) -> dict:
         "multi_scale": r == "C1",
         "photometric": r == "C1",
         "ema": r == "C1",
-        "row_attn": r in ("M_ROW", "M_ROW_SHAD", "M_ROW_BLV"),
-        "blv": r in ("M_BLV", "M_BLV_SHAD", "M_ROW_BLV"),
-        "shadow_aug": r in ("M_SHAD", "M_ROW_SHAD", "M_BLV_SHAD"),
+        "row_attn": r in ("M_ROW", "M_ROW_SHAD", "M_ROW_BLV", "M_ROW_BLV_SHAD"),
+        "blv": r in ("M_BLV", "M_BLV_SHAD", "M_ROW_BLV", "M_ROW_BLV_SHAD"),
+        "shadow_aug": r in ("M_SHAD", "M_ROW_SHAD", "M_BLV_SHAD", "M_ROW_BLV_SHAD"),
         "abl": abl,
         "invform_fallback": invform,
         "fade": r == "M_FADE",
