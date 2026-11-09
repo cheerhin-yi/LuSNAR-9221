@@ -1,0 +1,51 @@
+Validation date: 2026-11-05.
+Development environment: Windows, Python 3.12.0, PyTorch 2.13.0+cpu,
+Transformers 4.57.1, huggingface-hub 0.36.0 (isolated work/ dependency directory).
+Target environment described by user: Windows, Python 3.10.22 in lusnar,
+CUDA-enabled PyTorch installed earlier; NVIDIA RTX 4090 with ~48 GiB visible VRAM.
+
+PASS: Python syntax compilation and CLI help.
+PASS: Full B3 dimensions, stage depths [3,4,18,3], decoder dimension 768.
+PASS: Five-class parameter count 47,226,309.
+PASS: Actual full-model forward on (2,3,64,64), output (2,5,64,64), finite values.
+PASS: Cross-entropy backward with finite gradient norm and nonzero gradient in
+      first encoder convolution; these checks used the complete B3, not a tiny substitute.
+PASS: Local Hugging Face classification-format checkpoint loading into the
+      complete encoder, with exact equality of every loaded encoder tensor.
+      Source tensors were synthetic/random; not the real NVIDIA pretrained tensors.
+PASS: Five-class segmentation decoder after encoder checkpoint loading.
+PASS: Wrong MiT variant rejected explicitly; no fallback to random initialization.
+PASS: Actual-layout fixture pairing: Moon_*/image0/color and label timestamps.
+PASS: Exact split-manifest export/reuse and collection consistency checking.
+PASS: --check-only finishes without loading even a deliberately nonexistent
+      pretrained source; no model download is needed for data checks.
+PASS: FP32 training epoch, native-resolution sliding-window validation,
+      named per-class IoU output, CSV/JSON output, best/last checkpoint saving.
+PASS: Validation preview generation and visual inspection of Image/Ground truth/Prediction panels.
+PASS: Simulated interruption after epoch 1 of a 2-epoch run; separate CLI process
+      resumed at epoch 2 and finished held-out test evaluation with the best checkpoint.
+PASS: Resume succeeded while --pretrained pointed to a deliberately nonexistent
+      path: local last.pth supplied the model, no external weights were reloaded.
+
+Fixtures contained synthetic grayscale 72x80 camera images and exact RGB label
+colors. Training crops were 64x64 for CPU verification. The test metrics are not
+LuSNAR accuracy results and are not included as a performance claim.
+
+NOT VERIFIED HERE: user's actual dataset/files, target Python 3.10 interpreter,
+target GPU/CUDA execution, full-size 512 training, optional FP16 AMP on target GPU,
+online download of actual nvidia/mit-b3 weights, NVIDIA model checksum, published
+benchmark reproduction, or exhaustive numerical equivalence to original NVIDIA code.
+The package directly uses the pinned Transformers implementation; it does not
+claim to reproduce the original NVIDIA training pipeline.
+
+Connection-timeout fix regression checks (2026-11-05):
+Changed CLI default pretrained source from nvidia/mit-b3 to None (explicit offline/random default).
+PASS: ordinary train defaults to random initialization and FP32.
+PASS: --pretrained and --from-scratch are mutually exclusive and fail before training on conflict.
+PASS: explicit local pretrained option remains selectable.
+PASS: full B3 completed one synthetic CPU training epoch, sliding-window validation/test,
+      previews and best/last checkpoints while both pretrained config and model loaders
+      were mocked to raise if called; neither was called. HF_HUB_OFFLINE=1 was also set.
+PASS: random initialization is explicitly saved in initialization.json and best.pth.
+PASS: new checkpoint reloaded with --resume and best model test evaluation completed offline.
+Target CUDA training, actual data and network connectivity remain unverified here.
