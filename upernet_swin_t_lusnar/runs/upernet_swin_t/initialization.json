@@ -1,0 +1,6 @@
+{
+  "pretrained_source": null,
+  "resolved_commit": null,
+  "type": "random",
+  "implementation": "transformers.UperNetForSemanticSegmentation"
+}

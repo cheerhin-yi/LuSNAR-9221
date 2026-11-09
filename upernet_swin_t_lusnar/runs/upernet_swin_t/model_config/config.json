@@ -1,0 +1,81 @@
+{
+  "_attn_implementation_autoset": true,
+  "auxiliary_channels": 256,
+  "auxiliary_concat_input": false,
+  "auxiliary_in_channels": 384,
+  "auxiliary_loss_weight": 0.4,
+  "auxiliary_num_convs": 1,
+  "backbone": null,
+  "backbone_config": {
+    "attention_probs_dropout_prob": 0.0,
+    "depths": [
+      2,
+      2,
+      6,
+      2
+    ],
+    "drop_path_rate": 0.1,
+    "embed_dim": 96,
+    "encoder_stride": 32,
+    "hidden_act": "gelu",
+    "hidden_dropout_prob": 0.0,
+    "hidden_size": 768,
+    "image_size": 224,
+    "initializer_range": 0.02,
+    "layer_norm_eps": 1e-05,
+    "mlp_ratio": 4.0,
+    "model_type": "swin",
+    "num_heads": [
+      3,
+      6,
+      12,
+      24
+    ],
+    "num_layers": 4,
+    "out_features": [
+      "stage1",
+      "stage2",
+      "stage3",
+      "stage4"
+    ],
+    "out_indices": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "patch_size": 4,
+    "qkv_bias": true,
+    "use_absolute_embeddings": false,
+    "window_size": 7
+  },
+  "backbone_kwargs": null,
+  "hidden_size": 512,
+  "id2label": {
+    "0": "lunar_regolith",
+    "1": "impact_crater",
+    "2": "rock",
+    "3": "mountain",
+    "4": "sky"
+  },
+  "initializer_range": 0.02,
+  "label2id": {
+    "impact_crater": 1,
+    "lunar_regolith": 0,
+    "mountain": 3,
+    "rock": 2,
+    "sky": 4
+  },
+  "loss_ignore_index": 255,
+  "model_type": "upernet",
+  "pool_scales": [
+    1,
+    2,
+    3,
+    6
+  ],
+  "transformers_version": "4.49.0",
+  "use_auxiliary_head": true,
+  "use_pretrained_backbone": false,
+  "use_timm_backbone": false
+}
