@@ -80,3 +80,23 @@ Document noise band remains |Δ|<0.02; the same-recipe rerun V_B1C_noise landed 
 TTA gain vs each checkpoint's own single-scale: V_B1C +0.0260, M_BLV +0.0319, M_ROW_BLV +0.0303, M_SHAD +0.0158, M_ROW +0.0076, M_ROW_SHAD −0.0000, M_BLV_SHAD −0.0333.
 
 Takeaway: keep ROW+BLV (optionally +TTA). Do not pair SHAD with ROW or BLV. V_B1C_noise Δ=+0.0052 confirms the |Δ|<0.02 band; class-wise swings (rock +0.0493, crater −0.0223, sky −0.0297) are larger than mIoU noise, so single-module gains of +0.003 to +0.006 are not reliable. ROW+BLV at +0.0205 is just at the band edge; ROW+BLV+TTA at +0.0509 is clearly above it.
+
+## M_ROW_BLV_SHAD + TTA (3-module combo, 2026-11-08)
+
+Launcher ALL DONE at 2026-11-08 21:47 (Asia/Shanghai). Train wrote `work_dirs/smoke_M_ROW_BLV_SHAD/summary.json`; TTA wrote `work_dirs/smoke_M_ROW_BLV_SHAD_TTA/summary.json`. Train stopped early at iter 1909/2000 with `numpy._core._exceptions._ArrayMemoryError` inside `shadow_augment` (unable to allocate 12.0 MiB for shape (1024, 1024, 3) float32). best.pth equals last (mIoU 0.7818); TTA evaluated that checkpoint. wall_s train=10499.7, TTA=493.3.
+
+### vs local V_B1C control (mIoU 0.8014, crater 0.7407, mountain 0.6530)
+
+| exp | mIoU | d_mIoU | rock | crater | mountain | sky | crater and mountain both up? |
+|---|---:|---:|---:|---:|---:|---:|---|
+| M_ROW_BLV_SHAD | 0.7818 | -0.0196 | 0.7420 | 0.6802 | 0.6416 | 0.8715 | no (crater -0.0605, mountain -0.0114) |
+| M_ROW_BLV_SHAD_TTA | 0.8110 | +0.0096 | 0.6937 | 0.7081 | 0.6781 | 0.9936 | no (crater -0.0326, mountain +0.0251) |
+
+### Incremental third-module effect of adding SHAD
+
+| pair | mIoU | d_mIoU | d_rock | d_crater | d_mountain | d_sky |
+|---|---:|---:|---:|---:|---:|---:|
+| M_ROW_BLV_SHAD vs M_ROW_BLV (0.8219) | 0.7818 | -0.0401 | -0.0059 | -0.1026 | -0.0542 | -0.0341 |
+| M_ROW_BLV_SHAD_TTA vs M_ROW_BLV_TTA (0.8522) | 0.8110 | -0.0412 | -0.0583 | -0.0816 | -0.0642 | -0.0004 |
+
+Adding `shadow_augment` on this 2k Scene5 smoke lowered mIoU by about 4pp versus ROW+BLV, with the largest drop on crater. TTA still lifts SHAD itself (0.7818 -> 0.8110, +0.0292) but does not recover the two-module TTA (0.8522). Local Scene5 subset only; not official test; Moon_2/4/9 unused.

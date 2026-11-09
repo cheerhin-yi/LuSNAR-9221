@@ -1,0 +1,18 @@
+{
+    "last_report_exp":  "V_B1C",
+    "last_loss":  1.6504384279251099,
+    "last_report_iter":  50,
+    "notified":  [
+                     "new_exp_V_B1C_start"
+                 ],
+    "current_exp":  "V_B1C",
+    "finished_exps":  [
+
+                      ],
+    "pid":  28500,
+    "last_val":  null,
+    "checked_at":  "2026-11-07T13:07:37+08:00",
+    "process_alive":  true,
+    "matrix_done":  false,
+    "last_iter":  50
+}
