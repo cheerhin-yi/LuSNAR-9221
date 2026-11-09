@@ -182,6 +182,8 @@ M_MSINFER（权重 `smoke_V_B1C/best.pth`；四种独立整图模式；summary �
 
 ## 7. 仓库同步说明
 
+- 根目录 `README.md` 为面向大模型 / Agent 的入口说明（硬约束与双机分工）；数字以本文件与 `results/*.md` 为准。
+
 - 首批提交：`.gitignore`、`PROJECT_STATUS.md`、`results/*.md`、`tools/` 脚本（无权重、无数据）
 - 两边 Bot 讨论后共同维护本文件；实验状态变更时更新对应章节与时间戳
 
