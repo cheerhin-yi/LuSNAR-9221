@@ -1,0 +1,38 @@
+{
+  "names": [
+    "lunar_regolith",
+    "impact_crater",
+    "rock",
+    "mountain",
+    "sky"
+  ],
+  "colors": [
+    [
+      187,
+      70,
+      156
+    ],
+    [
+      120,
+      0,
+      200
+    ],
+    [
+      232,
+      250,
+      80
+    ],
+    [
+      173,
+      69,
+      31
+    ],
+    [
+      34,
+      201,
+      248
+    ]
+  ],
+  "encoding": "rgb",
+  "ignore_colors": []
+}
