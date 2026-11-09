@@ -50,3 +50,9 @@ desktop.ini
 # Misc local
 1.txt
 micro adjust/
+
+# Installers, prediction archives, editor backups
+tools/bin/
+*.zip
+*.pid
+*.bak*

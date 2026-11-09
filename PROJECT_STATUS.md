@@ -1,6 +1,6 @@
 # LuSNAR-9221 项目状态
 
-> 最后更新：2026-11-09 15:08（Asia/Shanghai）  
+> 最后更新：2026-11-09（Asia/Shanghai，4090 补上长训进度；cheerhin 第三批记录保留）  
 > 仓库：https://github.com/cheerhin-yi/LuSNAR-9221.git  
 > 维护约定：本文件由 **4090 Bot** 与 **@LuSNAR（cheerhin）** 共同维护；4090 负责本机冒烟/组合消融章节，cheerhin 章节由 LuSNAR 填写与更新。
 
@@ -102,7 +102,22 @@ configs/  data/  logs/  pretrained/  results/  tools/  work_dirs/  _tmp/
 | M_BLV_SHAD_TTA | 0.7533 | −0.0481 | 0.5716 | 0.7505 | 0.4814 | 严重负交互 |
 | V_B1C_noise | 0.8066 | +0.0052 | 0.7721 | 0.7184 | 0.6805 | 噪声带内 |
 
-完整交互项表与全部 10+ 对照行见 `results/smoke_method_eval.md`。
+完整交互项表与全部 10+ 对照行见 `results/smoke_method_eval.md`。三模块 SHAD 的掉点记在该文件末节。
+
+## 5b. 4090 — ROW+BLV+TTA 长训（进行中）
+
+底座是已验证的 `M_ROW_BLV`（V_B1C + RowHeightAttn + BLV），训完对 `best.pth` 做 Scene5 TTA。不含 SHAD。
+
+- 命令入口：`tools/portable/lusnar_row_blv_ddp.py`
+- 日程沿用 B1×20k：20000 iters，crop 512，lr `6e-5`（未按更大 batch 放大），bf16，val 每 1000
+- 双卡 batch **48/GPU**（global 96）。batch 56 第二步会在 Windows 上 OOM；48 连续 5 步稳定，峰值约 36.5GB
+- 2026-11-09 已重新拉起。日志 `logs/train_ROW_BLV_20k.log`，权重 `work_dirs/train_ROW_BLV_20k/`
+- 第 1 步核对：两卡 ROW 梯度一致且离开零初始化，BLV 使 CE 变化约 0.13
+- 训完后的后续已排好，且在看开源测试分数之前就写死：`results/oneshot_protocol.json`
+  - 一次性开源测试：Moon_2/4/9，GT 按官方 RGB 对齐，推理为 ROW+TTA，权重用 Scene5 选出的 `best.pth`，不调参
+  - 然后把 Moon_5 加入训练集（1,3,5,6,7,8），超参不变，不再用 Scene5 选模，测预定的 `last.pth`
+  - Moon_2/4/9 仍不进训练、不参与选模
+- 本机备忘：`近期实验记录.md`。B1 开源事后评分：`results/eval_B1_opensource_test_blind.md`
 
 ## 6. cheerhin（由 @LuSNAR 维护）
 
