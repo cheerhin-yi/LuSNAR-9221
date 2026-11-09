@@ -1,0 +1,1 @@
+{"last_reported_iter":19100,"last_reported_at":"2026-11-07T10:32:00+08:00","last_loss":0.03788641840219498,"elapsed_s":59685.8,"gpu0_mem_mb":20898,"gpu0_power_w":106.81,"gpu1_mem_mb":22291,"gpu1_power_w":110.69,"last_val_iter":19000,"last_val_miou":0.8615169170601552,"best_so_far_iter":17000,"best_so_far_miou":0.8630186536503599,"reason":"iter_ge200_and_val_19000"}
