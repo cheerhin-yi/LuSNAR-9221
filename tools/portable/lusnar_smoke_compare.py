@@ -640,6 +640,7 @@ def run_exp(
         "M_ROW_SHAD": "V_B1C + RowHeightAttn + shadow_augment (combo)",
         "M_BLV_SHAD": "V_B1C + BLV + shadow_augment (combo)",
         "M_ROW_BLV": "V_B1C + RowHeightAttn + BLV (combo)",
+        "M_ROW_BLV_SHAD": "V_B1C + RowHeightAttn + BLV + shadow_augment (3-module combo)",
         "M_ABL": "V_B1C + ABL-lite boundary BCE/Dice (train-only)",
         "M_INVFORM": "stub → ABL-lite fallback (no InverseForm net)",
         "M_FADE": "V_B1C + FADE-lite (logits⊕backbone-s0 refine); gate after M_TTA",
@@ -1107,6 +1108,7 @@ METHOD_EXPS = (
     "M_ROW_SHAD",
     "M_BLV_SHAD",
     "M_ROW_BLV",
+    "M_ROW_BLV_SHAD",
     "M_ABL",
     "M_INVFORM",
     "M_FADE",
@@ -1151,7 +1153,7 @@ def parse_args():
     ap = argparse.ArgumentParser(
         description=(
             "LuSNAR smoke ablation + method smokes. Scene5 val only. "
-            "Recipes: A0/A1/B1/C1 + V_B1C/V_B1E + M_ROW/M_BLV/M_SHAD/M_ROW_SHAD/M_BLV_SHAD/M_ROW_BLV/M_ABL/"
+            "Recipes: A0/A1/B1/C1 + V_B1C/V_B1E + M_ROW/M_BLV/M_SHAD/M_ROW_SHAD/M_BLV_SHAD/M_ROW_BLV/M_ROW_BLV_SHAD/M_ABL/"
             "M_INVFORM/M_FADE + M_TTA/M_SEGFIX/T_B1_TTA; M_HRDA stub."
         )
     )
