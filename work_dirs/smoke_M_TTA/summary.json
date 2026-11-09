@@ -1,0 +1,98 @@
+{
+  "exp": "M_TTA",
+  "run_name": "smoke_M_TTA",
+  "iters": 0,
+  "target_iters": 0,
+  "best_mIoU_scene5": 0.8274203852293096,
+  "per_class_IoU_best": {
+    "月壤": 0.9795180317471498,
+    "岩石": 0.721892255133934,
+    "撞击坑": 0.7510525772152176,
+    "山体": 0.6888560555582603,
+    "天空": 0.9957830064919868
+  },
+  "iou_rock": 0.721892255133934,
+  "iou_crater": 0.7510525772152176,
+  "confusion_rates": {
+    "sky_to_mountain": 0.0026077623765801685,
+    "crater_to_regolith": 0.08528014894599835,
+    "mountain_to_rock": 0.12403569154758616,
+    "rock_to_mountain": 0.017188490324443154
+  },
+  "tta_vs_single": {
+    "single_mIoU": 0.8013932814215007,
+    "single_per_class": {
+      "月壤": 0.9724758398406881,
+      "岩石": 0.7228193936201461,
+      "撞击坑": 0.7406566962059484,
+      "山体": 0.6530350244042036,
+      "天空": 0.9179794530365172
+    },
+    "single_confusion_rates": {
+      "sky_to_mountain": 0.058734938153834675,
+      "crater_to_regolith": 0.049129251501452816,
+      "mountain_to_rock": 0.11142261936704681,
+      "rock_to_mountain": 0.009690365694009575
+    },
+    "tta_mIoU": 0.8274203852293096,
+    "tta_per_class": {
+      "月壤": 0.9795180317471498,
+      "岩石": 0.721892255133934,
+      "撞击坑": 0.7510525772152176,
+      "山体": 0.6888560555582603,
+      "天空": 0.9957830064919868
+    },
+    "tta_confusion_rates": {
+      "sky_to_mountain": 0.0026077623765801685,
+      "crater_to_regolith": 0.08528014894599835,
+      "mountain_to_rock": 0.12403569154758616,
+      "rock_to_mountain": 0.017188490324443154
+    },
+    "scales": [
+      0.75,
+      1.0,
+      1.25
+    ],
+    "crop": 512,
+    "stride": 256,
+    "small_object_note": "portable stack has no size-bucket helper; skipped",
+    "ckpt": "D:\\LuSNAR_Seg\\work_dirs\\smoke_V_B1C\\best.pth",
+    "trained_V_B1C_here": false
+  },
+  "peak_mem_mb": 897.5,
+  "wall_sec": 424.4,
+  "batch": 16,
+  "lr": 6e-05,
+  "world_size": 1,
+  "flags": {
+    "rcs": false,
+    "mosaic": false,
+    "cc_paste": false,
+    "acw": false,
+    "crater_boost": false,
+    "eps": false,
+    "multi_scale": false,
+    "photometric": false,
+    "ema": false,
+    "row_attn": false,
+    "blv": false,
+    "shadow_aug": false,
+    "abl": false,
+    "invform_fallback": false,
+    "fade": false,
+    "tta": true,
+    "segfix": false,
+    "t_b1_tta": false,
+    "hrda": false,
+    "eval_only": true
+  },
+  "subset": {
+    "train": 1600,
+    "val": 350,
+    "seed": 42
+  },
+  "dry_run": false,
+  "error": null,
+  "method_note": "TTA diagnostic on V_B1C weights (no retrain of M_TTA itself)",
+  "note": "本地 Scene5 子集验证，非官方测试成绩；未使用 Moon_2/4/9 标签"
+}
