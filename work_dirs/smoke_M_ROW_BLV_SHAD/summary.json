@@ -1,0 +1,67 @@
+{
+  "exp": "M_ROW_BLV_SHAD",
+  "run_name": "smoke_M_ROW_BLV_SHAD",
+  "iters": 1909,
+  "target_iters": 2000,
+  "best_mIoU_scene5": 0.7818068643718898,
+  "last_mIoU_scene5": 0.7818068643718898,
+  "per_class_IoU_best": {
+    "月壤": 0.9737346690763872,
+    "岩石": 0.7420049686157445,
+    "撞击坑": 0.6802345157565649,
+    "山体": 0.6416031657745392,
+    "天空": 0.8714570026362131
+  },
+  "per_class_IoU_last": {
+    "月壤": 0.9737346690763872,
+    "岩石": 0.7420049686157445,
+    "撞击坑": 0.6802345157565649,
+    "山体": 0.6416031657745392,
+    "天空": 0.8714570026362131
+  },
+  "iou_rock": 0.7420049686157445,
+  "iou_crater": 0.6802345157565649,
+  "confusion_rates": {
+    "sky_to_mountain": 0.10186417825338542,
+    "crater_to_regolith": 0.049111261262203554,
+    "mountain_to_rock": 0.1056056498863148,
+    "rock_to_mountain": 0.009715847377456992
+  },
+  "peak_mem_mb": 12093.6,
+  "wall_sec": 10499.7,
+  "batch": 16,
+  "lr": 6e-05,
+  "world_size": 1,
+  "flags": {
+    "rcs": true,
+    "mosaic": true,
+    "cc_paste": true,
+    "acw": true,
+    "crater_boost": true,
+    "eps": false,
+    "multi_scale": false,
+    "photometric": false,
+    "ema": false,
+    "row_attn": true,
+    "blv": true,
+    "shadow_aug": true,
+    "abl": false,
+    "invform_fallback": false,
+    "fade": false,
+    "tta": false,
+    "segfix": false,
+    "t_b1_tta": false,
+    "hrda": false,
+    "eval_only": false
+  },
+  "blv_sigma": 0.5,
+  "subset": {
+    "train": 1600,
+    "val": 350,
+    "seed": 42
+  },
+  "dry_run": false,
+  "error": "Traceback (most recent call last):\n  File \"D:\\LuSNAR_Seg\\tools\\portable\\lusnar_smoke_compare.py\", line 514, in run_exp\n    for batch_data in train_loader:\n  File \"F:\\Conda\\envs\\lusnar\\lib\\site-packages\\torch\\utils\\data\\dataloader.py\", line 733, in __next__\n    data = self._next_data()\n  File \"F:\\Conda\\envs\\lusnar\\lib\\site-packages\\torch\\utils\\data\\dataloader.py\", line 789, in _next_data\n    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration\n  File \"F:\\Conda\\envs\\lusnar\\lib\\site-packages\\torch\\utils\\data\\_utils\\fetch.py\", line 52, in fetch\n    data = [self.dataset[idx] for idx in possibly_batched_index]\n  File \"F:\\Conda\\envs\\lusnar\\lib\\site-packages\\torch\\utils\\data\\_utils\\fetch.py\", line 52, in <listcomp>\n    data = [self.dataset[idx] for idx in possibly_batched_index]\n  File \"D:\\LuSNAR_Seg\\tools\\portable\\lusnar_smoke_compare.py\", line 147, in __getitem__\n    img = shadow_augment(img, self.rng)\n  File \"D:\\LuSNAR_Seg\\tools\\portable\\_lusnar_common.py\", line 249, in shadow_augment\n    out = 255.0 * np.power(np.clip(out / 255.0, 0.0, 1.0), gamma)\n  File \"F:\\Conda\\envs\\lusnar\\lib\\site-packages\\numpy\\_core\\fromnumeric.py\", line 2330, in clip\n    return _wrapfunc(a, 'clip', a_min, a_max, out=out, **kwargs)\n  File \"F:\\Conda\\envs\\lusnar\\lib\\site-packages\\numpy\\_core\\fromnumeric.py\", line 57, in _wrapfunc\n    return bound(*args, **kwds)\n  File \"F:\\Conda\\envs\\lusnar\\lib\\site-packages\\numpy\\_core\\_methods.py\", line 116, in _clip\n    return um.clip(a, min, max, out=out, **kwargs)\nnumpy._core._exceptions._ArrayMemoryError: Unable to allocate 12.0 MiB for an array with shape (1024, 1024, 3) and data type float32\n",
+  "method_note": "V_B1C + RowHeightAttn + BLV + shadow_augment (3-module combo)",
+  "note": "本地 Scene5 子集验证，非官方测试成绩；未使用 Moon_2/4/9 标签"
+}
