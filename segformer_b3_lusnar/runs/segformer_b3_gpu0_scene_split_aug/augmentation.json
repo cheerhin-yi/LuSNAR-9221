@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "mode": "standard",
+  "size": 512,
+  "parameters": {
+    "scale_min": 0.5,
+    "scale_max": 2.0,
+    "hflip_prob": 0.5,
+    "rotation_prob": 0.3,
+    "rotation_degrees": 5.0,
+    "photometric_prob": 0.5,
+    "brightness": 0.2,
+    "contrast": 0.2,
+    "gamma_min": 0.9,
+    "gamma_max": 1.1,
+    "noise_prob": 0.15,
+    "noise_std": 2.0,
+    "blur_prob": 0.1,
+    "blur_radius": 0.6
+  },
+  "label_ignore_value": 255,
+  "image_fill_rgb": [
+    124,
+    116,
+    104
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "epoch": 22,
+  "classes": [
+    "lunar_regolith",
+    "impact_crater",
+    "rock",
+    "mountain",
+    "sky"
+  ],
+  "selection_criterion": "validation_miou",
+  "miou": 0.8521055041152014,
+  "pixel_accuracy": 0.9889012989433542,
+  "iou": [
+    0.9861297352126918,
+    0.616648353296732,
+    0.7303438882316986,
+    0.9293866974952149,
+    0.9980188463396698
+  ]
+}
