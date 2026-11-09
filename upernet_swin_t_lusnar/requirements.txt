@@ -1,0 +1,7 @@
+# Reuse the existing CUDA-enabled PyTorch in lusnar; this file does not install torch.
+transformers==4.57.1
+huggingface-hub>=0.34,<1.0
+safetensors>=0.4.3,<1
+numpy>=1.24,<3
+Pillow>=10,<13
+tqdm>=4.66,<5
