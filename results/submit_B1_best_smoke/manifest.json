@@ -1,0 +1,77 @@
+{
+  "checkpoint": "D:\\LuSNAR_Seg\\work_dirs\\train_B1\\best.pth",
+  "ckpt_meta": {
+    "iter": 17000,
+    "miou": 0.8630186536503599,
+    "recipe": "B1"
+  },
+  "method": "slide512/stride256_avg_logits",
+  "amp": "bf16",
+  "device": "cuda:0",
+  "tile_batch": 9,
+  "counts": {
+    "Moon_2": 1,
+    "Moon_4": 1,
+    "Moon_9": 1
+  },
+  "total_images": 3,
+  "wall_sec": 25.0,
+  "smoke_checks": [
+    {
+      "scene": 2,
+      "name": "1693278795585098496.png",
+      "shape": [
+        1024,
+        1024
+      ],
+      "dtype": "uint8",
+      "unique": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "scene": 4,
+      "name": "1693297574019004160.png",
+      "shape": [
+        1024,
+        1024
+      ],
+      "dtype": "uint8",
+      "unique": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "scene": 9,
+      "name": "1692601811687322368.png",
+      "shape": [
+        1024,
+        1024
+      ],
+      "dtype": "uint8",
+      "unique": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ]
+    }
+  ],
+  "errors": [],
+  "note": "No test GT/label files were opened. Official score from organizer only.",
+  "official_baseline_reminder": {
+    "test_weighted_mIoU": 0.8046,
+    "Moon_9": 0.7186,
+    "crater": 0.3096
+  },
+  "out_dir": "D:\\LuSNAR_Seg\\results\\submit_B1_best_smoke"
+}
