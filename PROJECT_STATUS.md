@@ -1,6 +1,6 @@
 # LuSNAR-9221 项目状态
 
-> 最后更新：2026-11-09 04:08（Asia/Shanghai）  
+> 最后更新：2026-11-09 15:08（Asia/Shanghai）  
 > 仓库：https://github.com/cheerhin-yi/LuSNAR-9221.git  
 > 维护约定：本文件由 **4090 Bot** 与 **@LuSNAR（cheerhin）** 共同维护；4090 负责本机冒烟/组合消融章节，cheerhin 章节由 LuSNAR 填写与更新。
 
@@ -162,6 +162,8 @@ M_MSINFER（权重 `smoke_V_B1C/best.pth`；四种独立整图模式；summary �
 - **M_HARD −0.0266** 是唯一超出噪声带的变化，方向为下降，不进组合
 - M_MSINFER 不可与中心裁剪对照直接比较
 - 从未触碰 Moon_2/4/9
+
+归档（2026-11-09 15:08，cheerhin）：本机脚本刷新的完整第三批报告（Boundary F1/IoU 明细、M_MSINFER 四模式表、逐类边界指标）已存为 `results/smoke_method_eval_batch3.md`；推送前已抽查六项 `summary.json`（mIoU / wall_s / peak_mem_mb）与本表记录一致。4090 的 `results/smoke_method_eval.md`（方法矩阵 + 组合消融）保持不变，第三批报告不覆盖该文件。
 
 ## 7. 仓库同步说明
 
