@@ -1,0 +1,5 @@
+SegNeXt upstream: https://github.com/Visual-Attention-Network/SegNeXt
+Commit: c87bcaef22ed2ad72ed3decb3727e5f879343516
+License: Apache-2.0 (included in LICENSE)
+Modified mscan.py and ham_head.py: replace MMCV registries/layers with local torch equivalents; CPU/device-safe NMF FP32; single-GPU BatchNorm; wrapper and checkpoint loading.
+Dataset: https://github.com/zqyu9/LuSNAR-dataset

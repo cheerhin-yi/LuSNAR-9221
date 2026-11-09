@@ -1,0 +1,31 @@
+Validation performed 2026-11-04, Windows, Python 3.12.0, PyTorch 2.13.0+cpu.
+
+PASS: Python syntax compilation for model.py and train_segnext_s.py.
+PASS: SegNeXt-S 5-class parameter count = 13,895,621.
+PASS: Forward on (2,3,64,64), output (2,5,64,64), finite values.
+PASS: Backward propagated nonzero gradients into first backbone convolution.
+PASS: Strict complete backbone loading with 398 required tensors from a synthetic matching checkpoint.
+PASS: Unknown RGB label values rejected with source filename and hexadecimal value.
+PASS: Absent-class IoU excluded from mean; correct predictions yield mIoU 1.
+PASS: Dual-camera fixture collected 12 pairs, grouped into 3 disjoint scene splits.
+PASS: Grayscale image input converted into 3 channels.
+PASS: Complete one-epoch CPU training, native-resolution sliding-window validation,
+      best/last checkpoint creation, held-out test evaluation, CSV and JSON outputs.
+PASS: Simulated interruption after epoch 1 of a 2-epoch run; separate CLI process
+      loaded last.pth, resumed at epoch 2, preserved best model and evaluated held-out test.
+PASS: Environment / actual-layout inspection command.
+
+All data above were synthetic fixtures under work/, using small 72x80 images and
+64x64 crops. Synthetic metrics are not evidence of accuracy on LuSNAR.
+Not tested: actual user dataset, actual mask pixel values, user Conda environment,
+CUDA AMP execution, user GPUs, downloaded official pretrained checkpoint.
+Actual target folder D:\LuSNAR_Seg was unavailable in this execution environment.
+No target data or existing Conda environment was modified.
+
+AMP overflow fix regression checks (CPU only):
+PASS: injected nonfinite gradients cause AMP optimizer update to be skipped; scale 128 -> 64.
+PASS: following finite gradients result in a successful optimizer update.
+PASS: FP32 nonfinite gradients stop before updating parameters.
+PASS: individually finite gradients with overflowing aggregate norm stop without unsafe update.
+PASS: updated training loop completes one synthetic FP32 epoch, saves checkpoints and evaluates test set.
+Not reproduced on target CUDA hardware; the original screenshot alone does not identify the first unstable layer.
