@@ -1,0 +1,72 @@
+{
+  "disclaimer": "非官方一次性评分。Moon_2/4/9 未用于训练、调参或选模。",
+  "tag": "ROW_BLV_plus5",
+  "checkpoint": "/mnt/d/LuSNAR_Seg/work_dirs/train_ROW_BLV_20k_plus5/last.pth",
+  "ckpt_iter": 20000,
+  "row_attn": true,
+  "scales": [
+    0.75,
+    1.0,
+    1.25
+  ],
+  "crop": 512,
+  "stride": 256,
+  "n_images": 5004,
+  "n_missing": 0,
+  "unmapped_gt_pixels": 0,
+  "infer_sec": 4869.7,
+  "per_scene": {
+    "Moon_2": {
+      "n_images": 1597,
+      "mIoU": 0.9369379800502691,
+      "per_class_IoU": {
+        "regolith": 0.9938129812619022,
+        "rock": 0.8978966958092041,
+        "crater": 0.8279607920742372,
+        "mountain": 0.9665477945233549,
+        "sky": 0.9984716365826463
+      }
+    },
+    "Moon_4": {
+      "n_images": 1320,
+      "mIoU": 0.9354672924049044,
+      "per_class_IoU": {
+        "regolith": 0.9927873272817955,
+        "rock": 0.8952745573801225,
+        "crater": 0.8240632432486104,
+        "mountain": 0.9663089195130813,
+        "sky": 0.9989024146009128
+      }
+    },
+    "Moon_9": {
+      "n_images": 2087,
+      "mIoU": 0.8033108010285286,
+      "per_class_IoU": {
+        "regolith": 0.9785724404002785,
+        "rock": 0.8090651458686043,
+        "crater": 0.4163502807749394,
+        "mountain": 0.8224515352160031,
+        "sky": 0.9901146028828177
+      }
+    }
+  },
+  "overall": {
+    "mIoU": 0.8683644637078582,
+    "per_class_IoU": {
+      "regolith": 0.9871970447990805,
+      "rock": 0.8412644069339529,
+      "crater": 0.6339378168821915,
+      "mountain": 0.8840486671257791,
+      "sky": 0.9953743827982872
+    },
+    "gt_pixels": {
+      "regolith": 3589208122,
+      "rock": 157197614,
+      "crater": 65474918,
+      "mountain": 141505961,
+      "sky": 1293687689
+    }
+  },
+  "macro_scene_mIoU": 0.8919053578279007,
+  "weighted_scene_mIoU": 0.8808186294686836
+}

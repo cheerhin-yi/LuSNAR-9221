@@ -1,0 +1,1211 @@
+{
+  "gates": {
+    "majority_swallow": 0.5,
+    "texture_confusion": 0.25,
+    "boundary": 0.12,
+    "scale": 0.15,
+    "position_context": 0.15,
+    "illumination": 15.0,
+    "domain_shift": 0.12
+  },
+  "runs": [
+    {
+      "title": "B1 best，单尺度提交",
+      "n_images": 5004,
+      "n_missing_pred": 0,
+      "mIoU": 0.851638,
+      "classes": [
+        {
+          "class": "regolith",
+          "name": "月壤",
+          "iou": 0.984897,
+          "support": 3589208122,
+          "fn": 31790090,
+          "fn_to": [
+            {
+              "pred": "rock",
+              "name": "岩石",
+              "pixels": 12740427,
+              "share_of_fn": 0.400767
+            },
+            {
+              "pred": "crater",
+              "name": "撞击坑",
+              "pixels": 9916259,
+              "share_of_fn": 0.311929
+            },
+            {
+              "pred": "mountain",
+              "name": "山体",
+              "pixels": 8744936,
+              "share_of_fn": 0.275084
+            }
+          ],
+          "boundary_iou": 0.793591,
+          "interior_iou": 0.993463,
+          "size_recall": {
+            "small": {
+              "gt_pixels": 0,
+              "recall": null
+            },
+            "mid": {
+              "gt_pixels": 0,
+              "recall": null
+            },
+            "large": {
+              "gt_pixels": 0,
+              "recall": null
+            }
+          },
+          "row_recall": [
+            0.800686,
+            0.972561,
+            0.998869,
+            0.999733
+          ],
+          "delta_y_error_minus_correct": -24.499478,
+          "scene_iou": {
+            "Moon_2": 0.99335,
+            "Moon_4": 0.991813,
+            "Moon_9": 0.974001
+          },
+          "flags": [
+            {
+              "type": "illumination",
+              "zh": "光照",
+              "score": 0.244995,
+              "evidence": "判错像素比判对像素更暗 24.5 灰度"
+            },
+            {
+              "type": "boundary",
+              "zh": "边界",
+              "score": 0.199872,
+              "evidence": "内部 IoU 0.993，边界带 IoU 0.794"
+            }
+          ],
+          "primary": "illumination"
+        },
+        {
+          "class": "rock",
+          "name": "岩石",
+          "iou": 0.814721,
+          "support": 157197614,
+          "fn": 11225503,
+          "fn_to": [
+            {
+              "pred": "regolith",
+              "name": "月壤",
+              "pixels": 9095768,
+              "share_of_fn": 0.810277
+            },
+            {
+              "pred": "mountain",
+              "name": "山体",
+              "pixels": 1877536,
+              "share_of_fn": 0.167256
+            },
+            {
+              "pred": "crater",
+              "name": "撞击坑",
+              "pixels": 131331,
+              "share_of_fn": 0.011699
+            }
+          ],
+          "boundary_iou": 0.776953,
+          "interior_iou": 0.854953,
+          "size_recall": {
+            "small": {
+              "gt_pixels": 15961692,
+              "recall": 0.851931
+            },
+            "mid": {
+              "gt_pixels": 49373988,
+              "recall": 0.947083
+            },
+            "large": {
+              "gt_pixels": 91861934,
+              "recall": 0.93197
+            }
+          },
+          "row_recall": [
+            0.884613,
+            0.946752,
+            0.855915,
+            0.390672
+          ],
+          "delta_y_error_minus_correct": -48.117752,
+          "scene_iou": {
+            "Moon_2": 0.876445,
+            "Moon_4": 0.890366,
+            "Moon_9": 0.775991
+          },
+          "flags": [
+            {
+              "type": "majority_swallow",
+              "zh": "多数类吞并",
+              "score": 0.810277,
+              "evidence": "漏检里 81% 被判成月壤"
+            },
+            {
+              "type": "position_context",
+              "zh": "位置与上下文",
+              "score": 0.55608,
+              "evidence": "四条水平带召回极差 0.556"
+            },
+            {
+              "type": "illumination",
+              "zh": "光照",
+              "score": 0.481178,
+              "evidence": "判错像素比判对像素更暗 48.1 灰度"
+            }
+          ],
+          "primary": "majority_swallow"
+        },
+        {
+          "class": "crater",
+          "name": "撞击坑",
+          "iou": 0.645375,
+          "support": 65474918,
+          "fn": 16669117,
+          "fn_to": [
+            {
+              "pred": "regolith",
+              "name": "月壤",
+              "pixels": 12930771,
+              "share_of_fn": 0.775732
+            },
+            {
+              "pred": "mountain",
+              "name": "山体",
+              "pixels": 3012935,
+              "share_of_fn": 0.18075
+            },
+            {
+              "pred": "rock",
+              "name": "岩石",
+              "pixels": 526430,
+              "share_of_fn": 0.031581
+            }
+          ],
+          "boundary_iou": 0.557561,
+          "interior_iou": 0.682166,
+          "size_recall": {
+            "small": {
+              "gt_pixels": 461271,
+              "recall": 0.262319
+            },
+            "mid": {
+              "gt_pixels": 3027401,
+              "recall": 0.708906
+            },
+            "large": {
+              "gt_pixels": 61986246,
+              "recall": 0.75079
+            }
+          },
+          "row_recall": [
+            0.365041,
+            0.754974,
+            0.727726,
+            null
+          ],
+          "delta_y_error_minus_correct": 3.440967,
+          "scene_iou": {
+            "Moon_2": 0.865091,
+            "Moon_4": 0.822609,
+            "Moon_9": 0.454798
+          },
+          "flags": [
+            {
+              "type": "majority_swallow",
+              "zh": "多数类吞并",
+              "score": 0.775732,
+              "evidence": "漏检里 78% 被判成月壤"
+            },
+            {
+              "type": "scale",
+              "zh": "小目标与尺度",
+              "score": 0.488471,
+              "evidence": "小块召回 0.262，大块召回 0.751"
+            },
+            {
+              "type": "domain_shift",
+              "zh": "场景域偏移",
+              "score": 0.410293,
+              "evidence": "三场景 IoU 极差 0.410"
+            },
+            {
+              "type": "position_context",
+              "zh": "位置与上下文",
+              "score": 0.389933,
+              "evidence": "四条水平带召回极差 0.390"
+            },
+            {
+              "type": "boundary",
+              "zh": "边界",
+              "score": 0.124605,
+              "evidence": "内部 IoU 0.682，边界带 IoU 0.558"
+            }
+          ],
+          "primary": "majority_swallow"
+        },
+        {
+          "class": "mountain",
+          "name": "山体",
+          "iou": 0.819884,
+          "support": 141505961,
+          "fn": 11106183,
+          "fn_to": [
+            {
+              "pred": "rock",
+              "name": "岩石",
+              "pixels": 7937951,
+              "share_of_fn": 0.714733
+            },
+            {
+              "pred": "sky",
+              "name": "天空",
+              "pixels": 2814082,
+              "share_of_fn": 0.25338
+            },
+            {
+              "pred": "regolith",
+              "name": "月壤",
+              "pixels": 316368,
+              "share_of_fn": 0.028486
+            }
+          ],
+          "boundary_iou": 0.703292,
+          "interior_iou": 0.872659,
+          "size_recall": {
+            "small": {
+              "gt_pixels": 115344,
+              "recall": 0.784081
+            },
+            "mid": {
+              "gt_pixels": 4151271,
+              "recall": 0.968332
+            },
+            "large": {
+              "gt_pixels": 137239346,
+              "recall": 0.920214
+            }
+          },
+          "row_recall": [
+            0.939847,
+            0.903221,
+            null,
+            null
+          ],
+          "delta_y_error_minus_correct": -110.633506,
+          "scene_iou": {
+            "Moon_2": 0.941913,
+            "Moon_4": 0.912528,
+            "Moon_9": 0.734236
+          },
+          "flags": [
+            {
+              "type": "illumination",
+              "zh": "光照",
+              "score": 1.106335,
+              "evidence": "判错像素比判对像素更暗 110.6 灰度"
+            },
+            {
+              "type": "texture_confusion",
+              "zh": "类间外观混淆",
+              "score": 0.714733,
+              "evidence": "漏检里 71% 被判成岩石"
+            },
+            {
+              "type": "domain_shift",
+              "zh": "场景域偏移",
+              "score": 0.207677,
+              "evidence": "三场景 IoU 极差 0.208"
+            },
+            {
+              "type": "boundary",
+              "zh": "边界",
+              "score": 0.169367,
+              "evidence": "内部 IoU 0.873，边界带 IoU 0.703"
+            }
+          ],
+          "primary": "illumination"
+        },
+        {
+          "class": "sky",
+          "name": "天空",
+          "iou": 0.993313,
+          "support": 1293687689,
+          "fn": 5152262,
+          "fn_to": [
+            {
+              "pred": "mountain",
+              "name": "山体",
+              "pixels": 3905213,
+              "share_of_fn": 0.757961
+            },
+            {
+              "pred": "rock",
+              "name": "岩石",
+              "pixels": 765812,
+              "share_of_fn": 0.148636
+            },
+            {
+              "pred": "regolith",
+              "name": "月壤",
+              "pixels": 417566,
+              "share_of_fn": 0.081045
+            }
+          ],
+          "boundary_iou": 0.899344,
+          "interior_iou": 0.996597,
+          "size_recall": {
+            "small": {
+              "gt_pixels": 0,
+              "recall": null
+            },
+            "mid": {
+              "gt_pixels": 0,
+              "recall": null
+            },
+            "large": {
+              "gt_pixels": 0,
+              "recall": null
+            }
+          },
+          "row_recall": [
+            0.998398,
+            0.960248,
+            null,
+            null
+          ],
+          "delta_y_error_minus_correct": 9.390701,
+          "scene_iou": {
+            "Moon_2": 0.99579,
+            "Moon_4": 0.99854,
+            "Moon_9": 0.987291
+          },
+          "flags": [
+            {
+              "type": "texture_confusion",
+              "zh": "类间外观混淆",
+              "score": 0.757961,
+              "evidence": "漏检里 76% 被判成山体"
+            }
+          ],
+          "primary": "texture_confusion"
+        }
+      ]
+    },
+    {
+      "title": "ROW+BLV best + TTA",
+      "n_images": 5004,
+      "n_missing_pred": 0,
+      "mIoU": 0.829898,
+      "classes": [
+        {
+          "class": "regolith",
+          "name": "月壤",
+          "iou": 0.982595,
+          "support": 3589208122,
+          "fn": 25317509,
+          "fn_to": [
+            {
+              "pred": "mountain",
+              "name": "山体",
+              "pixels": 11953043,
+              "share_of_fn": 0.472126
+            },
+            {
+              "pred": "rock",
+              "name": "岩石",
+              "pixels": 9606075,
+              "share_of_fn": 0.379424
+            },
+            {
+              "pred": "crater",
+              "name": "撞击坑",
+              "pixels": 3177897,
+              "share_of_fn": 0.125522
+            }
+          ],
+          "boundary_iou": 0.78268,
+          "interior_iou": 0.991818,
+          "size_recall": {
+            "small": {
+              "gt_pixels": 0,
+              "recall": null
+            },
+            "mid": {
+              "gt_pixels": 0,
+              "recall": null
+            },
+            "large": {
+              "gt_pixels": 0,
+              "recall": null
+            }
+          },
+          "row_recall": [
+            0.814194,
+            0.978002,
+            0.999531,
+            0.999839
+          ],
+          "delta_y_error_minus_correct": -25.967155,
+          "scene_iou": {
+            "Moon_2": 0.99219,
+            "Moon_4": 0.991019,
+            "Moon_9": 0.969943
+          },
+          "flags": [
+            {
+              "type": "illumination",
+              "zh": "光照",
+              "score": 0.259672,
+              "evidence": "判错像素比判对像素更暗 26.0 灰度"
+            },
+            {
+              "type": "boundary",
+              "zh": "边界",
+              "score": 0.209138,
+              "evidence": "内部 IoU 0.992，边界带 IoU 0.783"
+            }
+          ],
+          "primary": "illumination"
+        },
+        {
+          "class": "rock",
+          "name": "岩石",
+          "iou": 0.817352,
+          "support": 157197614,
+          "fn": 15734725,
+          "fn_to": [
+            {
+              "pred": "regolith",
+              "name": "月壤",
+              "pixels": 12563588,
+              "share_of_fn": 0.798463
+            },
+            {
+              "pred": "mountain",
+              "name": "山体",
+              "pixels": 2927461,
+              "share_of_fn": 0.186051
+            },
+            {
+              "pred": "sky",
+              "name": "天空",
+              "pixels": 213644,
+              "share_of_fn": 0.013578
+            }
+          ],
+          "boundary_iou": 0.767966,
+          "interior_iou": 0.870622,
+          "size_recall": {
+            "small": {
+              "gt_pixels": 15961692,
+              "recall": 0.785802
+            },
+            "mid": {
+              "gt_pixels": 49373988,
+              "recall": 0.931147
+            },
+            "large": {
+              "gt_pixels": 91861934,
+              "recall": 0.902939
+            }
+          },
+          "row_recall": [
+            0.80883,
+            0.929896,
+            0.761173,
+            0.141008
+          ],
+          "delta_y_error_minus_correct": -42.496337,
+          "scene_iou": {
+            "Moon_2": 0.889988,
+            "Moon_4": 0.890638,
+            "Moon_9": 0.775623
+          },
+          "flags": [
+            {
+              "type": "majority_swallow",
+              "zh": "多数类吞并",
+              "score": 0.798463,
+              "evidence": "漏检里 80% 被判成月壤"
+            },
+            {
+              "type": "position_context",
+              "zh": "位置与上下文",
+              "score": 0.788888,
+              "evidence": "四条水平带召回极差 0.789"
+            },
+            {
+              "type": "illumination",
+              "zh": "光照",
+              "score": 0.424963,
+              "evidence": "判错像素比判对像素更暗 42.5 灰度"
+            }
+          ],
+          "primary": "majority_swallow"
+        },
+        {
+          "class": "crater",
+          "name": "撞击坑",
+          "iou": 0.543621,
+          "support": 65474918,
+          "fn": 28137475,
+          "fn_to": [
+            {
+              "pred": "regolith",
+              "name": "月壤",
+              "pixels": 23812613,
+              "share_of_fn": 0.846295
+            },
+            {
+              "pred": "mountain",
+              "name": "山体",
+              "pixels": 2510000,
+              "share_of_fn": 0.089205
+            },
+            {
+              "pred": "rock",
+              "name": "岩石",
+              "pixels": 925642,
+              "share_of_fn": 0.032897
+            }
+          ],
+          "boundary_iou": 0.485176,
+          "interior_iou": 0.567155,
+          "size_recall": {
+            "small": {
+              "gt_pixels": 461271,
+              "recall": 0.145418
+            },
+            "mid": {
+              "gt_pixels": 3027401,
+              "recall": 0.553534
+            },
+            "large": {
+              "gt_pixels": 61986246,
+              "recall": 0.574234
+            }
+          },
+          "row_recall": [
+            0.155914,
+            0.57959,
+            0.655476,
+            null
+          ],
+          "delta_y_error_minus_correct": -32.492558,
+          "scene_iou": {
+            "Moon_2": 0.777408,
+            "Moon_4": 0.806313,
+            "Moon_9": 0.258901
+          },
+          "flags": [
+            {
+              "type": "majority_swallow",
+              "zh": "多数类吞并",
+              "score": 0.846295,
+              "evidence": "漏检里 85% 被判成月壤"
+            },
+            {
+              "type": "domain_shift",
+              "zh": "场景域偏移",
+              "score": 0.547411,
+              "evidence": "三场景 IoU 极差 0.547"
+            },
+            {
+              "type": "scale",
+              "zh": "小目标与尺度",
+              "score": 0.428816,
+              "evidence": "小块召回 0.145，大块召回 0.574"
+            },
+            {
+              "type": "position_context",
+              "zh": "位置与上下文",
+              "score": 0.423676,
+              "evidence": "四条水平带召回极差 0.424"
+            },
+            {
+              "type": "illumination",
+              "zh": "光照",
+              "score": 0.324926,
+              "evidence": "判错像素比判对像素更暗 32.5 灰度"
+            }
+          ],
+          "primary": "majority_swallow"
+        },
+        {
+          "class": "mountain",
+          "name": "山体",
+          "iou": 0.81258,
+          "support": 141505961,
+          "fn": 10835743,
+          "fn_to": [
+            {
+              "pred": "rock",
+              "name": "岩石",
+              "pixels": 5146075,
+              "share_of_fn": 0.474917
+            },
+            {
+              "pred": "sky",
+              "name": "天空",
+              "pixels": 4559556,
+              "share_of_fn": 0.420788
+            },
+            {
+              "pred": "regolith",
+              "name": "月壤",
+              "pixels": 1130112,
+              "share_of_fn": 0.104295
+            }
+          ],
+          "boundary_iou": 0.683738,
+          "interior_iou": 0.873025,
+          "size_recall": {
+            "small": {
+              "gt_pixels": 115344,
+              "recall": 0.849433
+            },
+            "mid": {
+              "gt_pixels": 4151271,
+              "recall": 0.976054
+            },
+            "large": {
+              "gt_pixels": 137239346,
+              "recall": 0.921896
+            }
+          },
+          "row_recall": [
+            0.945133,
+            0.901764,
+            null,
+            null
+          ],
+          "delta_y_error_minus_correct": -132.14179,
+          "scene_iou": {
+            "Moon_2": 0.949503,
+            "Moon_4": 0.880742,
+            "Moon_9": 0.723108
+          },
+          "flags": [
+            {
+              "type": "illumination",
+              "zh": "光照",
+              "score": 1.321418,
+              "evidence": "判错像素比判对像素更暗 132.1 灰度"
+            },
+            {
+              "type": "texture_confusion",
+              "zh": "类间外观混淆",
+              "score": 0.474917,
+              "evidence": "漏检里 47% 被判成岩石"
+            },
+            {
+              "type": "domain_shift",
+              "zh": "场景域偏移",
+              "score": 0.226395,
+              "evidence": "三场景 IoU 极差 0.226"
+            },
+            {
+              "type": "boundary",
+              "zh": "边界",
+              "score": 0.189286,
+              "evidence": "内部 IoU 0.873，边界带 IoU 0.684"
+            }
+          ],
+          "primary": "illumination"
+        },
+        {
+          "class": "sky",
+          "name": "天空",
+          "iou": 0.99334,
+          "support": 1293687689,
+          "fn": 2414757,
+          "fn_to": [
+            {
+              "pred": "mountain",
+              "name": "山体",
+              "pixels": 1912590,
+              "share_of_fn": 0.792042
+            },
+            {
+              "pred": "regolith",
+              "name": "月壤",
+              "pixels": 303018,
+              "share_of_fn": 0.125486
+            },
+            {
+              "pred": "rock",
+              "name": "岩石",
+              "pixels": 199149,
+              "share_of_fn": 0.082472
+            }
+          ],
+          "boundary_iou": 0.912932,
+          "interior_iou": 0.996171,
+          "size_recall": {
+            "small": {
+              "gt_pixels": 0,
+              "recall": null
+            },
+            "mid": {
+              "gt_pixels": 0,
+              "recall": null
+            },
+            "large": {
+              "gt_pixels": 0,
+              "recall": null
+            }
+          },
+          "row_recall": [
+            0.999162,
+            0.982679,
+            null,
+            null
+          ],
+          "delta_y_error_minus_correct": 25.983348,
+          "scene_iou": {
+            "Moon_2": 0.998233,
+            "Moon_4": 0.999046,
+            "Moon_9": 0.984967
+          },
+          "flags": [
+            {
+              "type": "texture_confusion",
+              "zh": "类间外观混淆",
+              "score": 0.792042,
+              "evidence": "漏检里 79% 被判成山体"
+            },
+            {
+              "type": "illumination",
+              "zh": "光照",
+              "score": 0.259833,
+              "evidence": "判错像素比判对像素更亮 26.0 灰度"
+            }
+          ],
+          "primary": "texture_confusion"
+        }
+      ]
+    },
+    {
+      "title": "ROW+BLV+Moon_5 last + TTA",
+      "n_images": 5004,
+      "n_missing_pred": 0,
+      "mIoU": 0.868364,
+      "classes": [
+        {
+          "class": "regolith",
+          "name": "月壤",
+          "iou": 0.987197,
+          "support": 3589208122,
+          "fn": 17675171,
+          "fn_to": [
+            {
+              "pred": "rock",
+              "name": "岩石",
+              "pixels": 9127407,
+              "share_of_fn": 0.516397
+            },
+            {
+              "pred": "mountain",
+              "name": "山体",
+              "pixels": 4649529,
+              "share_of_fn": 0.263054
+            },
+            {
+              "pred": "crater",
+              "name": "撞击坑",
+              "pixels": 3553107,
+              "share_of_fn": 0.201022
+            }
+          ],
+          "boundary_iou": 0.825848,
+          "interior_iou": 0.994535,
+          "size_recall": {
+            "small": {
+              "gt_pixels": 0,
+              "recall": null
+            },
+            "mid": {
+              "gt_pixels": 0,
+              "recall": null
+            },
+            "large": {
+              "gt_pixels": 0,
+              "recall": null
+            }
+          },
+          "row_recall": [
+            0.900428,
+            0.983995,
+            0.999659,
+            0.999959
+          ],
+          "delta_y_error_minus_correct": -31.540244,
+          "scene_iou": {
+            "Moon_2": 0.993813,
+            "Moon_4": 0.992787,
+            "Moon_9": 0.978572
+          },
+          "flags": [
+            {
+              "type": "illumination",
+              "zh": "光照",
+              "score": 0.315402,
+              "evidence": "判错像素比判对像素更暗 31.5 灰度"
+            },
+            {
+              "type": "boundary",
+              "zh": "边界",
+              "score": 0.168687,
+              "evidence": "内部 IoU 0.995，边界带 IoU 0.826"
+            }
+          ],
+          "primary": "illumination"
+        },
+        {
+          "class": "rock",
+          "name": "岩石",
+          "iou": 0.841264,
+          "support": 157197614,
+          "fn": 13530854,
+          "fn_to": [
+            {
+              "pred": "regolith",
+              "name": "月壤",
+              "pixels": 11233724,
+              "share_of_fn": 0.83023
+            },
+            {
+              "pred": "mountain",
+              "name": "山体",
+              "pixels": 2170371,
+              "share_of_fn": 0.160402
+            },
+            {
+              "pred": "sky",
+              "name": "天空",
+              "pixels": 104455,
+              "share_of_fn": 0.00772
+            }
+          ],
+          "boundary_iou": 0.788246,
+          "interior_iou": 0.900025,
+          "size_recall": {
+            "small": {
+              "gt_pixels": 15961692,
+              "recall": 0.827675
+            },
+            "mid": {
+              "gt_pixels": 49373988,
+              "recall": 0.944196
+            },
+            "large": {
+              "gt_pixels": 91861934,
+              "recall": 0.912641
+            }
+          },
+          "row_recall": [
+            0.840076,
+            0.941655,
+            0.760628,
+            0.27181
+          ],
+          "delta_y_error_minus_correct": -41.276595,
+          "scene_iou": {
+            "Moon_2": 0.897897,
+            "Moon_4": 0.895275,
+            "Moon_9": 0.809065
+          },
+          "flags": [
+            {
+              "type": "majority_swallow",
+              "zh": "多数类吞并",
+              "score": 0.83023,
+              "evidence": "漏检里 83% 被判成月壤"
+            },
+            {
+              "type": "position_context",
+              "zh": "位置与上下文",
+              "score": 0.669845,
+              "evidence": "四条水平带召回极差 0.670"
+            },
+            {
+              "type": "illumination",
+              "zh": "光照",
+              "score": 0.412766,
+              "evidence": "判错像素比判对像素更暗 41.3 灰度"
+            }
+          ],
+          "primary": "majority_swallow"
+        },
+        {
+          "class": "crater",
+          "name": "撞击坑",
+          "iou": 0.633938,
+          "support": 65474918,
+          "fn": 21700067,
+          "fn_to": [
+            {
+              "pred": "regolith",
+              "name": "月壤",
+              "pixels": 16700236,
+              "share_of_fn": 0.769594
+            },
+            {
+              "pred": "mountain",
+              "name": "山体",
+              "pixels": 3314895,
+              "share_of_fn": 0.15276
+            },
+            {
+              "pred": "sky",
+              "name": "天空",
+              "pixels": 1047056,
+              "share_of_fn": 0.048251
+            }
+          ],
+          "boundary_iou": 0.535379,
+          "interior_iou": 0.674169,
+          "size_recall": {
+            "small": {
+              "gt_pixels": 461271,
+              "recall": 0.158672
+            },
+            "mid": {
+              "gt_pixels": 3027401,
+              "recall": 0.594205
+            },
+            "large": {
+              "gt_pixels": 61986246,
+              "recall": 0.676001
+            }
+          },
+          "row_recall": [
+            0.301296,
+            0.677317,
+            0.698775,
+            null
+          ],
+          "delta_y_error_minus_correct": -5.121905,
+          "scene_iou": {
+            "Moon_2": 0.827961,
+            "Moon_4": 0.824063,
+            "Moon_9": 0.41635
+          },
+          "flags": [
+            {
+              "type": "majority_swallow",
+              "zh": "多数类吞并",
+              "score": 0.769594,
+              "evidence": "漏检里 77% 被判成月壤"
+            },
+            {
+              "type": "scale",
+              "zh": "小目标与尺度",
+              "score": 0.517329,
+              "evidence": "小块召回 0.159，大块召回 0.676"
+            },
+            {
+              "type": "domain_shift",
+              "zh": "场景域偏移",
+              "score": 0.411611,
+              "evidence": "三场景 IoU 极差 0.412"
+            },
+            {
+              "type": "position_context",
+              "zh": "位置与上下文",
+              "score": 0.376021,
+              "evidence": "四条水平带召回极差 0.376"
+            },
+            {
+              "type": "boundary",
+              "zh": "边界",
+              "score": 0.13879,
+              "evidence": "内部 IoU 0.674，边界带 IoU 0.535"
+            }
+          ],
+          "primary": "majority_swallow"
+        },
+        {
+          "class": "mountain",
+          "name": "山体",
+          "iou": 0.884049,
+          "support": 141505961,
+          "fn": 6400960,
+          "fn_to": [
+            {
+              "pred": "rock",
+              "name": "岩石",
+              "pixels": 3390828,
+              "share_of_fn": 0.529737
+            },
+            {
+              "pred": "sky",
+              "name": "天空",
+              "pixels": 2599457,
+              "share_of_fn": 0.406104
+            },
+            {
+              "pred": "regolith",
+              "name": "月壤",
+              "pixels": 410078,
+              "share_of_fn": 0.064065
+            }
+          ],
+          "boundary_iou": 0.795761,
+          "interior_iou": 0.920942,
+          "size_recall": {
+            "small": {
+              "gt_pixels": 115344,
+              "recall": 0.808885
+            },
+            "mid": {
+              "gt_pixels": 4151271,
+              "recall": 0.969178
+            },
+            "large": {
+              "gt_pixels": 137239346,
+              "recall": 0.954452
+            }
+          },
+          "row_recall": [
+            0.97564,
+            0.933936,
+            null,
+            null
+          ],
+          "delta_y_error_minus_correct": -139.753997,
+          "scene_iou": {
+            "Moon_2": 0.966548,
+            "Moon_4": 0.966309,
+            "Moon_9": 0.822452
+          },
+          "flags": [
+            {
+              "type": "illumination",
+              "zh": "光照",
+              "score": 1.39754,
+              "evidence": "判错像素比判对像素更暗 139.8 灰度"
+            },
+            {
+              "type": "texture_confusion",
+              "zh": "类间外观混淆",
+              "score": 0.529737,
+              "evidence": "漏检里 53% 被判成岩石"
+            },
+            {
+              "type": "domain_shift",
+              "zh": "场景域偏移",
+              "score": 0.144096,
+              "evidence": "三场景 IoU 极差 0.144"
+            },
+            {
+              "type": "boundary",
+              "zh": "边界",
+              "score": 0.125181,
+              "evidence": "内部 IoU 0.921，边界带 IoU 0.796"
+            }
+          ],
+          "primary": "illumination"
+        },
+        {
+          "class": "sky",
+          "name": "天空",
+          "iou": 0.995374,
+          "support": 1293687689,
+          "fn": 1906955,
+          "fn_to": [
+            {
+              "pred": "mountain",
+              "name": "山体",
+              "pixels": 1184542,
+              "share_of_fn": 0.621169
+            },
+            {
+              "pred": "rock",
+              "name": "岩石",
+              "pixels": 421070,
+              "share_of_fn": 0.220808
+            },
+            {
+              "pred": "regolith",
+              "name": "月壤",
+              "pixels": 299990,
+              "share_of_fn": 0.157314
+            }
+          ],
+          "boundary_iou": 0.933136,
+          "interior_iou": 0.99755,
+          "size_recall": {
+            "small": {
+              "gt_pixels": 0,
+              "recall": null
+            },
+            "mid": {
+              "gt_pixels": 0,
+              "recall": null
+            },
+            "large": {
+              "gt_pixels": 0,
+              "recall": null
+            }
+          },
+          "row_recall": [
+            0.999416,
+            0.985145,
+            null,
+            null
+          ],
+          "delta_y_error_minus_correct": 22.525468,
+          "scene_iou": {
+            "Moon_2": 0.998472,
+            "Moon_4": 0.998902,
+            "Moon_9": 0.990115
+          },
+          "flags": [
+            {
+              "type": "texture_confusion",
+              "zh": "类间外观混淆",
+              "score": 0.621169,
+              "evidence": "漏检里 62% 被判成山体"
+            },
+            {
+              "type": "illumination",
+              "zh": "光照",
+              "score": 0.225255,
+              "evidence": "判错像素比判对像素更亮 22.5 灰度"
+            }
+          ],
+          "primary": "texture_confusion"
+        }
+      ]
+    }
+  ],
+  "agreement": "月壤：三组主因都是光照。岩石：三组主因都是多数类吞并。撞击坑：三组主因都是多数类吞并。山体：三组主因都是光照。天空：三组主因都是类间外观混淆。",
+  "curves": {
+    "B1": "岩石 最后 5 次验证停在 0.795（极差 0.008）；撞击坑 最后 5 次仍在动（0.840 → 0.836）；山体 最后 5 次验证停在 0.702（极差 0.017）；天空 最后 5 次验证停在 0.947（极差 0.012）。",
+    "ROW+BLV": "岩石 最后 5 次验证停在 0.819（极差 0.018）；撞击坑 最后 5 次仍在动（0.876 → 0.894）；山体 最后 5 次仍在动（0.684 → 0.696）；天空 最后 5 次仍在动（0.943 → 0.917）。"
+  },
+  "scene5_tta": {
+    "mIoU": 0.865091,
+    "per_class": [
+      0.986543,
+      0.747816,
+      0.868572,
+      0.726357,
+      0.996165
+    ],
+    "rates": {
+      "sky_to_mountain": 0.002673,
+      "crater_to_regolith": 0.096589,
+      "mountain_to_rock": 0.125831,
+      "rock_to_mountain": 0.011287
+    }
+  },
+  "note": "统计只用已有预测。不选模，不改超参。"
+}

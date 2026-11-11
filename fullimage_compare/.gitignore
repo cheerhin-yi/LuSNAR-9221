@@ -1,0 +1,7 @@
+# whole-image line: only scripts, README and small result tables are versioned
+work_dirs/
+logs/
+lists/
+STOP
+*.pth
+*.tmp

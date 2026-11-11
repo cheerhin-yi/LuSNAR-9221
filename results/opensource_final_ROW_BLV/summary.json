@@ -1,0 +1,431 @@
+{
+  "created_at": "2026-11-10 13:40:16",
+  "timezone": "Asia/Shanghai",
+  "role": "competition-line open-source Moon_2/4/9 used as a dev set after Scene5 protocol freeze; not a paper test set; not used for training",
+  "checkpoint": "/mnt/d/LuSNAR_Seg/work_dirs/train_ROW_BLV_20k/best.pth",
+  "ckpt_iter": 17000,
+  "row_attn": true,
+  "scales": [
+    0.75,
+    1.0,
+    1.25
+  ],
+  "crop": 512,
+  "stride": 256,
+  "amp": "bf16",
+  "gpus": 2,
+  "n_images": 5004,
+  "n_pred": 5004,
+  "wall_s": 2900.0,
+  "label_alignment": "open-source RGB remapped by official COLOR_TO_ID; rock/crater swapped vs official index order",
+  "gt_root": "data/Moon_{2,4,9}/image0/label",
+  "color_root": "data/test/Moon_{2,4,9}/color",
+  "frozen_from_scene5": {
+    "winner": "P1P2_bias_plus_geo",
+    "I1a_weights": [
+      [
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ],
+      [
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0
+      ]
+    ],
+    "I1a_scales": [
+      0.75,
+      1.0,
+      1.25
+    ],
+    "P1_bias": [
+      0.0,
+      -0.800000011920929,
+      0.800000011920929,
+      0.800000011920929,
+      0.800000011920929
+    ]
+  },
+  "official_competition_baseline_S": 0.8046,
+  "previous_oneshot_C0_overall_mIoU": 0.8298977303524323,
+  "c0_vs_previous_oneshot_preds": {
+    "compared": 5004,
+    "equal": 5004,
+    "match_rate": 1.0
+  },
+  "c0_overall_mIoU_delta_vs_previous": 0.0,
+  "protocols": {
+    "C0_equal_tta": {
+      "per_scene": {
+        "Moon_2": {
+          "n_images": 1597,
+          "n_missing": 0,
+          "unmapped_gt_pixels": 0,
+          "mIoU": 0.9214645011339637,
+          "per_class_IoU": {
+            "regolith": 0.9921900183172655,
+            "rock": 0.889988324824853,
+            "crater": 0.7774084308158371,
+            "mountain": 0.9495026938632936,
+            "sky": 0.9982330378485694
+          },
+          "gt_pixels": {
+            "regolith": 1153203401,
+            "rock": 30692028,
+            "crater": 17330406,
+            "mountain": 52041900,
+            "sky": 421308137
+          }
+        },
+        "Moon_4": {
+          "n_images": 1320,
+          "n_missing": 0,
+          "unmapped_gt_pixels": 0,
+          "mIoU": 0.9135516043087291,
+          "per_class_IoU": {
+            "regolith": 0.9910188261063461,
+            "rock": 0.8906383615452536,
+            "crater": 0.8063125639246963,
+            "mountain": 0.880742190929868,
+            "sky": 0.9990460790374815
+          },
+          "gt_pixels": {
+            "regolith": 948578636,
+            "rock": 29376699,
+            "crater": 18902881,
+            "mountain": 11369205,
+            "sky": 375892899
+          }
+        },
+        "Moon_9": {
+          "n_images": 2087,
+          "n_missing": 0,
+          "unmapped_gt_pixels": 0,
+          "mIoU": 0.7425086160682571,
+          "per_class_IoU": {
+            "regolith": 0.9699433262820383,
+            "rock": 0.7756230391612159,
+            "crater": 0.25890145931805064,
+            "mountain": 0.7231079909325502,
+            "sky": 0.9849672646474311
+          },
+          "gt_pixels": {
+            "regolith": 1487426085,
+            "rock": 97128887,
+            "crater": 29241631,
+            "mountain": 78094856,
+            "sky": 496486653
+          }
+        }
+      },
+      "overall": {
+        "n_images": 5004,
+        "n_missing": 0,
+        "unmapped_gt_pixels": 0,
+        "mIoU": 0.8298977303524323,
+        "per_class_IoU": {
+          "regolith": 0.9825953856528079,
+          "rock": 0.8173523196405156,
+          "crater": 0.5436210732499193,
+          "mountain": 0.8125799756736336,
+          "sky": 0.9933398975452846
+        },
+        "gt_pixels": {
+          "regolith": 3589208122,
+          "rock": 157197614,
+          "crater": 65474918,
+          "mountain": 141505961,
+          "sky": 1293687689
+        }
+      },
+      "S": 0.8300083343948017,
+      "S_minus_official_baseline": 0.025408334394801724,
+      "m2": 0.9214645011339637,
+      "m4": 0.9135516043087291,
+      "m9": 0.7425086160682571
+    },
+    "I1a_best_scale_per_class": {
+      "per_scene": {
+        "Moon_2": {
+          "n_images": 1597,
+          "n_missing": 0,
+          "unmapped_gt_pixels": 0,
+          "mIoU": 0.9247567243820651,
+          "per_class_IoU": {
+            "regolith": 0.9923112431353311,
+            "rock": 0.8769993023249532,
+            "crater": 0.8057524626679121,
+            "mountain": 0.9505144485842676,
+            "sky": 0.9982061651978613
+          },
+          "gt_pixels": {
+            "regolith": 1153203401,
+            "rock": 30692028,
+            "crater": 17330406,
+            "mountain": 52041900,
+            "sky": 421308137
+          }
+        },
+        "Moon_4": {
+          "n_images": 1320,
+          "n_missing": 0,
+          "unmapped_gt_pixels": 0,
+          "mIoU": 0.917146679188326,
+          "per_class_IoU": {
+            "regolith": 0.9910842414469914,
+            "rock": 0.8780114129713861,
+            "crater": 0.8152291311914267,
+            "mountain": 0.902351308809029,
+            "sky": 0.999057301522797
+          },
+          "gt_pixels": {
+            "regolith": 948578636,
+            "rock": 29376699,
+            "crater": 18902881,
+            "mountain": 11369205,
+            "sky": 375892899
+          }
+        },
+        "Moon_9": {
+          "n_images": 2087,
+          "n_missing": 0,
+          "unmapped_gt_pixels": 0,
+          "mIoU": 0.7529001190175891,
+          "per_class_IoU": {
+            "regolith": 0.9711010933103882,
+            "rock": 0.7507734782122798,
+            "crater": 0.3102583711999281,
+            "mountain": 0.7461622136401613,
+            "sky": 0.9862054387251881
+          },
+          "gt_pixels": {
+            "regolith": 1487426085,
+            "rock": 97128887,
+            "crater": 29241631,
+            "mountain": 78094856,
+            "sky": 496486653
+          }
+        }
+      },
+      "overall": {
+        "n_images": 5004,
+        "n_missing": 0,
+        "unmapped_gt_pixels": 0,
+        "mIoU": 0.8348367281028797,
+        "per_class_IoU": {
+          "regolith": 0.9831412052781118,
+          "rock": 0.7972133215833159,
+          "crater": 0.5729716903831972,
+          "mountain": 0.8270403414344394,
+          "sky": 0.9938170818353342
+        },
+        "gt_pixels": {
+          "regolith": 3589208122,
+          "rock": 157197614,
+          "crater": 65474918,
+          "mountain": 141505961,
+          "sky": 1293687689
+        }
+      },
+      "S": 0.8369259104013924,
+      "S_minus_official_baseline": 0.03232591040139243,
+      "m2": 0.9247567243820651,
+      "m4": 0.917146679188326,
+      "m9": 0.7529001190175891
+    },
+    "P1_logit_bias": {
+      "per_scene": {
+        "Moon_2": {
+          "n_images": 1597,
+          "n_missing": 0,
+          "unmapped_gt_pixels": 0,
+          "mIoU": 0.9217649974047436,
+          "per_class_IoU": {
+            "regolith": 0.9922067223186936,
+            "rock": 0.8897414723049478,
+            "crater": 0.7802780862678151,
+            "mountain": 0.9483290570174456,
+            "sky": 0.9982696491148157
+          },
+          "gt_pixels": {
+            "regolith": 1153203401,
+            "rock": 30692028,
+            "crater": 17330406,
+            "mountain": 52041900,
+            "sky": 421308137
+          }
+        },
+        "Moon_4": {
+          "n_images": 1320,
+          "n_missing": 0,
+          "unmapped_gt_pixels": 0,
+          "mIoU": 0.9122552504924382,
+          "per_class_IoU": {
+            "regolith": 0.9909367644146253,
+            "rock": 0.8893958510462758,
+            "crater": 0.8079416089464404,
+            "mountain": 0.873929155509284,
+            "sky": 0.9990728725455658
+          },
+          "gt_pixels": {
+            "regolith": 948578636,
+            "rock": 29376699,
+            "crater": 18902881,
+            "mountain": 11369205,
+            "sky": 375892899
+          }
+        },
+        "Moon_9": {
+          "n_images": 2087,
+          "n_missing": 0,
+          "unmapped_gt_pixels": 0,
+          "mIoU": 0.7435438901502895,
+          "per_class_IoU": {
+            "regolith": 0.9698379533005982,
+            "rock": 0.777095102762222,
+            "crater": 0.2630341452751859,
+            "mountain": 0.723147288477341,
+            "sky": 0.9846049609361003
+          },
+          "gt_pixels": {
+            "regolith": 1487426085,
+            "rock": 97128887,
+            "crater": 29241631,
+            "mountain": 78094856,
+            "sky": 496486653
+          }
+        }
+      },
+      "overall": {
+        "n_images": 5004,
+        "n_missing": 0,
+        "unmapped_gt_pixels": 0,
+        "mIoU": 0.830338139851263,
+        "per_class_IoU": {
+          "regolith": 0.9825350076288065,
+          "rock": 0.8181733470766335,
+          "crater": 0.5463895583162521,
+          "mountain": 0.8113746284482546,
+          "sky": 0.9932181577863692
+        },
+        "gt_pixels": {
+          "regolith": 3589208122,
+          "rock": 157197614,
+          "crater": 65474918,
+          "mountain": 141505961,
+          "sky": 1293687689
+        }
+      },
+      "S": 0.8302770070494402,
+      "S_minus_official_baseline": 0.025677007049440204,
+      "m2": 0.9217649974047436,
+      "m4": 0.9122552504924382,
+      "m9": 0.7435438901502895
+    },
+    "P1P2_bias_plus_geo": {
+      "per_scene": {
+        "Moon_2": {
+          "n_images": 1597,
+          "n_missing": 0,
+          "unmapped_gt_pixels": 0,
+          "mIoU": 0.921433216858954,
+          "per_class_IoU": {
+            "regolith": 0.9922193691039377,
+            "rock": 0.8882512441826252,
+            "crater": 0.7801306247640819,
+            "mountain": 0.948282032741222,
+            "sky": 0.9982828135029034
+          },
+          "gt_pixels": {
+            "regolith": 1153203401,
+            "rock": 30692028,
+            "crater": 17330406,
+            "mountain": 52041900,
+            "sky": 421308137
+          }
+        },
+        "Moon_4": {
+          "n_images": 1320,
+          "n_missing": 0,
+          "unmapped_gt_pixels": 0,
+          "mIoU": 0.9137697733633321,
+          "per_class_IoU": {
+            "regolith": 0.9910277913129715,
+            "rock": 0.889145027646135,
+            "crater": 0.808142150458074,
+            "mountain": 0.8814743389011911,
+            "sky": 0.9990595584982886
+          },
+          "gt_pixels": {
+            "regolith": 948578636,
+            "rock": 29376699,
+            "crater": 18902881,
+            "mountain": 11369205,
+            "sky": 375892899
+          }
+        },
+        "Moon_9": {
+          "n_images": 2087,
+          "n_missing": 0,
+          "unmapped_gt_pixels": 0,
+          "mIoU": 0.7332777163126408,
+          "per_class_IoU": {
+            "regolith": 0.9699765076712326,
+            "rock": 0.7450839540325193,
+            "crater": 0.2627114902555952,
+            "mountain": 0.7032965873033583,
+            "sky": 0.985320042300499
+          },
+          "gt_pixels": {
+            "regolith": 1487426085,
+            "rock": 97128887,
+            "crater": 29241631,
+            "mountain": 78094856,
+            "sky": 496486653
+          }
+        }
+      },
+      "overall": {
+        "n_images": 5004,
+        "n_missing": 0,
+        "unmapped_gt_pixels": 0,
+        "mIoU": 0.8236052637442709,
+        "per_class_IoU": {
+          "regolith": 0.9826203934974386,
+          "rock": 0.7980272659211337,
+          "crater": 0.5462705585711275,
+          "mountain": 0.7976107259910226,
+          "sky": 0.9934973747406324
+        },
+        "gt_pixels": {
+          "regolith": 3589208122,
+          "rock": 157197614,
+          "crater": 65474918,
+          "mountain": 141505961,
+          "sky": 1293687689
+        }
+      },
+      "S": 0.825439605711892,
+      "S_minus_official_baseline": 0.02083960571189203,
+      "m2": 0.921433216858954,
+      "m4": 0.9137697733633321,
+      "m9": 0.7332777163126408
+    }
+  }
+}

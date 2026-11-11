@@ -38,6 +38,7 @@ from _lusnar_common import (  # noqa: E402
     RowHeightAttn,
     abl_lite_loss,
     blv_perturb_logits,
+    build_segformer,
     build_segformer_b2,
     build_split_lists,
     crater_boost_sampler_weights,
@@ -325,6 +326,8 @@ def run_exp(
     ckpt: str | None = None,
     abl_weight: float = 0.5,
     run_name: str | None = None,
+    backbone: str = "b2",
+    workers: int = 0,
 ):
     set_seed(SEED)
     flags = recipe_flags(exp)
@@ -379,6 +382,8 @@ def run_exp(
             require_ckpt=False,
             default_ckpt=project / "work_dirs" / "smoke_V_B1C" / "best.pth",
             auto_train_vb1c=True,
+            backbone=backbone,
+            workers=workers,
         )
 
     if flags.get("t_b1_tta"):
@@ -401,6 +406,8 @@ def run_exp(
             require_ckpt=True,
             default_ckpt=project / "work_dirs" / "train_B1" / "best.pth",
             auto_train_vb1c=False,
+            backbone=backbone,
+            workers=workers,
         )
 
     if flags.get("segfix"):
@@ -411,6 +418,7 @@ def run_exp(
             dry_run=dry_run,
             mem_fraction=mem_fraction,
             ckpt_override=ckpt,
+            backbone=backbone,
         )
 
     work = project / "work_dirs" / f"smoke_{run_tag}"
@@ -446,19 +454,41 @@ def run_exp(
         assert len(weights) == len(train_ds)
         sampler = WeightedRandomSampler(weights, num_samples=len(train_ds), replacement=True)
         train_loader = DataLoader(
-            train_ds, batch_size=batch, sampler=sampler, num_workers=0, pin_memory=True, drop_last=True
+            train_ds,
+            batch_size=batch,
+            sampler=sampler,
+            num_workers=workers,
+            pin_memory=True,
+            drop_last=True,
+            persistent_workers=workers > 0,
+            prefetch_factor=2 if workers > 0 else None,
         )
     else:
         train_loader = DataLoader(
-            train_ds, batch_size=batch, shuffle=True, num_workers=0, pin_memory=True, drop_last=True
+            train_ds,
+            batch_size=batch,
+            shuffle=True,
+            num_workers=workers,
+            pin_memory=True,
+            drop_last=True,
+            persistent_workers=workers > 0,
+            prefetch_factor=2 if workers > 0 else None,
         )
-    val_loader = DataLoader(val_ds, batch_size=4, shuffle=False, num_workers=0, pin_memory=True)
+    val_loader = DataLoader(
+        val_ds,
+        batch_size=4,
+        shuffle=False,
+        num_workers=min(workers, 4) if workers else 0,
+        pin_memory=True,
+        persistent_workers=(min(workers, 4) > 0) if workers else False,
+        prefetch_factor=2 if workers > 0 else None,
+    )
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     if device.type == "cuda" and mem_fraction is not None:
         torch.cuda.set_per_process_memory_fraction(float(mem_fraction), 0)
 
-    model = build_segformer_b2(pretrain).to(device)
+    model = build_segformer(pretrain, backbone).to(device)
     edge_aux = EdgeAux().to(device) if flags["eps"] else None
     row_attn = RowHeightAttn().to(device) if flags["row_attn"] else None
     fade = FadeLite().to(device) if flags.get("fade") else None
@@ -700,6 +730,8 @@ def run_tta_exp(
     require_ckpt: bool = False,
     default_ckpt: Path | None = None,
     auto_train_vb1c: bool = True,
+    backbone: str = "b2",
+    workers: int = 0,
 ):
     """TTA diagnostic: single-scale vs multi-scale sliding window on a fixed ckpt.
 
@@ -785,7 +817,7 @@ def run_tta_exp(
     if device.type == "cuda" and mem_fraction is not None:
         torch.cuda.set_per_process_memory_fraction(float(mem_fraction), 0)
 
-    model = build_segformer_b2(pretrain).to(device)
+    model = build_segformer(pretrain, backbone).to(device)
     ckpt = torch.load(str(ckpt_path), map_location="cpu")
     state = ckpt["model"] if isinstance(ckpt, dict) and "model" in ckpt else ckpt
     model.load_state_dict(state, strict=False)
@@ -914,6 +946,7 @@ def run_segfix_exp(
     dry_run: bool = False,
     mem_fraction: float | None = None,
     ckpt_override: str | None = None,
+    backbone: str = "b2",
 ):
     """M_SEGFIX: eval-only SegFix-lite postprocess; report before/after on Scene5 val_sub."""
     exp = "M_SEGFIX"
@@ -952,7 +985,7 @@ def run_segfix_exp(
     if device.type == "cuda" and mem_fraction is not None:
         torch.cuda.set_per_process_memory_fraction(float(mem_fraction), 0)
 
-    model = build_segformer_b2(pretrain).to(device)
+    model = build_segformer(pretrain, backbone).to(device)
     ckpt = torch.load(str(ckpt_path), map_location="cpu")
     state = ckpt["model"] if isinstance(ckpt, dict) and "model" in ckpt else ckpt
     model.load_state_dict(state, strict=False)
@@ -1226,6 +1259,18 @@ def parse_args():
         help="optional checkpoint for M_SEGFIX / M_TTA / T_B1_TTA (project-relative or absolute)",
     )
     ap.add_argument(
+        "--backbone",
+        default="b2",
+        choices=["b2", "b5"],
+        help="SegFormer variant for M_ROW_BLV-style smokes (default b2)",
+    )
+    ap.add_argument(
+        "--workers",
+        type=int,
+        default=0,
+        help="DataLoader workers; default 0 matches historical smokes",
+    )
+    ap.add_argument(
         "--run-name",
         default=None,
         help=(
@@ -1248,7 +1293,13 @@ def main():
     data_root = resolve_data_root(project, args.data_root)
     scene_root = resolve_scene_root(data_root, args.train_subdir)
     smoke_dir = Path(args.smoke_dir).expanduser().resolve() if args.smoke_dir else (project / "data" / "smoke")
-    pretrain = find_pretrain(project, args.pretrain)
+    backbone = args.backbone
+    if args.pretrain:
+        pretrain = find_pretrain(project, args.pretrain)
+    elif backbone == "b5":
+        pretrain = find_pretrain(project, "pretrained/mit_b5_20220624-658746d9.pth")
+    else:
+        pretrain = find_pretrain(project, args.pretrain)
 
     print(
         json.dumps(
@@ -1258,6 +1309,8 @@ def main():
                 "scene_root": str(scene_root),
                 "smoke_dir": str(smoke_dir),
                 "pretrain": str(pretrain),
+                "backbone": backbone,
+                "workers": args.workers,
             },
             ensure_ascii=False,
             indent=2,
@@ -1314,6 +1367,8 @@ def main():
             ckpt=args.ckpt,
             abl_weight=args.abl_weight,
             run_name=args.run_name,
+            backbone=backbone,
+            workers=args.workers,
         )
         refresh_report(project)
 

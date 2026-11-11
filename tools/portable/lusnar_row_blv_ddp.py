@@ -91,17 +91,77 @@ def is_main(rank: int) -> bool:
     return rank == 0
 
 
+class PlainStage1Residual(torch.nn.Module):
+    """Zero-start residual from stage-1 features into the fused 1/4 map."""
+
+    def __init__(self, in_ch: int = 64, out_ch: int = 256):
+        super().__init__()
+        self.proj = torch.nn.Conv2d(in_ch, out_ch, kernel_size=1, bias=False)
+        torch.nn.init.kaiming_normal_(self.proj.weight, mode="fan_out", nonlinearity="relu")
+        self.alpha = torch.nn.Parameter(torch.zeros(1))
+
+    def forward(self, f1: torch.Tensor, h0: torch.Tensor) -> torch.Tensor:
+        if f1.shape[-2:] != h0.shape[-2:]:
+            f1 = F.interpolate(f1, size=h0.shape[-2:], mode="bilinear", align_corners=False)
+        return h0 + self.alpha * self.proj(f1)
+
+
+def local_margin_loss(logits: torch.Tensor, masks: torch.Tensor, margin: float = 0.5) -> torch.Tensor:
+    """Crater-vs-regolith margin on small instances and the crater boundary band.
+
+    Positive pixels: crater components with short side < 32, plus crater pixels
+    within 8 px of a crater edge. Negative pixels: the regolith ring outside them.
+    Computed after geometric augmentation, on the training crop. Empty crops contribute 0.
+    """
+    crater_id, regolith_id = 2, 0
+    losses = []
+    crater_logit = logits[:, crater_id]
+    regolith_logit = logits[:, regolith_id]
+    for b in range(logits.shape[0]):
+        mask = masks[b].detach().cpu().numpy()
+        crater = (mask == crater_id).astype(np.uint8)
+        if int(crater.sum()) < 16:
+            continue
+        nlab, labels, stats, _ = cv2.connectedComponentsWithStats(crater, 8)
+        pos = np.zeros_like(crater, dtype=bool)
+        for i in range(1, nlab):
+            short = min(int(stats[i, cv2.CC_STAT_WIDTH]), int(stats[i, cv2.CC_STAT_HEIGHT]))
+            if short < 32:
+                pos |= labels == i
+        kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
+        er = cv2.erode(crater, kernel)
+        edge = (crater > 0) & (er == 0)
+        band = cv2.dilate(edge.astype(np.uint8), cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (17, 17)))
+        pos |= (band > 0) & (crater > 0)
+        ring = cv2.dilate(pos.astype(np.uint8), cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (17, 17)))
+        neg = (ring > 0) & (mask == regolith_id) & ~pos
+        if int(pos.sum()) < 8 or int(neg.sum()) < 8:
+            continue
+        d = crater_logit[b] - regolith_logit[b]
+        pos_t = torch.from_numpy(pos).to(d.device)
+        neg_t = torch.from_numpy(neg).to(d.device)
+        mu_pos = d[pos_t].mean()
+        mu_neg = d[neg_t].mean()
+        losses.append(F.softplus(margin - (mu_pos - mu_neg)))
+    if not losses:
+        return logits.new_zeros(())
+    return torch.stack(losses).mean()
+
+
 class _SegLogits(torch.nn.Module):
     """Thin forward so DDP hooks run (must not call .module.extract_feat directly)."""
 
-    def __init__(self, core: torch.nn.Module, row_attn=None):
+    def __init__(self, core: torch.nn.Module, row_attn=None, residual=None):
         super().__init__()
         self.core = core
         self.row_attn = row_attn
+        self.residual = residual
 
     def forward(self, imgs: torch.Tensor) -> torch.Tensor:
         feats = self.core.extract_feat(imgs)
-        logits = self.core.decode_head.forward(feats)
+        from _lusnar_common import _decode_logits
+
+        logits = _decode_logits(self.core, feats, residual=self.residual)
         return self.row_attn(logits) if self.row_attn is not None else logits
 
 
@@ -297,6 +357,10 @@ def parse_args():
     ap.add_argument("--train-scenes", default="", help="comma scene ids; default 1,3,6,7,8")
     ap.add_argument("--no-val", action="store_true", help="no val selection; save last.pth at the final iter")
     ap.add_argument("--tta-final", action="store_true")
+    ap.add_argument("--plain-residual", action="store_true", help="zero-start stage-1 residual into the fused map")
+    ap.add_argument("--local-margin", action="store_true", help="small-crater and boundary local margin loss")
+    ap.add_argument("--local-margin-weight", type=float, default=0.1)
+    ap.add_argument("--reset-optimizer", action="store_true", help="do not restore optimizer state on resume")
     ap.add_argument(
         "--resume",
         default=None,
@@ -433,7 +497,8 @@ def main():
     device = torch.device(f"cuda:{local_rank}" if torch.cuda.is_available() else "cpu")
     core = build_segformer_b2(pretrain).to(device)
     row_attn = RowHeightAttn().to(device) if flags["row_attn"] else None
-    model = _SegLogits(core, row_attn)
+    residual = PlainStage1Residual().to(device) if args.plain_residual else None
+    model = _SegLogits(core, row_attn, residual)
     edge_aux = EdgeAux().to(device) if flags["eps"] else None
     ema_model = copy.deepcopy(core) if flags["ema"] else None
     if ema_model is not None:
@@ -517,8 +582,10 @@ def main():
             if not resume_ckpt.get("row_attn"):
                 raise SystemExit("resume ckpt missing row_attn but recipe has RowHeightAttn")
             row_attn.load_state_dict(resume_ckpt["row_attn"])
-        if resume_ckpt.get("optimizer"):
+        if resume_ckpt.get("optimizer") and not args.reset_optimizer:
             opt.load_state_dict(resume_ckpt["optimizer"])
+        if residual is not None and resume_ckpt.get("plain_residual"):
+            residual.load_state_dict(resume_ckpt["plain_residual"])
         if is_main(rank):
             print(
                 {
@@ -581,6 +648,8 @@ def main():
                     )
                     dsc = dice_loss(logits, masks)
                     loss = ce + dsc
+                    if args.local_margin:
+                        loss = loss + args.local_margin_weight * local_margin_loss(logits.float(), masks)
                     if flags["eps"] and edge_aux is not None:
                         e_logits = edge_aux(logits)
                         valid = masks != IGNORE
@@ -708,7 +777,7 @@ def main():
                 )
                 if do_eval:
                     miou, ious = evaluate(
-                        net, val_loader, device, use_ema=ema_model if flags["ema"] else None, row_attn=row_attn
+                        net, val_loader, device, use_ema=ema_model if flags["ema"] else None, row_attn=row_attn, residual=residual
                     )
                     last_ious = ious
                     row = {
@@ -721,14 +790,14 @@ def main():
                     with open(log_path, "a", encoding="utf-8") as f:
                         f.write(json.dumps(row, ensure_ascii=False) + "\n")
                     torch.save(
-                        {"model": net.state_dict(), "row_attn": row_attn.state_dict() if row_attn is not None else None, "optimizer": opt.state_dict(), "iter": it, "miou": miou, "recipe": args.recipe},
+                        {"model": net.state_dict(), "row_attn": row_attn.state_dict() if row_attn is not None else None, "plain_residual": residual.state_dict() if residual is not None else None, "optimizer": opt.state_dict(), "iter": it, "miou": miou, "recipe": args.recipe},
                         work / f"iter_{it}.pth",
                     )
                     if miou > best:
                         best = miou
                         best_ious = ious
                         torch.save(
-                            {"model": net.state_dict(), "row_attn": row_attn.state_dict() if row_attn is not None else None, "optimizer": opt.state_dict(), "iter": it, "miou": miou, "recipe": args.recipe},
+                            {"model": net.state_dict(), "row_attn": row_attn.state_dict() if row_attn is not None else None, "plain_residual": residual.state_dict() if residual is not None else None, "optimizer": opt.state_dict(), "iter": it, "miou": miou, "recipe": args.recipe},
                             work / "best.pth",
                         )
                     model.train()

@@ -648,11 +648,30 @@ def confusion_rates(cm: np.ndarray) -> dict:
     }
 
 
-def build_segformer_b2(pretrain: Path):
+_SEGFORMER_CFGS = {
+    "b2": "segformer_mit-b2_8xb2-160k_ade20k-512x512.py",
+    "b5": "segformer_mit-b5_8xb2-160k_ade20k-512x512.py",
+}
+
+
+def build_segformer(pretrain: Path, variant: str = "b2"):
     from mmseg.utils import register_all_modules
     from mmseg.registry import MODELS
     from mmengine.config import Config
     import mmseg
+
+    key = (
+        str(variant)
+        .lower()
+        .replace("mit-", "")
+        .replace("mit_", "")
+        .replace("segformer-", "")
+        .replace("segformer_", "")
+    )
+    if key not in _SEGFORMER_CFGS:
+        raise ValueError(
+            f"unknown segformer variant {variant!r}; known={sorted(_SEGFORMER_CFGS)}"
+        )
 
     register_all_modules()
     cfg_path = (
@@ -660,7 +679,7 @@ def build_segformer_b2(pretrain: Path):
         / ".mim"
         / "configs"
         / "segformer"
-        / "segformer_mit-b2_8xb2-160k_ade20k-512x512.py"
+        / _SEGFORMER_CFGS[key]
     )
     cfg = Config.fromfile(str(cfg_path))
     model_cfg = cfg.model.to_dict() if hasattr(cfg.model, "to_dict") else dict(cfg.model)
@@ -691,9 +710,37 @@ def build_segformer_b2(pretrain: Path):
     return model
 
 
-def _forward_logits(net, imgs, row_attn=None, fade=None):
+def build_segformer_b2(pretrain: Path):
+    return build_segformer(pretrain, "b2")
+
+
+def _decode_logits(net, feats, residual=None):
+    """Decoder logits. Optional residual is added on the fused 1/4 map, before cls_seg."""
+    head = net.decode_head
+    if residual is None:
+        return head.forward(feats)
+    from mmseg.models.utils import resize
+
+    inputs = head._transform_inputs(feats)
+    outs = []
+    for idx, x in enumerate(inputs):
+        y = head.convs[idx](x)
+        outs.append(
+            resize(
+                y,
+                size=inputs[0].shape[2:],
+                mode=head.interpolate_mode,
+                align_corners=head.align_corners,
+            )
+        )
+    h0 = head.fusion_conv(torch.cat(outs, dim=1))
+    h0 = residual(inputs[0], h0)
+    return head.cls_seg(h0)
+
+
+def _forward_logits(net, imgs, row_attn=None, fade=None, residual=None):
     x = net.extract_feat(imgs)
-    logits = net.decode_head.forward(x)
+    logits = _decode_logits(net, x, residual=residual)
     if fade is not None:
         logits = fade(logits, x[0])
     if row_attn is not None:
@@ -702,7 +749,7 @@ def _forward_logits(net, imgs, row_attn=None, fade=None):
 
 
 @torch.no_grad()
-def evaluate(model, loader, device, use_ema=None, row_attn=None, fade=None):
+def evaluate(model, loader, device, use_ema=None, row_attn=None, fade=None, residual=None):
     was_training = model.training
     model.eval()
     net = use_ema if use_ema is not None else model
@@ -718,7 +765,7 @@ def evaluate(model, loader, device, use_ema=None, row_attn=None, fade=None):
         imgs = imgs.to(device, non_blocking=True)
         masks = masks.to(device, non_blocking=True)
         with torch.autocast(device_type="cuda", dtype=torch.bfloat16, enabled=device.type == "cuda"):
-            logits = _forward_logits(net, imgs, row_attn=row_attn, fade=fade)
+            logits = _forward_logits(net, imgs, row_attn=row_attn, fade=fade, residual=residual)
             if logits.shape[-2:] != masks.shape[-2:]:
                 logits = F.interpolate(
                     logits, size=masks.shape[-2:], mode="bilinear", align_corners=False
@@ -803,6 +850,7 @@ def sliding_window_logits(
     stride: int = 256,
     row_attn=None,
     fade=None,
+    residual=None,
 ):
     """Average logits over sliding windows on a single BGR image."""
     h, w = img_bgr.shape[:2]
@@ -831,7 +879,7 @@ def sliding_window_logits(
             with torch.autocast(
                 device_type=device.type, dtype=torch.bfloat16, enabled=device.type == "cuda"
             ):
-                logits = _forward_logits(net, t, row_attn=row_attn, fade=fade)
+                logits = _forward_logits(net, t, row_attn=row_attn, fade=fade, residual=residual)
                 if logits.shape[-2:] != (crop, crop):
                     logits = F.interpolate(
                         logits, size=(crop, crop), mode="bilinear", align_corners=False

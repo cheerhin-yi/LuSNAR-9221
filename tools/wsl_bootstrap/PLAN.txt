@@ -1,0 +1,5 @@
+﻿Plan (locked with user 2026-11-09):
+1. Keep Windows ROW+BLV 20k running until next saved ckpt (iter_5000 or newer / best).
+2. Prefer migrate first-round resume to WSL if env+GPU smoke OK.
+3. Fallback: finish first round on Windows; run plus5 second long-train ONLY on WSL.
+4. Do not change recipe/batch; never Moon_2/4/9 for train select; port 29621 for plus5.

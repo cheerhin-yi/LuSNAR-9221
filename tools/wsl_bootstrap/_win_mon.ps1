@@ -1,0 +1,3 @@
+(Get-Counter '\Memory\Committed Bytes','\Memory\Commit Limit').CounterSamples | % { "{0} {1:N1} GB" -f ($_.Path -replace '.*\\',''), ($_.CookedValue/1GB) }
+Get-WinEvent -FilterHashtable @{LogName='System';Id=2004;StartTime=(Get-Date).AddMinutes(-30)} -ErrorAction SilentlyContinue | select -First 3 TimeCreated,Message | fl
+$p=Get-Process vmmemWSL -ErrorAction SilentlyContinue; if($p){"vmmemWSL WS {0:N1} GB PM {1:N1} GB" -f ($p.WorkingSet64/1GB),($p.PagedMemorySize64/1GB)}

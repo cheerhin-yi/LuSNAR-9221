@@ -1,0 +1,6 @@
+# wsl2 config for user profile ? large memory + nested virt not required
+[wsl2]
+memory=64GB
+processors=24
+swap=32GB
+localhostForwarding=true

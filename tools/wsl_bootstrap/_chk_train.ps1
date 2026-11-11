@@ -1,0 +1,1 @@
+wsl -d Ubuntu -u root -- bash -lc "ps -ef | grep lusnar_row_blv | grep -v grep; echo ---; nvidia-smi --query-gpu=index,utilization.gpu,memory.used --format=csv,noheader; echo ---; tail -n 40 /mnt/d/LuSNAR_Seg/logs/train_ROW_BLV_20k.log; echo ---; tail -n 5 /mnt/d/LuSNAR_Seg/work_dirs/train_ROW_BLV_20k/train_log.jsonl"

@@ -1,0 +1,56 @@
+{
+  "n_images": 1599,
+  "crop": 512,
+  "classes": {
+    "rock": {
+      "n_cc": 33007,
+      "area_p50": 129.0,
+      "area_p90": 2532.0,
+      "side_p50": 11.357816691600547,
+      "side_p90": 50.3189825016365,
+      "frac_side_lt_32": 0.8156148695731209,
+      "frac_side_lt_64": 0.9322567940133911,
+      "area_hist": {
+        "<16^2": 21264,
+        "16^2-32^2": 5657,
+        "32^2-64^2": 3850,
+        "64^2-96^2": 1310,
+        ">=96^2": 926
+      }
+    },
+    "crater": {
+      "n_cc": 2946,
+      "area_p50": 31.0,
+      "area_p90": 31920.0,
+      "side_p50": 5.5677643628300215,
+      "side_p90": 178.66168717694404,
+      "frac_side_lt_32": 0.7145281737949762,
+      "frac_side_lt_64": 0.7780040733197556,
+      "area_hist": {
+        "<16^2": 1804,
+        "16^2-32^2": 301,
+        "32^2-64^2": 187,
+        "64^2-96^2": 150,
+        ">=96^2": 504
+      }
+    }
+  },
+  "scale_notes": {
+    "0.50": {
+      "meaning": "object side appears ~0.5x at this infer scale; objects with full-res side < 64.0px fall under ~32px at this scale"
+    },
+    "0.75": {
+      "meaning": "object side appears ~0.75x at this infer scale; objects with full-res side < 42.7px fall under ~32px at this scale"
+    },
+    "1.00": {
+      "meaning": "object side appears ~1.0x at this infer scale; objects with full-res side < 32.0px fall under ~32px at this scale"
+    },
+    "1.25": {
+      "meaning": "object side appears ~1.25x at this infer scale; objects with full-res side < 25.6px fall under ~32px at this scale"
+    },
+    "1.50": {
+      "meaning": "object side appears ~1.5x at this infer scale; objects with full-res side < 21.3px fall under ~32px at this scale"
+    }
+  },
+  "recommendation": "If many rock/crater CC have side_p50 << 64, prefer scales >=1.25 or re-zoom (I3). If large objects dominate, scales <=0.75 help context (mountain)."
+}
