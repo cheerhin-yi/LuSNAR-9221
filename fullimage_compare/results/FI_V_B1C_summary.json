@@ -1,0 +1,174 @@
+{
+  "exp": "FI_V_B1C",
+  "line": "fullimage_compare (whole-image 1024)",
+  "host": "DESKTOP-ORQLB8F-WSL",
+  "status": "done",
+  "iters": 2000,
+  "target_iters": 2000,
+  "best_mIoU_scene5": 0.7819500550371171,
+  "best_iter": 2000,
+  "last_mIoU_scene5": 0.7819500550371171,
+  "per_class_IoU_best": {
+    "regolith": 0.9771885485795813,
+    "rock": 0.619350674148902,
+    "crater": 0.6986774875927461,
+    "mountain": 0.6199343511327786,
+    "sky": 0.9945992137315779
+  },
+  "per_class_IoU_last": {
+    "regolith": 0.9771885485795813,
+    "rock": 0.619350674148902,
+    "crater": 0.6986774875927461,
+    "mountain": 0.6199343511327786,
+    "sky": 0.9945992137315779
+  },
+  "iou_rock_best": 0.619350674148902,
+  "iou_crater_best": 0.6986774875927461,
+  "boundary_metrics_best": {
+    "per_class_boundary_f1": {
+      "regolith": 0.7875496029765092,
+      "rock": 0.7076998177780713,
+      "crater": 0.3951285183540273,
+      "mountain": 0.489964204397697,
+      "sky": 0.9771698963279313
+    },
+    "mean_boundary_f1": 0.6715024079668472,
+    "per_class_boundary_iou": {
+      "regolith": 0.489227423259162,
+      "rock": 0.3337722306180599,
+      "crater": 0.12047395688315521,
+      "mountain": 0.22840208282572014,
+      "sky": 0.8010320645756641
+    },
+    "mean_boundary_iou": 0.39458155163235226,
+    "boundary_f1_tolerance_px": 3,
+    "boundary_iou_d_px": 3,
+    "aggregation": "dataset-pooled class counts; absent/absent=null; ignore-safe"
+  },
+  "boundary_metrics_last": {
+    "per_class_boundary_f1": {
+      "regolith": 0.7875496029765092,
+      "rock": 0.7076998177780713,
+      "crater": 0.3951285183540273,
+      "mountain": 0.489964204397697,
+      "sky": 0.9771698963279313
+    },
+    "mean_boundary_f1": 0.6715024079668472,
+    "per_class_boundary_iou": {
+      "regolith": 0.489227423259162,
+      "rock": 0.3337722306180599,
+      "crater": 0.12047395688315521,
+      "mountain": 0.22840208282572014,
+      "sky": 0.8010320645756641
+    },
+    "mean_boundary_iou": 0.39458155163235226,
+    "boundary_f1_tolerance_px": 3,
+    "boundary_iou_d_px": 3,
+    "aggregation": "dataset-pooled class counts; absent/absent=null; ignore-safe"
+  },
+  "confusion_rates_best": {
+    "sky_to_mountain": 0.0021363663883998377,
+    "crater_to_regolith": 0.10521743396612376,
+    "mountain_to_rock": 0.25301423694165076,
+    "rock_to_mountain": 0.009356957703935541
+  },
+  "class_names_en": [
+    "regolith",
+    "rock",
+    "crater",
+    "mountain",
+    "sky"
+  ],
+  "class_names_zh": [
+    "月壤",
+    "岩石",
+    "撞击坑",
+    "山体",
+    "天空"
+  ],
+  "micro_batch": 4,
+  "grad_accum": 1,
+  "effective_batch": 4,
+  "requested_batch": 4,
+  "requested_grad_accum": 1,
+  "lr": 6e-05,
+  "lr_rescaled": false,
+  "seed": 42,
+  "workers_initial": 12,
+  "workers_final": 12,
+  "input_size": [
+    1024,
+    1024
+  ],
+  "crop": null,
+  "val": {
+    "scene": 5,
+    "n_images": 350,
+    "batch": 1,
+    "mode": "whole[1.0]",
+    "every": 500,
+    "sec_last_pass": 61.5
+  },
+  "peak_mem_alloc_mb": 20281.6,
+  "peak_mem_reserved_mb": 21246.0,
+  "peak_train_alloc_mb_before_first_val": 20281.6,
+  "peak_train_reserved_mb_before_first_val": 21246.0,
+  "sec_per_iter_train": 0.267,
+  "sec_per_iter_note": "optimizer step incl. all accumulation micro-steps, excl. data wait/val, iters 1-20 excluded",
+  "wall_sec_this_session": 797.9,
+  "fallbacks": [],
+  "any_fallback": false,
+  "resumed_at_iters": [],
+  "module_effect": {
+    "ok": true,
+    "failed": []
+  },
+  "flags": {
+    "rcs": true,
+    "mosaic": true,
+    "cc_paste": true,
+    "acw": true,
+    "crater_boost": true,
+    "eps": false,
+    "multi_scale": false,
+    "photometric": false,
+    "ema": false,
+    "row_attn": false,
+    "blv": false,
+    "shadow_aug": false,
+    "abl": false,
+    "invform_fallback": false,
+    "fade": false,
+    "tta": false,
+    "segfix": false,
+    "t_b1_tta": false,
+    "hrda": false,
+    "eval_only": false,
+    "dysample": false,
+    "hard": false,
+    "ctrast": false,
+    "sapa": false,
+    "_flags_source": "tools/portable/_lusnar_common.recipe_flags"
+  },
+  "method_note": "control: B1 (RCS+mosaic+CC paste+ACW) + crater RCS/ACW boost",
+  "subset": {
+    "train": 1600,
+    "val": 350,
+    "seed": 42
+  },
+  "lists_dir": "/root/lusnar_data/lists_fullimage",
+  "pretrain": "/mnt/d/LuSNAR_Seg/pretrained/mit_b2_20220624-66e8bf70.pth",
+  "device_info": {
+    "device": "NVIDIA GeForce RTX 4090",
+    "total_gb": 47.99,
+    "free_gb_at_start": 46.26,
+    "used_by_others_gb_at_start": 1.73,
+    "cuda_visible_devices": "1"
+  },
+  "torch": "2.7.1+cu128",
+  "dry_run": false,
+  "error": null,
+  "comparability": "Compare ONLY with FI_* runs on the same host with identical micro/accum/effective batch/iters/val mode. Never with crop-line or cross-machine numbers.",
+  "note": "Local Scene5 subset validation, not an official test score; Moon_2/4/9 labels never used.",
+  "note_zh": "本地 Scene5 子集验证，非官方测试成绩；未使用 Moon_2/4/9 标签"
+}

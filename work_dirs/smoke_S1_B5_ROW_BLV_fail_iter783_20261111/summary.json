@@ -1,0 +1,67 @@
+{
+  "exp": "M_ROW_BLV",
+  "run_name": "smoke_S1_B5_ROW_BLV",
+  "iters": 783,
+  "target_iters": 2000,
+  "best_mIoU_scene5": 0.6815853282053329,
+  "last_mIoU_scene5": 0.6815853282053329,
+  "per_class_IoU_best": {
+    "月壤": 0.9449964435562885,
+    "岩石": 0.6653782029843605,
+    "撞击坑": 0.43613498628637387,
+    "山体": 0.565907528067703,
+    "天空": 0.7955094801319385
+  },
+  "per_class_IoU_last": {
+    "月壤": 0.9449964435562885,
+    "岩石": 0.6653782029843605,
+    "撞击坑": 0.43613498628637387,
+    "山体": 0.565907528067703,
+    "天空": 0.7955094801319385
+  },
+  "iou_rock": 0.6653782029843605,
+  "iou_crater": 0.43613498628637387,
+  "confusion_rates": {
+    "sky_to_mountain": 0.1456611757432998,
+    "crater_to_regolith": 0.015650253013888046,
+    "mountain_to_rock": 0.12769920775699067,
+    "rock_to_mountain": 0.016129905622214932
+  },
+  "peak_mem_mb": 25601.6,
+  "wall_sec": 732.2,
+  "batch": 16,
+  "lr": 6e-05,
+  "world_size": 1,
+  "flags": {
+    "rcs": true,
+    "mosaic": true,
+    "cc_paste": true,
+    "acw": true,
+    "crater_boost": true,
+    "eps": false,
+    "multi_scale": false,
+    "photometric": false,
+    "ema": false,
+    "row_attn": true,
+    "blv": true,
+    "shadow_aug": false,
+    "abl": false,
+    "invform_fallback": false,
+    "fade": false,
+    "tta": false,
+    "segfix": false,
+    "t_b1_tta": false,
+    "hrda": false,
+    "eval_only": false
+  },
+  "blv_sigma": 0.5,
+  "subset": {
+    "train": 1600,
+    "val": 350,
+    "seed": 42
+  },
+  "dry_run": false,
+  "error": "Traceback (most recent call last):\n  File \"/mnt/d/LuSNAR_Seg/tools/portable/lusnar_smoke_compare.py\", line 585, in run_exp\n    loss.backward()\n  File \"/opt/miniconda3/envs/lusnar/lib/python3.10/site-packages/torch/_tensor.py\", line 648, in backward\n    torch.autograd.backward(\n  File \"/opt/miniconda3/envs/lusnar/lib/python3.10/site-packages/torch/autograd/__init__.py\", line 353, in backward\n    _engine_run_backward(\n  File \"/opt/miniconda3/envs/lusnar/lib/python3.10/site-packages/torch/autograd/graph.py\", line 824, in _engine_run_backward\n    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass\nRuntimeError: cuDNN error: CUDNN_STATUS_EXECUTION_FAILED\n",
+  "method_note": "V_B1C + RowHeightAttn + BLV (combo)",
+  "note": "本地 Scene5 子集验证，非官方测试成绩；未使用 Moon_2/4/9 标签"
+}
