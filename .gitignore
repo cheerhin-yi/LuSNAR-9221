@@ -56,3 +56,14 @@ tools/bin/
 *.zip
 *.pid
 *.bak*
+
+# Agent temp / local scratch (2026-11-17: keep out of history)
+.temp/
+_tmp_git/
+_tmp_*.py
+results/**/_part_rank*.json
+results/**/_smoke/
+
+# Installers (2026-11-17: a 247MB .msi slipped in — keep installers out)
+*.msi
+*.exe

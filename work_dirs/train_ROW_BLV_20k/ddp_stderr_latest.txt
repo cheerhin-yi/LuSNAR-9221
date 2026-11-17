@@ -1,0 +1,118 @@
+W1109 17:17:49.778000 3208 site-packages\torch\distributed\elastic\multiprocessing\redirects.py:29] NOTE: Redirects are currently not supported in Windows or MacOs.
+
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+[W1109 17:17:49.000000000 socket.cpp:755] [c10d] The client socket has failed to connect to [DESKTOP-ORQLB8F]:29601 (system error: 10049 - 在其上下文中，该请求的地址无效。).
+[W1109 17:17:51.000000000 socket.cpp:755] [c10d] The client socket has failed to connect to [DESKTOP-ORQLB8F]:29601 (system error: 10049 - 在其上下文中，该请求的地址无效。).
+[W1109 17:17:51.000000000 socket.cpp:755] [c10d] The client socket has failed to connect to [DESKTOP-ORQLB8F]:29601 (system error: 10049 - 在其上下文中，该请求的地址无效。).
+F:\Conda\envs\lusnar\lib\site-packages\mmseg\models\builder.py:36: UserWarning: ``build_loss`` would be deprecated soon, please use ``mmseg.registry.MODELS.build()`` 
+  warnings.warn('``build_loss`` would be deprecated soon, please use '
+F:\Conda\envs\lusnar\lib\site-packages\mmseg\models\losses\cross_entropy_loss.py:250: UserWarning: Default ``avg_non_ignore`` is False, if you would like to ignore the certain label and average loss over non-ignore labels, which is the same with PyTorch official cross_entropy, set ``avg_non_ignore=True``.
+  warnings.warn(
+F:\Conda\envs\lusnar\lib\site-packages\mmseg\models\builder.py:36: UserWarning: ``build_loss`` would be deprecated soon, please use ``mmseg.registry.MODELS.build()`` 
+  warnings.warn('``build_loss`` would be deprecated soon, please use '
+F:\Conda\envs\lusnar\lib\site-packages\mmseg\models\losses\cross_entropy_loss.py:250: UserWarning: Default ``avg_non_ignore`` is False, if you would like to ignore the certain label and average loss over non-ignore labels, which is the same with PyTorch official cross_entropy, set ``avg_non_ignore=True``.
+  warnings.warn(
+F:\Conda\envs\lusnar\lib\site-packages\torch\autograd\graph.py:824: UserWarning: Grad strides do not match bucket view strides. This may indicate grad was not created according to the gradient layout contract, or that the param's strides changed since DDP was constructed.  This is not an error, but may impair performance.
+grad.sizes() = [5, 256, 1, 1], strides() = [256, 1, 256, 256]
+bucket_view.sizes() = [5, 256, 1, 1], strides() = [256, 1, 1, 1] (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\pytorch\torch\csrc\distributed\c10d\reducer.cpp:342.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+F:\Conda\envs\lusnar\lib\site-packages\torch\autograd\graph.py:824: UserWarning: Grad strides do not match bucket view strides. This may indicate grad was not created according to the gradient layout contract, or that the param's strides changed since DDP was constructed.  This is not an error, but may impair performance.
+grad.sizes() = [5, 256, 1, 1], strides() = [256, 1, 256, 256]
+bucket_view.sizes() = [5, 256, 1, 1], strides() = [256, 1, 1, 1] (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\pytorch\torch\csrc\distributed\c10d\reducer.cpp:342.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+forrtl: error (200): program aborting due to window-CLOSE event
+Image              PC                Routine            Line        Source             
+KERNELBASE.dll     00007FFD5EF363ED  Unknown               Unknown  Unknown
+KERNEL32.DLL       00007FFD60C0DDA7  Unknown               Unknown  Unknown
+ntdll.dll          00007FFD618DEE4C  Unknown               Unknown  Unknown
+forrtl: error (200): program aborting due to window-CLOSE event
+Image              PC                Routine            Line        Source             
+KERNELBASE.dll     00007FFD5EF363ED  Unknown               Unknown  Unknown
+KERNEL32.DLL       00007FFD60C0DDA7  Unknown               Unknown  Unknown
+ntdll.dll          00007FFD618DEE4C  Unknown               Unknown  Unknown
+forrtl: error (200): program aborting due to window-CLOSE event
+Image              PC                Routine            Line        Source             
+KERNELBASE.dll     00007FFD5EF363ED  Unknown               Unknown  Unknown
+KERNEL32.DLL       00007FFD60C0DDA7  Unknown               Unknown  Unknown
+ntdll.dll          00007FFD618DEE4C  Unknown               Unknown  Unknown
+forrtl: error (200): program aborting due to window-CLOSE event
+Image              PC                Routine            Line        Source             
+KERNELBASE.dll     00007FFD5EF363ED  Unknown               Unknown  Unknown
+KERNEL32.DLL       00007FFD60C0DDA7  Unknown               Unknown  Unknown
+ntdll.dll          00007FFD618DEE4C  Unknown               Unknown  Unknown
+forrtl: error (200): program aborting due to window-CLOSE event
+Image              PC                Routine            Line        Source             
+KERNELBASE.dll     00007FFD5EF363ED  Unknown               Unknown  Unknown
+KERNEL32.DLL       00007FFD60C0DDA7  Unknown               Unknown  Unknown
+ntdll.dll          00007FFD618DEE4C  Unknown               Unknown  Unknown
+forrtl: error (200): program aborting due to window-CLOSE event
+Image              PC                Routine            Line        Source             
+KERNELBASE.dll     00007FFD5EF363ED  Unknown               Unknown  Unknown
+KERNEL32.DLL       00007FFD60C0DDA7  Unknown               Unknown  Unknown
+ntdll.dll          00007FFD618DEE4C  Unknown               Unknown  Unknown
+forrtl: error (200): program aborting due to window-CLOSE event
+Image              PC                Routine            Line        Source             
+KERNELBASE.dll     00007FFD5EF363ED  Unknown               Unknown  Unknown
+KERNEL32.DLL       00007FFD60C0DDA7  Unknown               Unknown  Unknown
+ntdll.dll          00007FFD618DEE4C  Unknown               Unknown  Unknown
+forrtl: error (200): program aborting due to window-CLOSE event
+Image              PC                Routine            Line        Source             
+KERNELBASE.dll     00007FFD5EF363ED  Unknown               Unknown  Unknown
+KERNEL32.DLL       00007FFD60C0DDA7  Unknown               Unknown  Unknown
+ntdll.dll          00007FFD618DEE4C  Unknown               Unknown  Unknown
+forrtl: error (200): program aborting due to window-CLOSE event
+Image              PC                Routine            Line        Source             
+KERNELBASE.dll     00007FFD5EF363ED  Unknown               Unknown  Unknown
+KERNEL32.DLL       00007FFD60C0DDA7  Unknown               Unknown  Unknown
+ntdll.dll          00007FFD618DEE4C  Unknown               Unknown  Unknown
+W1109 18:26:04.929000 3208 site-packages\torch\distributed\elastic\multiprocessing\api.py:900] Sending process 42796 closing signal CTRL_C_EVENT
+forrtl: error (200): program aborting due to window-CLOSE event
+Image              PC                Routine            Line        Source             
+KERNELBASE.dll     00007FFD5EF363ED  Unknown               Unknown  Unknown
+KERNEL32.DLL       00007FFD60C0DDA7  Unknown               Unknown  Unknown
+ntdll.dll          00007FFD618DEE4C  Unknown               Unknown  Unknown
+W1109 18:26:05.964000 3208 site-packages\torch\distributed\elastic\agent\server\api.py:719] Received Signals.SIGINT death signal, shutting down workers
+Traceback (most recent call last):
+  File "F:\Conda\envs\lusnar\lib\runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "F:\Conda\envs\lusnar\lib\runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "F:\Conda\envs\lusnar\lib\site-packages\torch\distributed\run.py", line 896, in <module>
+    main()
+  File "F:\Conda\envs\lusnar\lib\site-packages\torch\distributed\elastic\multiprocessing\errors\__init__.py", line 355, in wrapper
+    return f(*args, **kwargs)
+  File "F:\Conda\envs\lusnar\lib\site-packages\torch\distributed\run.py", line 892, in main
+    run(args)
+  File "F:\Conda\envs\lusnar\lib\site-packages\torch\distributed\run.py", line 883, in run
+    elastic_launch(
+  File "F:\Conda\envs\lusnar\lib\site-packages\torch\distributed\launcher\api.py", line 139, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "F:\Conda\envs\lusnar\lib\site-packages\torch\distributed\launcher\api.py", line 261, in launch_agent
+    result = agent.run()
+  File "F:\Conda\envs\lusnar\lib\site-packages\torch\distributed\elastic\metrics\api.py", line 138, in wrapper
+    result = f(*args, **kwargs)
+  File "F:\Conda\envs\lusnar\lib\site-packages\torch\distributed\elastic\agent\server\api.py", line 711, in run
+    result = self._invoke_run(role)
+  File "F:\Conda\envs\lusnar\lib\site-packages\torch\distributed\elastic\agent\server\api.py", line 871, in _invoke_run
+    run_result = self._monitor_workers(self._worker_group)
+  File "F:\Conda\envs\lusnar\lib\site-packages\torch\distributed\elastic\metrics\api.py", line 138, in wrapper
+    result = f(*args, **kwargs)
+  File "F:\Conda\envs\lusnar\lib\site-packages\torch\distributed\elastic\agent\server\local_elastic_agent.py", line 394, in _monitor_workers
+    result = self._pcontext.wait(0)
+  File "F:\Conda\envs\lusnar\lib\site-packages\torch\distributed\elastic\multiprocessing\api.py", line 536, in wait
+    return self._poll()
+  File "F:\Conda\envs\lusnar\lib\site-packages\torch\distributed\elastic\multiprocessing\api.py", line 866, in _poll
+    self.close()  # terminate all running procs
+  File "F:\Conda\envs\lusnar\lib\site-packages\torch\distributed\elastic\multiprocessing\api.py", line 577, in close
+    self._close(death_sig=death_sig, timeout=timeout)
+  File "F:\Conda\envs\lusnar\lib\site-packages\torch\distributed\elastic\multiprocessing\api.py", line 912, in _close
+    handler.proc.wait(time_to_wait)
+  File "F:\Conda\envs\lusnar\lib\subprocess.py", line 1209, in wait
+    return self._wait(timeout=timeout)
+  File "F:\Conda\envs\lusnar\lib\subprocess.py", line 1506, in _wait
+    result = _winapi.WaitForSingleObject(self._handle,
+  File "F:\Conda\envs\lusnar\lib\site-packages\torch\distributed\elastic\multiprocessing\api.py", line 84, in _terminate_process_handler
+    raise SignalException(f"Process {os.getpid()} got signal: {sigval}", sigval=sigval)
+torch.distributed.elastic.multiprocessing.api.SignalException: Process 3208 got signal: 2

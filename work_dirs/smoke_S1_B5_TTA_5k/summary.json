@@ -1,0 +1,98 @@
+{
+  "exp": "M_TTA",
+  "run_name": "smoke_S1_B5_TTA_5k",
+  "iters": 0,
+  "target_iters": 0,
+  "best_mIoU_scene5": 0.8818981796085831,
+  "per_class_IoU_best": {
+    "月壤": 0.9851951724230275,
+    "岩石": 0.7892547049230905,
+    "撞击坑": 0.8553552478263396,
+    "山体": 0.7836777154309947,
+    "天空": 0.9960080574394635
+  },
+  "iou_rock": 0.7892547049230905,
+  "iou_crater": 0.8553552478263396,
+  "confusion_rates": {
+    "sky_to_mountain": 0.0022564783392249495,
+    "crater_to_regolith": 0.06874824076664947,
+    "mountain_to_rock": 0.06236785065723904,
+    "rock_to_mountain": 0.011328978620314347
+  },
+  "tta_vs_single": {
+    "single_mIoU": 0.853248882747972,
+    "single_per_class": {
+      "月壤": 0.9804839399074938,
+      "岩石": 0.7795557396951618,
+      "撞击坑": 0.8428870059428127,
+      "山体": 0.7200827404377116,
+      "天空": 0.9432349877566792
+    },
+    "single_confusion_rates": {
+      "sky_to_mountain": 0.03994127145696882,
+      "crater_to_regolith": 0.05318416775270533,
+      "mountain_to_rock": 0.07024793188653622,
+      "rock_to_mountain": 0.004654866523756892
+    },
+    "tta_mIoU": 0.8818981796085831,
+    "tta_per_class": {
+      "月壤": 0.9851951724230275,
+      "岩石": 0.7892547049230905,
+      "撞击坑": 0.8553552478263396,
+      "山体": 0.7836777154309947,
+      "天空": 0.9960080574394635
+    },
+    "tta_confusion_rates": {
+      "sky_to_mountain": 0.0022564783392249495,
+      "crater_to_regolith": 0.06874824076664947,
+      "mountain_to_rock": 0.06236785065723904,
+      "rock_to_mountain": 0.011328978620314347
+    },
+    "scales": [
+      0.75,
+      1.0,
+      1.25
+    ],
+    "crop": 512,
+    "stride": 256,
+    "small_object_note": "portable stack has no size-bucket helper; skipped",
+    "ckpt": "/mnt/d/LuSNAR_Seg/work_dirs/smoke_S1_B5_ROW_BLV_5k/best.pth",
+    "trained_V_B1C_here": false
+  },
+  "peak_mem_mb": 1208.3,
+  "wall_sec": 891.8,
+  "batch": 16,
+  "lr": 6e-05,
+  "world_size": 1,
+  "flags": {
+    "rcs": false,
+    "mosaic": false,
+    "cc_paste": false,
+    "acw": false,
+    "crater_boost": false,
+    "eps": false,
+    "multi_scale": false,
+    "photometric": false,
+    "ema": false,
+    "row_attn": false,
+    "blv": false,
+    "shadow_aug": false,
+    "abl": false,
+    "invform_fallback": false,
+    "fade": false,
+    "tta": true,
+    "segfix": false,
+    "t_b1_tta": false,
+    "hrda": false,
+    "eval_only": true
+  },
+  "subset": {
+    "train": 1600,
+    "val": 350,
+    "seed": 42
+  },
+  "dry_run": false,
+  "error": null,
+  "method_note": "TTA diagnostic on /mnt/d/LuSNAR_Seg/work_dirs/smoke_S1_B5_ROW_BLV_5k/best.pth (run_name=S1_B5_TTA_5k; row_attn=yes)",
+  "note": "本地 Scene5 子集验证，非官方测试成绩；未使用 Moon_2/4/9 标签"
+}

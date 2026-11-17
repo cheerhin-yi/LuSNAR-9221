@@ -1,0 +1,1376 @@
+{
+  "project": "D:\\LuSNAR_Seg",
+  "scene_root": "D:\\LuSNAR_Seg\\data\\train",
+  "train": 6403,
+  "val_scene5": 1599,
+  "train_scenes": [
+    1,
+    3,
+    6,
+    7,
+    8
+  ],
+  "no_val": false,
+  "recipe": "M_ROW_BLV",
+  "world_size": 2,
+  "batch_per_gpu": 48,
+  "pretrain": "D:\\LuSNAR_Seg\\pretrained\\mit_b2_20220624-66e8bf70.pth"
+}
+[info] test dir present at D:\LuSNAR_Seg\data\test ¡ª training will NOT read labels there
+11/09 17:18:02 - mmengine - INFO - load model from: D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth
+11/09 17:18:02 - mmengine - INFO - Loads checkpoint by local backend from path: D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.0.projection.weight - torch.Size([64, 3, 7, 7]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.0.projection.bias - torch.Size([64]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.0.norm.weight - torch.Size([64]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.0.norm.bias - torch.Size([64]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.0.norm1.weight - torch.Size([64]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.0.norm1.bias - torch.Size([64]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.0.attn.attn.in_proj_weight - torch.Size([192, 64]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.0.attn.attn.in_proj_bias - torch.Size([192]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.0.attn.attn.out_proj.weight - torch.Size([64, 64]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.0.attn.attn.out_proj.bias - torch.Size([64]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.0.attn.sr.weight - torch.Size([64, 64, 8, 8]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.0.attn.sr.bias - torch.Size([64]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.0.attn.norm.weight - torch.Size([64]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.0.attn.norm.bias - torch.Size([64]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.0.norm2.weight - torch.Size([64]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.0.norm2.bias - torch.Size([64]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.0.ffn.layers.0.weight - torch.Size([256, 64, 1, 1]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.0.ffn.layers.0.bias - torch.Size([256]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.0.ffn.layers.1.weight - torch.Size([256, 1, 3, 3]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.0.ffn.layers.1.bias - torch.Size([256]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.0.ffn.layers.4.weight - torch.Size([64, 256, 1, 1]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.0.ffn.layers.4.bias - torch.Size([64]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.1.norm1.weight - torch.Size([64]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.1.norm1.bias - torch.Size([64]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.1.attn.attn.in_proj_weight - torch.Size([192, 64]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.1.attn.attn.in_proj_bias - torch.Size([192]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.1.attn.attn.out_proj.weight - torch.Size([64, 64]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.1.attn.attn.out_proj.bias - torch.Size([64]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.1.attn.sr.weight - torch.Size([64, 64, 8, 8]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.1.attn.sr.bias - torch.Size([64]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.1.attn.norm.weight - torch.Size([64]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.1.attn.norm.bias - torch.Size([64]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.1.norm2.weight - torch.Size([64]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.1.norm2.bias - torch.Size([64]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.1.ffn.layers.0.weight - torch.Size([256, 64, 1, 1]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.1.ffn.layers.0.bias - torch.Size([256]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.1.ffn.layers.1.weight - torch.Size([256, 1, 3, 3]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.1.ffn.layers.1.bias - torch.Size([256]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.1.ffn.layers.4.weight - torch.Size([64, 256, 1, 1]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.1.ffn.layers.4.bias - torch.Size([64]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.2.norm1.weight - torch.Size([64]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.2.norm1.bias - torch.Size([64]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.2.attn.attn.in_proj_weight - torch.Size([192, 64]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.2.attn.attn.in_proj_bias - torch.Size([192]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.2.attn.attn.out_proj.weight - torch.Size([64, 64]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.2.attn.attn.out_proj.bias - torch.Size([64]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.2.attn.sr.weight - torch.Size([64, 64, 8, 8]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.2.attn.sr.bias - torch.Size([64]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.2.attn.norm.weight - torch.Size([64]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.2.attn.norm.bias - torch.Size([64]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.2.norm2.weight - torch.Size([64]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.2.norm2.bias - torch.Size([64]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.2.ffn.layers.0.weight - torch.Size([256, 64, 1, 1]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.2.ffn.layers.0.bias - torch.Size([256]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.2.ffn.layers.1.weight - torch.Size([256, 1, 3, 3]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.2.ffn.layers.1.bias - torch.Size([256]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.2.ffn.layers.4.weight - torch.Size([64, 256, 1, 1]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.1.2.ffn.layers.4.bias - torch.Size([64]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.2.weight - torch.Size([64]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.0.2.bias - torch.Size([64]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.0.projection.weight - torch.Size([128, 64, 3, 3]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.0.projection.bias - torch.Size([128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.0.norm.weight - torch.Size([128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.0.norm.bias - torch.Size([128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.0.norm1.weight - torch.Size([128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.0.norm1.bias - torch.Size([128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.0.attn.attn.in_proj_weight - torch.Size([384, 128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.0.attn.attn.in_proj_bias - torch.Size([384]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.0.attn.attn.out_proj.weight - torch.Size([128, 128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.0.attn.attn.out_proj.bias - torch.Size([128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.0.attn.sr.weight - torch.Size([128, 128, 4, 4]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.0.attn.sr.bias - torch.Size([128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.0.attn.norm.weight - torch.Size([128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.0.attn.norm.bias - torch.Size([128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.0.norm2.weight - torch.Size([128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.0.norm2.bias - torch.Size([128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.0.ffn.layers.0.weight - torch.Size([512, 128, 1, 1]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.0.ffn.layers.0.bias - torch.Size([512]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.0.ffn.layers.1.weight - torch.Size([512, 1, 3, 3]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.0.ffn.layers.1.bias - torch.Size([512]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.0.ffn.layers.4.weight - torch.Size([128, 512, 1, 1]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.0.ffn.layers.4.bias - torch.Size([128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.1.norm1.weight - torch.Size([128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.1.norm1.bias - torch.Size([128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.1.attn.attn.in_proj_weight - torch.Size([384, 128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.1.attn.attn.in_proj_bias - torch.Size([384]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.1.attn.attn.out_proj.weight - torch.Size([128, 128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.1.attn.attn.out_proj.bias - torch.Size([128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.1.attn.sr.weight - torch.Size([128, 128, 4, 4]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.1.attn.sr.bias - torch.Size([128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.1.attn.norm.weight - torch.Size([128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.1.attn.norm.bias - torch.Size([128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.1.norm2.weight - torch.Size([128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.1.norm2.bias - torch.Size([128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.1.ffn.layers.0.weight - torch.Size([512, 128, 1, 1]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.1.ffn.layers.0.bias - torch.Size([512]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.1.ffn.layers.1.weight - torch.Size([512, 1, 3, 3]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.1.ffn.layers.1.bias - torch.Size([512]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.1.ffn.layers.4.weight - torch.Size([128, 512, 1, 1]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.1.ffn.layers.4.bias - torch.Size([128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.2.norm1.weight - torch.Size([128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.2.norm1.bias - torch.Size([128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.2.attn.attn.in_proj_weight - torch.Size([384, 128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.2.attn.attn.in_proj_bias - torch.Size([384]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.2.attn.attn.out_proj.weight - torch.Size([128, 128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.2.attn.attn.out_proj.bias - torch.Size([128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.2.attn.sr.weight - torch.Size([128, 128, 4, 4]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.2.attn.sr.bias - torch.Size([128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.2.attn.norm.weight - torch.Size([128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.2.attn.norm.bias - torch.Size([128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.2.norm2.weight - torch.Size([128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.2.norm2.bias - torch.Size([128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.2.ffn.layers.0.weight - torch.Size([512, 128, 1, 1]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.2.ffn.layers.0.bias - torch.Size([512]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.2.ffn.layers.1.weight - torch.Size([512, 1, 3, 3]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.2.ffn.layers.1.bias - torch.Size([512]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.2.ffn.layers.4.weight - torch.Size([128, 512, 1, 1]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.2.ffn.layers.4.bias - torch.Size([128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.3.norm1.weight - torch.Size([128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.3.norm1.bias - torch.Size([128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.3.attn.attn.in_proj_weight - torch.Size([384, 128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.3.attn.attn.in_proj_bias - torch.Size([384]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.3.attn.attn.out_proj.weight - torch.Size([128, 128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.3.attn.attn.out_proj.bias - torch.Size([128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.3.attn.sr.weight - torch.Size([128, 128, 4, 4]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.3.attn.sr.bias - torch.Size([128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.3.attn.norm.weight - torch.Size([128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.3.attn.norm.bias - torch.Size([128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.3.norm2.weight - torch.Size([128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.3.norm2.bias - torch.Size([128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.3.ffn.layers.0.weight - torch.Size([512, 128, 1, 1]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.3.ffn.layers.0.bias - torch.Size([512]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.3.ffn.layers.1.weight - torch.Size([512, 1, 3, 3]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.3.ffn.layers.1.bias - torch.Size([512]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.3.ffn.layers.4.weight - torch.Size([128, 512, 1, 1]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.1.3.ffn.layers.4.bias - torch.Size([128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.2.weight - torch.Size([128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.1.2.bias - torch.Size([128]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.0.projection.weight - torch.Size([320, 128, 3, 3]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.0.projection.bias - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.0.norm.weight - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.0.norm.bias - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.0.norm1.weight - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.0.norm1.bias - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.0.attn.attn.in_proj_weight - torch.Size([960, 320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.0.attn.attn.in_proj_bias - torch.Size([960]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.0.attn.attn.out_proj.weight - torch.Size([320, 320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.0.attn.attn.out_proj.bias - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.0.attn.sr.weight - torch.Size([320, 320, 2, 2]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.0.attn.sr.bias - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.0.attn.norm.weight - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.0.attn.norm.bias - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.0.norm2.weight - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.0.norm2.bias - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.0.ffn.layers.0.weight - torch.Size([1280, 320, 1, 1]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.0.ffn.layers.0.bias - torch.Size([1280]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.0.ffn.layers.1.weight - torch.Size([1280, 1, 3, 3]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.0.ffn.layers.1.bias - torch.Size([1280]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.0.ffn.layers.4.weight - torch.Size([320, 1280, 1, 1]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.0.ffn.layers.4.bias - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.1.norm1.weight - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.1.norm1.bias - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.1.attn.attn.in_proj_weight - torch.Size([960, 320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.1.attn.attn.in_proj_bias - torch.Size([960]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.1.attn.attn.out_proj.weight - torch.Size([320, 320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.1.attn.attn.out_proj.bias - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.1.attn.sr.weight - torch.Size([320, 320, 2, 2]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.1.attn.sr.bias - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.1.attn.norm.weight - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.1.attn.norm.bias - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.1.norm2.weight - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.1.norm2.bias - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.1.ffn.layers.0.weight - torch.Size([1280, 320, 1, 1]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.1.ffn.layers.0.bias - torch.Size([1280]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.1.ffn.layers.1.weight - torch.Size([1280, 1, 3, 3]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.1.ffn.layers.1.bias - torch.Size([1280]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.1.ffn.layers.4.weight - torch.Size([320, 1280, 1, 1]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.1.ffn.layers.4.bias - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.2.norm1.weight - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.2.norm1.bias - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.2.attn.attn.in_proj_weight - torch.Size([960, 320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.2.attn.attn.in_proj_bias - torch.Size([960]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.2.attn.attn.out_proj.weight - torch.Size([320, 320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.2.attn.attn.out_proj.bias - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.2.attn.sr.weight - torch.Size([320, 320, 2, 2]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.2.attn.sr.bias - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.2.attn.norm.weight - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.2.attn.norm.bias - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.2.norm2.weight - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.2.norm2.bias - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.2.ffn.layers.0.weight - torch.Size([1280, 320, 1, 1]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.2.ffn.layers.0.bias - torch.Size([1280]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.2.ffn.layers.1.weight - torch.Size([1280, 1, 3, 3]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.2.ffn.layers.1.bias - torch.Size([1280]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.2.ffn.layers.4.weight - torch.Size([320, 1280, 1, 1]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.2.ffn.layers.4.bias - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.3.norm1.weight - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.3.norm1.bias - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.3.attn.attn.in_proj_weight - torch.Size([960, 320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.3.attn.attn.in_proj_bias - torch.Size([960]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.3.attn.attn.out_proj.weight - torch.Size([320, 320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.3.attn.attn.out_proj.bias - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.3.attn.sr.weight - torch.Size([320, 320, 2, 2]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.3.attn.sr.bias - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.3.attn.norm.weight - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.3.attn.norm.bias - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.3.norm2.weight - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.3.norm2.bias - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.3.ffn.layers.0.weight - torch.Size([1280, 320, 1, 1]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.3.ffn.layers.0.bias - torch.Size([1280]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.3.ffn.layers.1.weight - torch.Size([1280, 1, 3, 3]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.3.ffn.layers.1.bias - torch.Size([1280]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.3.ffn.layers.4.weight - torch.Size([320, 1280, 1, 1]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.3.ffn.layers.4.bias - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.4.norm1.weight - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.4.norm1.bias - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.4.attn.attn.in_proj_weight - torch.Size([960, 320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.4.attn.attn.in_proj_bias - torch.Size([960]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.4.attn.attn.out_proj.weight - torch.Size([320, 320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.4.attn.attn.out_proj.bias - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.4.attn.sr.weight - torch.Size([320, 320, 2, 2]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.4.attn.sr.bias - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.4.attn.norm.weight - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.4.attn.norm.bias - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.4.norm2.weight - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.4.norm2.bias - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.4.ffn.layers.0.weight - torch.Size([1280, 320, 1, 1]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.4.ffn.layers.0.bias - torch.Size([1280]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.4.ffn.layers.1.weight - torch.Size([1280, 1, 3, 3]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.4.ffn.layers.1.bias - torch.Size([1280]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.4.ffn.layers.4.weight - torch.Size([320, 1280, 1, 1]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.4.ffn.layers.4.bias - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.5.norm1.weight - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.5.norm1.bias - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.5.attn.attn.in_proj_weight - torch.Size([960, 320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.5.attn.attn.in_proj_bias - torch.Size([960]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.5.attn.attn.out_proj.weight - torch.Size([320, 320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.5.attn.attn.out_proj.bias - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.5.attn.sr.weight - torch.Size([320, 320, 2, 2]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.5.attn.sr.bias - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.5.attn.norm.weight - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.5.attn.norm.bias - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.5.norm2.weight - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.5.norm2.bias - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.5.ffn.layers.0.weight - torch.Size([1280, 320, 1, 1]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.5.ffn.layers.0.bias - torch.Size([1280]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.5.ffn.layers.1.weight - torch.Size([1280, 1, 3, 3]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.5.ffn.layers.1.bias - torch.Size([1280]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.5.ffn.layers.4.weight - torch.Size([320, 1280, 1, 1]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.1.5.ffn.layers.4.bias - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.2.weight - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.2.2.bias - torch.Size([320]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.0.projection.weight - torch.Size([512, 320, 3, 3]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.0.projection.bias - torch.Size([512]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.0.norm.weight - torch.Size([512]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.0.norm.bias - torch.Size([512]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.1.0.norm1.weight - torch.Size([512]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.1.0.norm1.bias - torch.Size([512]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.1.0.attn.attn.in_proj_weight - torch.Size([1536, 512]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.1.0.attn.attn.in_proj_bias - torch.Size([1536]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.1.0.attn.attn.out_proj.weight - torch.Size([512, 512]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.1.0.attn.attn.out_proj.bias - torch.Size([512]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.1.0.norm2.weight - torch.Size([512]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.1.0.norm2.bias - torch.Size([512]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.1.0.ffn.layers.0.weight - torch.Size([2048, 512, 1, 1]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.1.0.ffn.layers.0.bias - torch.Size([2048]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.1.0.ffn.layers.1.weight - torch.Size([2048, 1, 3, 3]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.1.0.ffn.layers.1.bias - torch.Size([2048]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.1.0.ffn.layers.4.weight - torch.Size([512, 2048, 1, 1]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.1.0.ffn.layers.4.bias - torch.Size([512]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.1.1.norm1.weight - torch.Size([512]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.1.1.norm1.bias - torch.Size([512]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.1.1.attn.attn.in_proj_weight - torch.Size([1536, 512]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.1.1.attn.attn.in_proj_bias - torch.Size([1536]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.1.1.attn.attn.out_proj.weight - torch.Size([512, 512]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.1.1.attn.attn.out_proj.bias - torch.Size([512]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.1.1.norm2.weight - torch.Size([512]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.1.1.norm2.bias - torch.Size([512]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.1.1.ffn.layers.0.weight - torch.Size([2048, 512, 1, 1]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.1.1.ffn.layers.0.bias - torch.Size([2048]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.1.1.ffn.layers.1.weight - torch.Size([2048, 1, 3, 3]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.1.1.ffn.layers.1.bias - torch.Size([2048]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.1.1.ffn.layers.4.weight - torch.Size([512, 2048, 1, 1]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.1.1.ffn.layers.4.bias - torch.Size([512]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.1.2.norm1.weight - torch.Size([512]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.1.2.norm1.bias - torch.Size([512]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.1.2.attn.attn.in_proj_weight - torch.Size([1536, 512]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.1.2.attn.attn.in_proj_bias - torch.Size([1536]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.1.2.attn.attn.out_proj.weight - torch.Size([512, 512]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.1.2.attn.attn.out_proj.bias - torch.Size([512]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.1.2.norm2.weight - torch.Size([512]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.1.2.norm2.bias - torch.Size([512]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.1.2.ffn.layers.0.weight - torch.Size([2048, 512, 1, 1]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.1.2.ffn.layers.0.bias - torch.Size([2048]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.1.2.ffn.layers.1.weight - torch.Size([2048, 1, 3, 3]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.1.2.ffn.layers.1.bias - torch.Size([2048]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.1.2.ffn.layers.4.weight - torch.Size([512, 2048, 1, 1]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.1.2.ffn.layers.4.bias - torch.Size([512]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.2.weight - torch.Size([512]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+backbone.layers.3.2.bias - torch.Size([512]): 
+PretrainedInit: load from D:\LuSNAR_Seg\pretrained\mit_b2_20220624-66e8bf70.pth 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+decode_head.conv_seg.weight - torch.Size([5, 256, 1, 1]): 
+NormalInit: mean=0, std=0.01, bias=0 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+decode_head.conv_seg.bias - torch.Size([5]): 
+NormalInit: mean=0, std=0.01, bias=0 
+ 
+11/09 17:18:02 - mmengine - INFO - 
+decode_head.convs.0.conv.weight - torch.Size([256, 64, 1, 1]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+ 
+11/09 17:18:02 - mmengine - INFO - 
+decode_head.convs.0.bn.weight - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+ 
+11/09 17:18:02 - mmengine - INFO - 
+decode_head.convs.0.bn.bias - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+ 
+11/09 17:18:02 - mmengine - INFO - 
+decode_head.convs.1.conv.weight - torch.Size([256, 128, 1, 1]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+ 
+11/09 17:18:02 - mmengine - INFO - 
+decode_head.convs.1.bn.weight - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+ 
+11/09 17:18:02 - mmengine - INFO - 
+decode_head.convs.1.bn.bias - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+ 
+11/09 17:18:02 - mmengine - INFO - 
+decode_head.convs.2.conv.weight - torch.Size([256, 320, 1, 1]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+ 
+11/09 17:18:02 - mmengine - INFO - 
+decode_head.convs.2.bn.weight - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+ 
+11/09 17:18:02 - mmengine - INFO - 
+decode_head.convs.2.bn.bias - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+ 
+11/09 17:18:02 - mmengine - INFO - 
+decode_head.convs.3.conv.weight - torch.Size([256, 512, 1, 1]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+ 
+11/09 17:18:02 - mmengine - INFO - 
+decode_head.convs.3.bn.weight - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+ 
+11/09 17:18:02 - mmengine - INFO - 
+decode_head.convs.3.bn.bias - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+ 
+11/09 17:18:02 - mmengine - INFO - 
+decode_head.fusion_conv.conv.weight - torch.Size([256, 1024, 1, 1]): 
+Initialized by user-defined `init_weights` in ConvModule  
+ 
+11/09 17:18:02 - mmengine - INFO - 
+decode_head.fusion_conv.bn.weight - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+ 
+11/09 17:18:02 - mmengine - INFO - 
+decode_head.fusion_conv.bn.bias - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+ 
+[ddp] backend-ready world_size=2 local_rank=0 device=cuda:0
+ACW weights=[0.20182090997695923, 1.0992687940597534, 2.4885504245758057, 0.8698983192443848, 0.3404613733291626]
+[module] RowHeightAttn params=117 in_optimizer=yes zero_init_last=yes
+[module] BLV sigma=0.5 train_only scale=[0.2565, 1.3973, 1.8076, 1.1058, 0.4328]
+{'resume': 'D:\\LuSNAR_Seg\\work_dirs\\train_ROW_BLV_20k\\iter_4000.pth', 'resume_iter': 4000, 'resume_miou': 0.8487488078665676, 'resume_recipe': 'M_ROW_BLV'}
+{'iter': 4010, 'loss': 0.059220802038908005, 'ce': 0.03138364478945732, 'dice': 0.027837157249450684, 'elapsed_s': 75.8, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4020, 'loss': 0.0700569897890091, 'ce': 0.032878946512937546, 'dice': 0.03717803955078125, 'elapsed_s': 116.7, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4030, 'loss': 0.06897151470184326, 'ce': 0.02986001968383789, 'dice': 0.03911149501800537, 'elapsed_s': 175.9, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4040, 'loss': 0.05722898244857788, 'ce': 0.028434157371520996, 'dice': 0.028794825077056885, 'elapsed_s': 214.8, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4050, 'loss': 0.0640983134508133, 'ce': 0.028390660881996155, 'dice': 0.03570765256881714, 'elapsed_s': 274.0, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4060, 'loss': 0.0696115717291832, 'ce': 0.029835902154445648, 'dice': 0.03977566957473755, 'elapsed_s': 316.6, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4070, 'loss': 0.07450952380895615, 'ce': 0.035841844975948334, 'dice': 0.03866767883300781, 'elapsed_s': 378.5, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4080, 'loss': 0.0571637824177742, 'ce': 0.025684604421257973, 'dice': 0.03147917985916138, 'elapsed_s': 437.7, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4090, 'loss': 0.06771226972341537, 'ce': 0.03172709792852402, 'dice': 0.03598517179489136, 'elapsed_s': 479.2, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4100, 'loss': 0.061750300228595734, 'ce': 0.02867705374956131, 'dice': 0.033073246479034424, 'elapsed_s': 530.9, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4110, 'loss': 0.059571217745542526, 'ce': 0.029324304312467575, 'dice': 0.03024691343307495, 'elapsed_s': 575.8, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4120, 'loss': 0.05762515217065811, 'ce': 0.027162233367562294, 'dice': 0.030462920665740967, 'elapsed_s': 629.7, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4130, 'loss': 0.06726492941379547, 'ce': 0.03130264952778816, 'dice': 0.03596228361129761, 'elapsed_s': 672.1, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4140, 'loss': 0.06644770503044128, 'ce': 0.03227623924612999, 'dice': 0.034171462059020996, 'elapsed_s': 731.3, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4150, 'loss': 0.06519981473684311, 'ce': 0.028098544105887413, 'dice': 0.03710126876831055, 'elapsed_s': 787.2, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4160, 'loss': 0.07639370858669281, 'ce': 0.040321748703718185, 'dice': 0.036071956157684326, 'elapsed_s': 833.0, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4170, 'loss': 0.07562077045440674, 'ce': 0.03561908006668091, 'dice': 0.04000169038772583, 'elapsed_s': 884.1, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4180, 'loss': 0.06843290477991104, 'ce': 0.030158797279000282, 'dice': 0.03827410936355591, 'elapsed_s': 932.1, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4190, 'loss': 0.062360845506191254, 'ce': 0.028447529301047325, 'dice': 0.03391331434249878, 'elapsed_s': 981.8, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4200, 'loss': 0.07461953163146973, 'ce': 0.03199547901749611, 'dice': 0.042624056339263916, 'elapsed_s': 1042.6, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4210, 'loss': 0.0664629340171814, 'ce': 0.030505595728754997, 'dice': 0.03595733642578125, 'elapsed_s': 1078.9, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4220, 'loss': 0.06127393990755081, 'ce': 0.030166691169142723, 'dice': 0.03110724687576294, 'elapsed_s': 1133.9, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4230, 'loss': 0.058018967509269714, 'ce': 0.028693899512290955, 'dice': 0.02932506799697876, 'elapsed_s': 1175.7, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4240, 'loss': 0.06696814298629761, 'ce': 0.03347766026854515, 'dice': 0.03349047899246216, 'elapsed_s': 1230.9, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4250, 'loss': 0.05534321069717407, 'ce': 0.027737675234675407, 'dice': 0.027605533599853516, 'elapsed_s': 1273.0, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4260, 'loss': 0.06714093685150146, 'ce': 0.03294361010193825, 'dice': 0.034197330474853516, 'elapsed_s': 1334.8, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4270, 'loss': 0.06656049191951752, 'ce': 0.0312797836959362, 'dice': 0.035280704498291016, 'elapsed_s': 1395.4, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4280, 'loss': 0.06429238617420197, 'ce': 0.0310102216899395, 'dice': 0.03328216075897217, 'elapsed_s': 1434.8, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4290, 'loss': 0.06787034869194031, 'ce': 0.028808923438191414, 'dice': 0.03906142711639404, 'elapsed_s': 1490.0, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4300, 'loss': 0.0733993649482727, 'ce': 0.037873271852731705, 'dice': 0.0355260968208313, 'elapsed_s': 1535.0, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4310, 'loss': 0.08275263011455536, 'ce': 0.03864376246929169, 'dice': 0.04410886764526367, 'elapsed_s': 1591.3, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4320, 'loss': 0.0761050209403038, 'ce': 0.039175890386104584, 'dice': 0.03692913055419922, 'elapsed_s': 1631.0, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4330, 'loss': 0.0695732906460762, 'ce': 0.03412187844514847, 'dice': 0.035451412200927734, 'elapsed_s': 1682.5, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4340, 'loss': 0.06288675218820572, 'ce': 0.03225962072610855, 'dice': 0.030627131462097168, 'elapsed_s': 1746.2, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4350, 'loss': 0.07271387428045273, 'ce': 0.032659195363521576, 'dice': 0.04005467891693115, 'elapsed_s': 1787.7, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4360, 'loss': 0.06400826573371887, 'ce': 0.03522411361336708, 'dice': 0.02878415584564209, 'elapsed_s': 1842.4, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4370, 'loss': 0.05655805766582489, 'ce': 0.028314992785453796, 'dice': 0.028243064880371094, 'elapsed_s': 1885.2, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4380, 'loss': 0.06400544941425323, 'ce': 0.03195716068148613, 'dice': 0.03204828500747681, 'elapsed_s': 1939.4, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4390, 'loss': 0.07153882086277008, 'ce': 0.030941976234316826, 'dice': 0.040596842765808105, 'elapsed_s': 1983.7, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4400, 'loss': 0.0639193207025528, 'ce': 0.03422935679554939, 'dice': 0.0296899676322937, 'elapsed_s': 2036.3, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4410, 'loss': 0.059934310615062714, 'ce': 0.026855342090129852, 'dice': 0.03307896852493286, 'elapsed_s': 2093.7, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4420, 'loss': 0.05558944493532181, 'ce': 0.025510558858513832, 'dice': 0.030078887939453125, 'elapsed_s': 2137.9, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4430, 'loss': 0.061337195336818695, 'ce': 0.030398746952414513, 'dice': 0.030938446521759033, 'elapsed_s': 2197.4, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4440, 'loss': 0.061186499893665314, 'ce': 0.029521292075514793, 'dice': 0.03166520595550537, 'elapsed_s': 2239.9, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4450, 'loss': 0.06497134268283844, 'ce': 0.03680743649601936, 'dice': 0.028163909912109375, 'elapsed_s': 2296.3, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4460, 'loss': 0.06630462408065796, 'ce': 0.03203463926911354, 'dice': 0.03426998853683472, 'elapsed_s': 2331.4, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4470, 'loss': 0.07616575062274933, 'ce': 0.04168965294957161, 'dice': 0.03447610139846802, 'elapsed_s': 2387.7, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4480, 'loss': 0.05496761202812195, 'ce': 0.026925770565867424, 'dice': 0.028041839599609375, 'elapsed_s': 2444.4, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4490, 'loss': 0.0633341521024704, 'ce': 0.0316573865711689, 'dice': 0.0316767692565918, 'elapsed_s': 2483.7, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4500, 'loss': 0.05328710377216339, 'ce': 0.025253310799598694, 'dice': 0.028033792972564697, 'elapsed_s': 2539.8, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4510, 'loss': 0.06500749289989471, 'ce': 0.028847619891166687, 'dice': 0.03615987300872803, 'elapsed_s': 2580.1, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4520, 'loss': 0.07046335190534592, 'ce': 0.033951930701732635, 'dice': 0.03651142120361328, 'elapsed_s': 2637.7, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4530, 'loss': 0.06201919913291931, 'ce': 0.030337363481521606, 'dice': 0.031681835651397705, 'elapsed_s': 2696.9, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4540, 'loss': 0.05844881385564804, 'ce': 0.02791597880423069, 'dice': 0.0305328369140625, 'elapsed_s': 2740.3, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4550, 'loss': 0.07248930633068085, 'ce': 0.0396261066198349, 'dice': 0.03286319971084595, 'elapsed_s': 2794.6, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4560, 'loss': 0.05965146794915199, 'ce': 0.027944479137659073, 'dice': 0.03170698881149292, 'elapsed_s': 2840.2, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4570, 'loss': 0.056464239954948425, 'ce': 0.02857576496899128, 'dice': 0.027888476848602295, 'elapsed_s': 2891.0, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4580, 'loss': 0.0633503794670105, 'ce': 0.02808416076004505, 'dice': 0.035266220569610596, 'elapsed_s': 2941.2, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4590, 'loss': 0.057458020746707916, 'ce': 0.025739232078194618, 'dice': 0.03171879053115845, 'elapsed_s': 2993.7, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4600, 'loss': 0.07015424966812134, 'ce': 0.0325934924185276, 'dice': 0.03756076097488403, 'elapsed_s': 3050.6, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4610, 'loss': 0.06287893652915955, 'ce': 0.03310487046837807, 'dice': 0.029774069786071777, 'elapsed_s': 3090.0, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4620, 'loss': 0.07005190849304199, 'ce': 0.033521827310323715, 'dice': 0.03653007745742798, 'elapsed_s': 3146.6, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4630, 'loss': 0.06597311794757843, 'ce': 0.027802007272839546, 'dice': 0.03817111253738403, 'elapsed_s': 3188.2, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4640, 'loss': 0.06806662678718567, 'ce': 0.03183385357260704, 'dice': 0.03623276948928833, 'elapsed_s': 3243.3, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4650, 'loss': 0.065640389919281, 'ce': 0.030293051153421402, 'dice': 0.0353473424911499, 'elapsed_s': 3283.2, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4660, 'loss': 0.0771867111325264, 'ce': 0.04083610326051712, 'dice': 0.03635060787200928, 'elapsed_s': 3336.4, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4670, 'loss': 0.051813866943120956, 'ce': 0.02604028210043907, 'dice': 0.025773584842681885, 'elapsed_s': 3399.9, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4680, 'loss': 0.05934927985072136, 'ce': 0.028091292828321457, 'dice': 0.0312579870223999, 'elapsed_s': 3445.8, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4690, 'loss': 0.061722151935100555, 'ce': 0.027980798855423927, 'dice': 0.03374135494232178, 'elapsed_s': 3502.8, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4700, 'loss': 0.0637805312871933, 'ce': 0.029069293290376663, 'dice': 0.034711241722106934, 'elapsed_s': 3546.7, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4710, 'loss': 0.05860818177461624, 'ce': 0.028441259637475014, 'dice': 0.030166923999786377, 'elapsed_s': 3605.8, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4720, 'loss': 0.07027813792228699, 'ce': 0.031685616821050644, 'dice': 0.038592517375946045, 'elapsed_s': 3645.0, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4730, 'loss': 0.06868722289800644, 'ce': 0.031482480466365814, 'dice': 0.037204742431640625, 'elapsed_s': 3698.4, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4740, 'loss': 0.06683798879384995, 'ce': 0.02727731503546238, 'dice': 0.039560675621032715, 'elapsed_s': 3752.5, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4750, 'loss': 0.05491119250655174, 'ce': 0.02788883075118065, 'dice': 0.027022361755371094, 'elapsed_s': 3789.9, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4760, 'loss': 0.06046563386917114, 'ce': 0.02996218018233776, 'dice': 0.030503451824188232, 'elapsed_s': 3843.6, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4770, 'loss': 0.06413084268569946, 'ce': 0.030288221314549446, 'dice': 0.033842623233795166, 'elapsed_s': 3873.9, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4780, 'loss': 0.06488710641860962, 'ce': 0.031265739351511, 'dice': 0.033621370792388916, 'elapsed_s': 3916.1, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4790, 'loss': 0.06284219771623611, 'ce': 0.029707737267017365, 'dice': 0.03313446044921875, 'elapsed_s': 3944.7, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4800, 'loss': 0.05911247432231903, 'ce': 0.029353724792599678, 'dice': 0.029758751392364502, 'elapsed_s': 3986.7, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4810, 'loss': 0.05572514235973358, 'ce': 0.026378853246569633, 'dice': 0.0293462872505188, 'elapsed_s': 4026.1, 'mem_mb': 36797.2, 'rank': 0}
+{'iter': 4820, 'loss': 0.06612738966941833, 'ce': 0.034099847078323364, 'dice': 0.03202754259109497, 'elapsed_s': 4054.2, 'mem_mb': 36797.2, 'rank': 0}

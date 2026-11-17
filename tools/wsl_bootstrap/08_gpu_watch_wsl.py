@@ -24,10 +24,14 @@ EVENTS = LOGDIR / "gpu_watch_events.jsonl"
 INTERVAL = 60
 TZ = timezone(timedelta(hours=8))
 
-GPU0_QUEUE = "06_backbone_smoke_wsl.sh|06b_rerun_s1_wsl.sh"
+GPU0_QUEUE = "06_backbone_smoke_wsl.sh|06b_rerun_s1_wsl.sh|06c_backbone_5k_wsl.sh|06d_m2f_5k_wsl.sh"
 GPU0_PY = "lusnar_smoke_compare.py"
 GPU1_QUEUE = "05_fullimage_queue_wsl.sh"
 GPU1_PY = "fullimage_smoke.py"
+# full-image longtrain (both GPUs, DDP): waiter + trainer
+LT_QUEUE = "09_fi_longtrain_wsl.sh"
+LT_PY = "lusnar_row_blv_ddp.py"
+LT_WAITER_LOG = LOGDIR / "LT_FI_ROW_BLV_waiter_wsl.log"
 GPU0_DONE = "ALL BACKBONE S0/S1 DONE"
 # queue script also says this when S0/S1 finish and M2F is not started
 GPU0_DONE_ALT = "Mask2Former not started"
@@ -185,6 +189,11 @@ def snapshot() -> dict:
     p1 = pgrep(GPU1_PY)
 
     bb_log = LOGDIR / "backbone_smoke_wsl.log"
+    # newest GPU0 queue log wins (06/06b: backbone_smoke, 06c: backbone_5k, 06d: backbone_m2f_5k)
+    _bb_c = [LOGDIR / n for n in ("backbone_smoke_wsl.log", "backbone_5k_wsl.log", "backbone_m2f_5k_wsl.log")]
+    _bb_c = [x for x in _bb_c if x.exists()]
+    if _bb_c:
+        bb_log = max(_bb_c, key=lambda x: x.stat().st_mtime)
     bb_txt = tail_text(bb_log, 120)
     stage = gpu0_stage(bb_txt)
     stage_log = LOGDIR / f"{stage}_wsl.log"
@@ -204,6 +213,7 @@ def snapshot() -> dict:
     merged1 = fi_txt + "\n" + fi_stage_txt + "\n" + tail_text(probe, 40)
 
     done0 = (GPU0_DONE in bb_txt) or (GPU0_DONE_ALT in bb_txt and "ALL BACKBONE" in bb_txt)
+    done0 = done0 or bool(re.search(r"ALL B2/B5 5k DONE|ALL M2F 5k DONE", bb_txt))
     # only treat GPU1 as done if the queue log says so clearly
     done1 = any(m.lower() in fi_txt.lower() for m in GPU1_DONE_MARKERS) and (
         "done" in fi_txt.lower()
@@ -267,6 +277,27 @@ def snapshot() -> dict:
     if done1:
         fi_stage = "all_done"
 
+    # ---- full-image longtrain (DDP on both GPUs) ----
+    lq = pgrep(LT_QUEUE)
+    lp = pgrep(LT_PY)
+    lw_txt = tail_text(LT_WAITER_LOG, 60)
+    lt_runs = re.findall(r"LAUNCH (\S+)", lw_txt)
+    lt_stage = lt_runs[-1] if lt_runs else ("waiting" if lq else "none")
+    lt_log = LOGDIR / f"{lt_stage}_wsl.log"
+    lt_txt = tail_text(lt_log, 80) if lt_runs else ""
+    done_lt = "ALL LT_FI DONE" in lw_txt
+    it_lt = last_iter(lt_txt)
+    fail_lt = has_fail(lt_txt[-4000:]) or (has_fail(lw_txt[-2000:]) if "FAILED" in lw_txt else None)
+    plt = (prev.get("lt") or {})
+    ts_lt = progress_ts("lt", it_lt, plt.get("last_iter"), plt.get("progress_unix"))
+    stalled_lt = bool(lp and not done_lt and (now - ts_lt) > 90 * 60)
+    lt_pack = pack(1, lq, lp, lt_stage, it_lt, fail_lt, done_lt, stalled_lt, lt_log if lt_runs else LT_WAITER_LOG, ts_lt)
+    lt_pack["index"] = "0+1"
+    if lq and not lp and not done_lt and not fail_lt:
+        lt_pack["state"] = "waiting" if not lt_runs else lt_pack["state"]
+    if not lq and not lp and not lt_runs and not done_lt:
+        lt_pack["state"] = "idle"
+
     snap = {
         "ts": now_str(),
         "unix": now,
@@ -283,13 +314,14 @@ def snapshot() -> dict:
             fi_stage_log or fi_q,
             ts1,
         ),
+        "lt": lt_pack,
     }
     return snap, prev
 
 
 def alerts_of(snap: dict) -> list[str]:
     out = []
-    for key, label in (("gpu0", "GPU0 backbone"), ("gpu1", "GPU1 full-image")):
+    for key, label in (("gpu0", "GPU0 backbone"), ("gpu1", "GPU1 full-image"), ("lt", "FI longtrain DDP")):
         g = snap[key]
         if g["state"] == "unexpected_stop":
             out.append(f"{label} stopped unexpectedly (stage={g.get('stage')}, last_iter={g.get('last_iter')})")
@@ -313,7 +345,7 @@ def main() -> None:
             # transitions vs previous
             events = []
             if prev:
-                for key in ("gpu0", "gpu1"):
+                for key in ("gpu0", "gpu1", "lt"):
                     a, b = (prev.get(key) or {}).get("state"), snap[key]["state"]
                     if a != b:
                         events.append(
@@ -340,7 +372,7 @@ def main() -> None:
                             }
                         )
             else:
-                emit("initial", {"gpu0": snap["gpu0"]["state"], "gpu1": snap["gpu1"]["state"],
+                emit("initial", {"gpu0": snap["gpu0"]["state"], "gpu1": snap["gpu1"]["state"], "lt": snap["lt"]["state"],
                                  "gpu0_stage": snap["gpu0"]["stage"], "gpu1_stage": snap["gpu1"]["stage"]})
             for ev in events:
                 emit(ev.pop("event"), ev)

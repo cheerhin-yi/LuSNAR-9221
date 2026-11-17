@@ -1,0 +1,29 @@
+{
+  "best_iter": 16000,
+  "mIoU": 0.8101336382868064,
+  "per_class": [
+    0.9828885463499849,
+    0.658182307248094,
+    0.823534243801737,
+    0.5897008047737645,
+    0.9963622892604518
+  ],
+  "rates": {
+    "sky_to_mountain": 0.0022076556067522545,
+    "crater_to_regolith": 0.11079213406673213,
+    "mountain_to_rock": 0.2484530642307971,
+    "rock_to_mountain": 0.016645701474916938
+  },
+  "meta": {
+    "scales": [
+      0.75,
+      1.0,
+      1.25
+    ],
+    "crop": 512,
+    "stride": 256,
+    "n_images": 1599,
+    "small_object_buckets": null,
+    "small_object_note": "portable stack has no size-bucket helper; skipped"
+  }
+}

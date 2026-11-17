@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+echo "$(date '+%Y-%m-%d %H:%M:%S') queue stopped by user decision (t295): FADE skipped; queue bash PID 537 killed on purpose before FADE could start; FI_M_SAPA left to finish its final val. fullimage queue ALL DONE (SAPA last, FADE skipped). Next: LT_FI_ROW_BLV_20k longtrain via tools/wsl_bootstrap/09_fi_longtrain_wsl.sh" >> /mnt/d/LuSNAR_Seg/fullimage_compare/logs/queue_DESKTOP-ORQLB8F-WSL.log
+tail -n 2 /mnt/d/LuSNAR_Seg/fullimage_compare/logs/queue_DESKTOP-ORQLB8F-WSL.log

@@ -1,0 +1,70 @@
+{
+  "exp": "M_ROW_BLV",
+  "run_name": "smoke_S2_M2F_ROW_BLV_5k",
+  "iters": 5000,
+  "target_iters": 5000,
+  "best_mIoU_scene5": 0.8623693970181934,
+  "last_mIoU_scene5": 0.8623693970181934,
+  "per_class_IoU_best": {
+    "月壤": 0.9849505873423855,
+    "岩石": 0.8438776326135966,
+    "撞击坑": 0.8345374524590659,
+    "山体": 0.7749511351324347,
+    "天空": 0.8735301775434846
+  },
+  "per_class_IoU_last": {
+    "月壤": 0.9849505873423855,
+    "岩石": 0.8438776326135966,
+    "撞击坑": 0.8345374524590659,
+    "山体": 0.7749511351324347,
+    "天空": 0.8735301775434846
+  },
+  "iou_rock": 0.8438776326135966,
+  "iou_crater": 0.8345374524590659,
+  "confusion_rates": {
+    "sky_to_mountain": 0.11289310019558417,
+    "crater_to_regolith": 0.025731062658329796,
+    "mountain_to_rock": 0.0218967903691252,
+    "rock_to_mountain": 0.007338724832856082
+  },
+  "peak_mem_mb": 36983.4,
+  "wall_sec": 4591.8,
+  "batch": 16,
+  "accum": 1,
+  "micro_batch": 16,
+  "backbone": "m2f",
+  "lr": 6e-05,
+  "world_size": 1,
+  "flags": {
+    "rcs": true,
+    "mosaic": true,
+    "cc_paste": true,
+    "acw": true,
+    "crater_boost": true,
+    "eps": false,
+    "multi_scale": false,
+    "photometric": false,
+    "ema": false,
+    "row_attn": true,
+    "blv": true,
+    "shadow_aug": false,
+    "abl": false,
+    "invform_fallback": false,
+    "fade": false,
+    "tta": false,
+    "segfix": false,
+    "t_b1_tta": false,
+    "hrda": false,
+    "eval_only": false
+  },
+  "blv_sigma": 0.5,
+  "subset": {
+    "train": 1600,
+    "val": 350,
+    "seed": 42
+  },
+  "dry_run": false,
+  "error": null,
+  "method_note": "V_B1C + RowHeightAttn + BLV (combo) | backbone=Mask2Former Swin-B (HF, ADE20k-semantic init); per-pixel semantic logits=log(einsum(softmax(cls)[:-1], sigmoid(mask))) trained with the same CE(+BLV)+Dice loop; no Hungarian/mask loss; input BGR with ImageNet RGB-order mean/std (parity with B2/B5)",
+  "note": "本地 Scene5 子集验证，非官方测试成绩；未使用 Moon_2/4/9 标签"
+}

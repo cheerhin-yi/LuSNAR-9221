@@ -1,0 +1,13 @@
+{
+  "work_dir": "/mnt/d/LuSNAR_Seg/work_dirs/LT_FI_ROW_BLV_20k",
+  "target_iters": 20000,
+  "best": null,
+  "last": null,
+  "val_curve_scene5": [],
+  "train_curve": [],
+  "checkpoints": [],
+  "trainer_summary": null,
+  "tta_final": null,
+  "module_effect": null,
+  "note": "Local Scene5 whole-image validation (stage 1) / no val (plus5). Not an official score. Moon_2/4/9 never used in training."
+}

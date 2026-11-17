@@ -1,0 +1,286 @@
+{
+  "n_images": 12,
+  "train_iters": 30,
+  "bs": 8,
+  "t_train_s": 12.313795566558838,
+  "t_eval_s": 5.601731061935425,
+  "t_total_s": 21.965356588363647,
+  "D1": {
+    "logit": {
+      "total_cands": 600,
+      "fp_per_img_at_all_top50": 50.0,
+      "16-64_all": {
+        "n": 0,
+        "R@top2": null,
+        "R@top5": null,
+        "R@top10": null,
+        "R@0.5FP/img": null,
+        "R@1FP/img": null,
+        "R@2FP/img": null,
+        "R@5FP/img": null,
+        "R@10FP/img": null,
+        "R@any(top50)": null
+      },
+      "16-64_frozen_missed": {
+        "n": 0,
+        "R@top2": null,
+        "R@top5": null,
+        "R@top10": null,
+        "R@0.5FP/img": null,
+        "R@1FP/img": null,
+        "R@2FP/img": null,
+        "R@5FP/img": null,
+        "R@10FP/img": null,
+        "R@any(top50)": null
+      },
+      "64-256_all": {
+        "n": 0,
+        "R@top2": null,
+        "R@top5": null,
+        "R@top10": null,
+        "R@0.5FP/img": null,
+        "R@1FP/img": null,
+        "R@2FP/img": null,
+        "R@5FP/img": null,
+        "R@10FP/img": null,
+        "R@any(top50)": null
+      },
+      "64-256_frozen_missed": {
+        "n": 0,
+        "R@top2": null,
+        "R@top5": null,
+        "R@top10": null,
+        "R@0.5FP/img": null,
+        "R@1FP/img": null,
+        "R@2FP/img": null,
+        "R@5FP/img": null,
+        "R@10FP/img": null,
+        "R@any(top50)": null
+      }
+    },
+    "learned": {
+      "total_cands": 600,
+      "fp_per_img_at_all_top50": 50.0,
+      "16-64_all": {
+        "n": 0,
+        "R@top2": null,
+        "R@top5": null,
+        "R@top10": null,
+        "R@0.5FP/img": null,
+        "R@1FP/img": null,
+        "R@2FP/img": null,
+        "R@5FP/img": null,
+        "R@10FP/img": null,
+        "R@any(top50)": null
+      },
+      "16-64_frozen_missed": {
+        "n": 0,
+        "R@top2": null,
+        "R@top5": null,
+        "R@top10": null,
+        "R@0.5FP/img": null,
+        "R@1FP/img": null,
+        "R@2FP/img": null,
+        "R@5FP/img": null,
+        "R@10FP/img": null,
+        "R@any(top50)": null
+      },
+      "64-256_all": {
+        "n": 0,
+        "R@top2": null,
+        "R@top5": null,
+        "R@top10": null,
+        "R@0.5FP/img": null,
+        "R@1FP/img": null,
+        "R@2FP/img": null,
+        "R@5FP/img": null,
+        "R@10FP/img": null,
+        "R@any(top50)": null
+      },
+      "64-256_frozen_missed": {
+        "n": 0,
+        "R@top2": null,
+        "R@top5": null,
+        "R@top10": null,
+        "R@0.5FP/img": null,
+        "R@1FP/img": null,
+        "R@2FP/img": null,
+        "R@5FP/img": null,
+        "R@10FP/img": null,
+        "R@any(top50)": null
+      }
+    }
+  },
+  "D1_missed_dist_to_pred_crater": {
+    "0-16": {
+      "n_missed": 0,
+      "n_total": 0,
+      "frac_dist0(partial)": null,
+      "median_px": null,
+      "p90_px": null,
+      "frac_no_crater_pred_in_img": null
+    },
+    "16-64": {
+      "n_missed": 0,
+      "n_total": 0,
+      "frac_dist0(partial)": null,
+      "median_px": null,
+      "p90_px": null,
+      "frac_no_crater_pred_in_img": null
+    },
+    "64-256": {
+      "n_missed": 0,
+      "n_total": 0,
+      "frac_dist0(partial)": null,
+      "median_px": null,
+      "p90_px": null,
+      "frac_no_crater_pred_in_img": null
+    },
+    "256-1024": {
+      "n_missed": 0,
+      "n_total": 0,
+      "frac_dist0(partial)": null,
+      "median_px": null,
+      "p90_px": null,
+      "frac_no_crater_pred_in_img": null
+    }
+  },
+  "D2": {
+    "iou": {
+      "base": {
+        "mIoU": 0.7400811046530442,
+        "regolith": 0.9959971018661608,
+        "rock": 0.8011336611316616,
+        "crater": 0.0,
+        "mountain": 0.9057303883502918,
+        "sky": 0.9975443719171071
+      },
+      "pos64": {
+        "mIoU": 0.7400811046530442,
+        "regolith": 0.9959971018661608,
+        "rock": 0.8011336611316616,
+        "crater": 0.0,
+        "mountain": 0.9057303883502918,
+        "sky": 0.9975443719171071
+      },
+      "pos32": {
+        "mIoU": 0.7400811046530442,
+        "regolith": 0.9959971018661608,
+        "rock": 0.8011336611316616,
+        "crater": 0.0,
+        "mountain": 0.9057303883502918,
+        "sky": 0.9975443719171071
+      },
+      "rand": {
+        "mIoU": 0.7400811046530442,
+        "regolith": 0.9959971018661608,
+        "rock": 0.8011336611316616,
+        "crater": 0.0,
+        "mountain": 0.9057303883502918,
+        "sky": 0.9975443719171071
+      },
+      "hard": {
+        "mIoU": 0.7400811046530442,
+        "regolith": 0.9959971018661608,
+        "rock": 0.8011336611316616,
+        "crater": 0.0,
+        "mountain": 0.9057303883502918,
+        "sky": 0.9975443719171071
+      },
+      "pos64+rand+hard": {
+        "mIoU": 0.7400811046530442,
+        "regolith": 0.9959971018661608,
+        "rock": 0.8011336611316616,
+        "crater": 0.0,
+        "mountain": 0.9057303883502918,
+        "sky": 0.9975443719171071
+      }
+    },
+    "recall50": {
+      "base": {
+        "0-16": 0.0,
+        "16-64": 0.0,
+        "64-256": 0.0,
+        "256-1024": 0.0
+      },
+      "pos64": {
+        "0-16": 0.0,
+        "16-64": 0.0,
+        "64-256": 0.0,
+        "256-1024": 0.0
+      },
+      "pos32": {
+        "0-16": 0.0,
+        "16-64": 0.0,
+        "64-256": 0.0,
+        "256-1024": 0.0
+      },
+      "rand": {
+        "0-16": 0.0,
+        "16-64": 0.0,
+        "64-256": 0.0,
+        "256-1024": 0.0
+      },
+      "hard": {
+        "0-16": 0.0,
+        "16-64": 0.0,
+        "64-256": 0.0,
+        "256-1024": 0.0
+      },
+      "pos64+rand+hard": {
+        "0-16": 0.0,
+        "16-64": 0.0,
+        "64-256": 0.0,
+        "256-1024": 0.0
+      }
+    },
+    "n_inst": {
+      "0-16": 0,
+      "16-64": 0,
+      "64-256": 0,
+      "256-1024": 0
+    },
+    "touch": {
+      "pos64": {
+        "rock": 0,
+        "rock_gtcrater": 0,
+        "mtn": 0,
+        "mtn_gtcrater": 0,
+        "conv_tp": 0,
+        "conv_fp": 0,
+        "nwin": 0,
+        "nwin_fire8": 0
+      },
+      "pos32": {
+        "rock": 0,
+        "rock_gtcrater": 0,
+        "mtn": 0,
+        "mtn_gtcrater": 0,
+        "conv_tp": 0,
+        "conv_fp": 0,
+        "nwin": 0,
+        "nwin_fire8": 0
+      },
+      "rand": {
+        "rock": 0,
+        "rock_gtcrater": 0,
+        "mtn": 0,
+        "mtn_gtcrater": 0,
+        "conv_tp": 0,
+        "conv_fp": 0,
+        "nwin": 24,
+        "nwin_fire8": 0
+      },
+      "hard": {
+        "rock": 0,
+        "rock_gtcrater": 0,
+        "mtn": 0,
+        "mtn_gtcrater": 0,
+        "conv_tp": 0,
+        "conv_fp": 0,
+        "nwin": 24,
+        "nwin_fire8": 0
+      }
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "exp": "M_ROW_BLV",
+  "run_name": "smoke_S0_B2_ROW_BLV_5k",
+  "iters": 5000,
+  "target_iters": 5000,
+  "best_mIoU_scene5": 0.8312129839993286,
+  "last_mIoU_scene5": 0.8222197185259292,
+  "per_class_IoU_best": {
+    "月壤": 0.9800682618039384,
+    "岩石": 0.7862210679543434,
+    "撞击坑": 0.7840709242607601,
+    "山体": 0.6904513161405187,
+    "天空": 0.9152533498370831
+  },
+  "per_class_IoU_last": {
+    "月壤": 0.9787659369507323,
+    "岩石": 0.7830832346908017,
+    "撞击坑": 0.768739097855404,
+    "山体": 0.6563178160067212,
+    "天空": 0.9241925071259868
+  },
+  "iou_rock": 0.7862210679543434,
+  "iou_crater": 0.7840709242607601,
+  "confusion_rates": {
+    "sky_to_mountain": 0.06507463641063083,
+    "crater_to_regolith": 0.053008867514439256,
+    "mountain_to_rock": 0.07917547164976739,
+    "rock_to_mountain": 0.00699663323257451
+  },
+  "peak_mem_mb": 12093.6,
+  "wall_sec": 4660.9,
+  "batch": 16,
+  "lr": 6e-05,
+  "world_size": 1,
+  "flags": {
+    "rcs": true,
+    "mosaic": true,
+    "cc_paste": true,
+    "acw": true,
+    "crater_boost": true,
+    "eps": false,
+    "multi_scale": false,
+    "photometric": false,
+    "ema": false,
+    "row_attn": true,
+    "blv": true,
+    "shadow_aug": false,
+    "abl": false,
+    "invform_fallback": false,
+    "fade": false,
+    "tta": false,
+    "segfix": false,
+    "t_b1_tta": false,
+    "hrda": false,
+    "eval_only": false
+  },
+  "blv_sigma": 0.5,
+  "subset": {
+    "train": 1600,
+    "val": 350,
+    "seed": 42
+  },
+  "dry_run": false,
+  "error": null,
+  "method_note": "V_B1C + RowHeightAttn + BLV (combo)",
+  "note": "本地 Scene5 子集验证，非官方测试成绩；未使用 Moon_2/4/9 标签"
+}

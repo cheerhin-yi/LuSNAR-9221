@@ -1,0 +1,104 @@
+#!/usr/bin/env bash
+# FI (full-image, crop=1024 = whole image) 20k longtrain + small-crater FI ablation. Written 2026-11-12 (Asia/Shanghai).
+# v2 (14:15): v1 died at iter 1 (NCCL all_gather of CPU tensor in the DDP sync check). Now uses *_fi.py trainer copies (only that fix).
+# Plan t312/t321/t322: sc_diag says small-crater not solvable short-term -> FI longtrain main line + best SC variant as ablation.
+#   0) wait: F5 score.exit present, queue_sc_r3 (PID 58472) gone, no SC/LT python, both GPUs < 4 GB
+#   1) LT_FI_dry_E3sc      : 5-iter DDP dry run of the ablation config (memory/startup check only, --no-val)
+#   2) LT_FI_ROW_BLV_20k   : MAIN LINE. unmodified B2 trainer lusnar_row_blv_ddp.py, M_ROW_BLV, crop 1024, 20k, val Scene5 /1000, --tta-final
+#   3) LT_FI_ROW_BLV_20k_E3sc : ABLATION. lusnar_row_blv_ddp_sc.py + E3 modules (--detail-residual --local-margin w0.1 m0.5),
+#                             --cc-off (= effective CC behaviour of the unmodified trainer on WSL), same seed 42 / lr / batch / schedule
+#   4) official I1a Scene5 scoring of both last.pth (single GPU each, parallel, after all training)
+# Never: plus5, B5, M2F, official submit, Moon_2/4/9, PYTORCH_CUDA_ALLOC_CONF, overwriting existing work dirs.
+set -uo pipefail
+export USE_LIBUV=0 MASTER_ADDR=127.0.0.1 PYTHONUNBUFFERED=1 NCCL_P2P_DISABLE=0
+unset PYTORCH_CUDA_ALLOC_CONF || true
+ROOT=/mnt/d/LuSNAR_Seg
+export PYTHONPATH="$ROOT/tools/portable"
+source /opt/miniconda3/etc/profile.d/conda.sh
+conda activate lusnar
+cd "$ROOT"
+DATA_ROOT=/root/lusnar_data
+BATCH="${LT_BATCH:-8}"
+WORKERS="${LT_WORKERS:-12}"
+ITERS=20000
+VAL_EVERY=1000
+RUN0=LT_FI_dry_E3sc_v2
+RUN1=LT_FI_ROW_BLV_20k_v2
+RUN2=LT_FI_ROW_BLV_20k_E3sc_v2
+E3FLAGS="--detail-residual --local-margin --local-margin-weight 0.1 --local-margin-m 0.5 --cc-off"
+WLOG=$ROOT/logs/LT_FI_sc_queue_wsl.log
+PP=$ROOT/tools/wsl_bootstrap/_lt/lt_postprocess.py
+F5EXIT=$ROOT/logs/small_crater_sc_r3/F5_sgsdr_sir_2k.score.exit
+say() { echo "[$(date '+%F %T')] $*" | tee -a "$WLOG"; }
+say "queue start pid=$$ batch/gpu=$BATCH workers/rank=$WORKERS iters=$ITERS val_every=$VAL_EVERY"
+for r in "$RUN0" "$RUN1" "$RUN2"; do
+  if [ -e "$ROOT/work_dirs/$r" ]; then say "REFUSE: work_dirs/$r exists (never overwrite)"; exit 2; fi
+done
+gpus_free() {
+  nvidia-smi --query-gpu=memory.used --format=csv,noheader,nounits | awk 'BEGIN{x=0}{if($1+0>4000)x=1}END{exit x}'
+}
+last=0
+while true; do
+  ok=1
+  [ -f "$F5EXIT" ] || ok=0
+  kill -0 58472 2>/dev/null && ok=0
+  pgrep -f 'lusnar_small_crater_score_sc.py|lusnar_row_blv_ddp|fullimage_smoke.py|lusnar_smoke_compare.py|sc_diag' >/dev/null 2>&1 && ok=0
+  gpus_free || ok=0
+  [ $ok = 1 ] && break
+  now=$(date +%s)
+  if [ $((now-last)) -ge 600 ]; then say "waiting: f5exit=$([ -f $F5EXIT ] && cat $F5EXIT || echo none) q58472=$(kill -0 58472 2>/dev/null && echo alive || echo gone) gpus=$(nvidia-smi --query-gpu=memory.used --format=csv,noheader,nounits | tr '\n' ' ')"; last=$now; fi
+  sleep 30
+done
+say "gate open: F5 score.exit=$(cat $F5EXIT), queue gone, GPUs free"
+sleep 15
+prep_list() { mkdir -p "$1"; [ -f "$1/full_crater_weights.json" ] || cp -p "$DATA_ROOT/lists/full_crater_weights.json" "$1/"; }
+port_free() { ! ss -ltn 2>/dev/null | awk '{print $4}' | grep -q ":$1$"; }
+train() {  # $1 trainer $2 run $3 log $4 port $5 list $6 iters ; rest extra
+  local tr=$1 run=$2 log=$3 port=$4 list=$5 its=$6; shift 6
+  if [ -e "$ROOT/work_dirs/$run" ]; then say "REFUSE: work_dirs/$run exists"; return 2; fi
+  port_free "$port" || { say "port $port busy"; return 3; }
+  prep_list "$list"
+  say "LAUNCH $run trainer=$tr port=$port list=$list batch/gpu=$BATCH workers=$WORKERS iters=$its extra=$*"
+  echo "=== $run start $(date '+%F %T') trainer=$tr batch/gpu=$BATCH x2 crop=1024 lr=6e-5 workers=$WORKERS iters=$its $* ===" >>"$log"
+  python -u -m torch.distributed.run --nproc_per_node=2 --master_addr 127.0.0.1 --master_port "$port" \
+    "tools/portable/$tr" \
+    --recipe M_ROW_BLV --run-name "$run" --iters "$its" --batch "$BATCH" --workers "$WORKERS" \
+    --amp bf16 --crop 1024 --lr 6e-5 --val-every "$VAL_EVERY" --log-every 50 \
+    --project-root "$ROOT" --data-root "$DATA_ROOT" --list-dir "$list" --train-subdir train "$@" \
+    >>"$log" 2>&1 < /dev/null
+  local rc=$?
+  echo "=== $run exit $rc $(date '+%F %T') ===" >>"$log"
+  say "END $run exit=$rc"
+  return $rc
+}
+# 1) dry run of the heavier (ablation) config: 5 iters, both GPUs
+train lusnar_row_blv_ddp_sc_fi.py "$RUN0" "$ROOT/logs/${RUN0}_wsl.log" 29672 "$DATA_ROOT/lists_fi_lt_sc" 20 --dry-run --no-val $E3FLAGS
+rc0=$?
+[ $rc0 -eq 0 ] || say "WARN: ablation dry run failed rc=$rc0 (main line still runs; ablation will be skipped)"
+sleep 20
+# 2) main line
+train lusnar_row_blv_ddp_fi.py "$RUN1" "$ROOT/logs/${RUN1}_wsl.log" 29642 "$DATA_ROOT/lists_fi_lt" "$ITERS" --tta-final
+rc1=$?
+python "$PP" "$ROOT/work_dirs/$RUN1" "$ITERS" >>"$WLOG" 2>&1 || say "postprocess failed $RUN1"
+say "MAIN $RUN1 exit=$rc1"
+sleep 30
+# 3) ablation (only if dry run passed)
+rc2=99
+if [ $rc0 -eq 0 ]; then
+  train lusnar_row_blv_ddp_sc_fi.py "$RUN2" "$ROOT/logs/${RUN2}_wsl.log" 29662 "$DATA_ROOT/lists_fi_lt_sc" "$ITERS" --tta-final $E3FLAGS
+  rc2=$?
+  python "$PP" "$ROOT/work_dirs/$RUN2" "$ITERS" >>"$WLOG" 2>&1 || say "postprocess failed $RUN2"
+  say "ABL $RUN2 exit=$rc2"
+fi
+# 4) official I1a Scene5 scoring of last.pth (single GPU each)
+sleep 20
+p0=""; p1=""
+if [ -f "$ROOT/work_dirs/$RUN1/last.pth" ]; then
+  bash tools/small_crater_sc/sc_score.sh 0 "work_dirs/$RUN1/last.pth" "$RUN1" > "$ROOT/logs/score_${RUN1}_wsl.log" 2>&1 & p0=$!
+fi
+if [ -f "$ROOT/work_dirs/$RUN2/last.pth" ]; then
+  bash tools/small_crater_sc/sc_score.sh 1 "work_dirs/$RUN2/last.pth" "$RUN2" > "$ROOT/logs/score_${RUN2}_wsl.log" 2>&1 & p1=$!
+fi
+[ -n "$p0" ] && { wait $p0; say "SCORE $RUN1 exit=$?"; }
+[ -n "$p1" ] && { wait $p1; say "SCORE $RUN2 exit=$?"; }
+say "ALL LT_FI_sc DONE main=$rc1 abl=$rc2 (no plus5 chained; plus5/Moon_2/4/9 eval need separate approval)"
